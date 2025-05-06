@@ -1,0 +1,22 @@
+<section class="contact-section">
+    <h2><%= __('contact.title') %></h2>
+    <p><%= __('contact.subtitle') %></p>
+    <% if (success && success.length) { %>
+        <div class="alert alert-success"><%= success[0] %></div>
+    <% } %>
+    <% if (error && error.length) { %>
+        <div class="alert alert-error"><%= error[0] %></div>
+    <% } %>
+    <form action="/contact" method="POST" class="contact-form">
+      <label for="name"><%= __('contact.name') %></label>
+      <input type="text" id="name" name="name" required>
+  
+      <label for="email"><%= __('contact.email') %></label>
+      <input type="email" id="email" name="email" required>
+  
+      <label for="message"><%= __('contact.message') %></label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+  
+      <button type="submit"><%= __('contact.send') %></button>
+    </form>
+  </section>

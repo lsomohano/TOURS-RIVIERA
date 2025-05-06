@@ -1,0 +1,22 @@
+// views/admin/reservas.ejs
+<h2>Reservas</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Tour</th>
+      <th>Fecha</th>
+      <th>Total Pagado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% reservas.forEach(r => { %>
+      <tr>
+        <td><%= r.nombre %></td>
+        <td><%= r.tour_nombre %></td>
+        <td><%= r.fecha_reserva.toISOString().split('T')[0] %></td>
+        <td>$<%= r.total_pagado %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

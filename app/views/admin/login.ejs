@@ -1,0 +1,13 @@
+// views/login.ejs
+<% layout('layouts/login') %>
+
+<h2>Iniciar sesión</h2>
+
+<% if (typeof error !== 'undefined') { %>
+  <p style="color:red"><%= error %></p>
+<% } %>
+<form method="POST" action="/login">
+  <label>Usuario: <input type="text" name="username" /></label><br />
+  <label>Contraseña: <input type="password" name="password" /></label><br />
+  <button type="submit">Ingresar</button>
+</form>

@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db
+    env_file:
+      - .env
+    #environment:
+    #  - DB_HOST=${DB_HOST}
+    #  - DB_USER=${DB_USER}
+    #  - DB_PASSWORD=${DB_PASSWORD}
+    # - DB_NAME=${DB_NAME}
+
+    #  - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+    #  - STRIPE_PUBLIC_KEY=${STRIPE_PUBLIC_KEY}
+    #  - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+    #  - DOMAIN=${DOMAIN}
+    #  - PORT=${PORT}
+    command: ["/bin/sh", "-c", "./wait-for-it.sh db:3306 -- npm start"]
+
+  db:
+    image: mysql:5.7
+    restart: always
+    env_file:
+      - .env
+    #environment:
+    #  MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}  # Contraseña del usuario root
+    #  MYSQL_DATABASE: ${DB_NAME}           # Base de datos inicial
+    #  MYSQL_USER: ${DB_USER}               # Nombre de usuario para conexiones
+    #  MYSQL_PASSWORD: ${DB_PASSWORD}       # Contraseña del usuario no root
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

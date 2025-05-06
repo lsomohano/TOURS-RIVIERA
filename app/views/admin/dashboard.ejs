@@ -1,0 +1,15 @@
+// views/admin/dashboard.ejs
+<div class="admin-dashboard">
+  <h1>Bienvenido al panel de administración</h1>
+  <div class="stats">
+    <div class="stat-box">
+      <h3><%= totalReservasHoy %></h3>
+      <p>Reservas de hoy</p>
+    </div>
+    <div class="stat-box">
+      <h3>$<%= totalIngresosHoy %></h3>
+      <p>Ingresos de hoy</p>
+    </div>
+  </div>
+  <a href="/logout">Cerrar sesión</a>
+</div>

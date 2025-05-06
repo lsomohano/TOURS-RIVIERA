@@ -1,0 +1,41 @@
+<section class="intro">
+  <h2><%= __('app.title2') %></h2>
+  <p>
+    <%= __('app.line1') %><br>
+    <%= __('app.line2') %>
+  </p>
+</section>
+
+<section class="categorias">
+  <div class="categoria">
+    <img src="/images/parques.jpg" alt="<%= __('categorias.parques') %>">
+    <div class="overlay"><%= __('categorias.parques') %></div>
+  </div>
+  <div class="categoria">
+    <img src="/images/piramides.jpg" alt="<%= __('categorias.ruinas_mayas') %>">
+    <div class="overlay"><%= __('categorias.ruinas_mayas') %></div>
+  </div>
+  <div class="categoria">
+    <img src="/images/cenotes.jpg" alt="<%= __('categorias.cenotes') %>">
+    <div class="overlay"><%= __('categorias.cenotes') %></div>
+  </div>
+</section>
+
+<section class="tours-section">
+  <h2><%= __('menu.tours') %></h2>
+  <div class="tour-grid">
+    <% tours.forEach(tour => { %>
+      <div class="tour-card">
+        <img src="<%= tour.imagen || '/images/default-tour.jpg' %>" alt="<%= tour.nombre %>">
+        <div class="tour-info">
+          <h3><%= tour.nombre %></h3>
+          <p><%= tour.descripcion %></p>
+          <p class="precio">$<%= tour.precio %> MXN</p>
+          <a href="/reservar/<%= tour.id %>" class="btn-reservar">
+            <%= __('Reservar') %>
+          </a>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</section>

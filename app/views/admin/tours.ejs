@@ -1,0 +1,6 @@
+<h2>Tours disponibles</h2>
+<ul>
+  <% tours.forEach(tour => { %>
+    <li><strong><%= tour.nombre %></strong> - $<%= tour.precio %></li>
+  <% }) %>
+</ul>

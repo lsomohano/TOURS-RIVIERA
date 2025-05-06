@@ -1,0 +1,23 @@
+<section class="reserva-container">
+  <h1><%= __('reservation.exito.titulo') %></h1>
+
+  <% if (reserva) { %>
+    <p>
+      <%- __('reservation.exito.mensaje', { nombre: reserva.nombre, tour: reserva.tour_nombre }) %>
+    </p>
+
+    <ul>
+      <li><strong><%= __('reservation.codigo') %>:</strong> <%= reserva.reserva_codigo %></li>
+      <li><strong><%= __('reservation.fecha') %>:</strong> <%= reserva.fecha_reserva.toISOString().split('T')[0] %></li>
+      <li><strong><%= __('reservation.personas') %>:</strong> <%= reserva.personas %></li>
+      <li><strong><%= __('reservation.costo_unitario') %>:</strong> $<%= Number(reserva.costo_unitario).toFixed(2) %> MXN</li>
+      <li><strong><%= __('reservation.total_pagado') %>:</strong> $<%= Number(reserva.costo_pagado).toFixed(2) %> MXN</li>
+      <li><strong><%= __('reservation.email_conf') %>:</strong> <%= reserva.email %></li>
+    </ul>
+  <% } else { %>
+    <p class="error"><%= __('reservation.error') %></p>
+  <% } %>
+
+  <a href="/" class="btn-volver"><%= __('reservation.volver_inicio') %></a>
+  <a href="#" onclick="window.print()" class="btn-imprimir"><%= __('reservation.imprimir') %></a>
+</section>

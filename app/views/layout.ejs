@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="<%= locale %>">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= __('app.title') %></title>
+  
+    <!-- Estilos -->
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="logo"><a href="/"><%= __('app.title') %></a></div>
+      <a href="/?lang=es" title="Español">
+        <span class="flag-icon flag-icon-es" style="font-size: 1.5em;"></span>
+      </a>
+      <a href="/?lang=en" title="English">
+        <span class="flag-icon flag-icon-gb" style="font-size: 1.5em;"></span>
+      </a>
+      <ul>
+        <li><a href="/"><%= __('menu.home') %></a></li>
+        <li><a href="/tours"><%= __('menu.tours') %></a></li>
+        <li><a href="/contact"><%= __('menu.contact') %></a></li>
+        
+        <li class="small-text">
+          <a href="<%= `${currentUrl.split('?')[0]}?lang=es` %>"><%= __('menu.spanish') %></a> | 
+          <a href="<%= `${currentUrl.split('?')[0]}?lang=en` %>"><%= __('menu.english') %></a>
+        </li>  
+      </ul>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1><%= __('app.welcome') %></h1>
+      <p><%= __('app.explore') %></p>
+    </div>
+  </div>
+
+  <main>
+    <%- body %>
+  </main>
+
+  <footer>
+    <p>&copy; <%= new Date().getFullYear() %> Riviera Maya Tours</p>
+
+    <div class="legal-links">
+      <a href="/terminos-condiciones" target="_blank"><%= __('legal.terms_title') %></a> |
+      <a href="/politica-privacidad" target="_blank"><%= __('legal.privacy_title') %></a>
+    </div>
+
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://wa.me/1234567890" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>

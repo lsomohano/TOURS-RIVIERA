@@ -1,0 +1,19 @@
+<section class="reserva-container">
+  <h1 class="text-danger"><%= __('reservation.cancelado.titulo') %></h1>
+
+  <% if (reserva) { %>
+    <p><%- __('reservation.cancelado.mensaje', { nombre: reserva.nombre, tour: reserva.tour_nombre }) %></p>
+    
+    <ul>
+      <li><strong><%= __('reservation.codigo') %>:</strong> <%= reserva.reserva_codigo %></li>
+      <li><strong><%= __('reservation.fecha') %>:</strong> <%= reserva.fecha_reserva.toISOString().split('T')[0] %></li>
+      <li><strong><%= __('reservation.personas') %>:</strong> <%= reserva.personas %></li>
+    </ul>
+
+    <p><%= __('reservation.reintentar') %></p>
+    <a href="/reservar/<%= reserva.tour_id %>" class="btn-volver"><%= __('reservation.btn_reintentar') %></a>
+  <% } else { %>
+    <p class="error"><%= __('reservation.error') %></p>
+    <a href="/" class="btn-volver"><%= __('reservation.btn_inicio') %></a>
+  <% } %>
+</section>

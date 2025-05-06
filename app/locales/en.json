@@ -1,0 +1,74 @@
+{
+	"app": {
+		"title": "Riviera Maya Tours",
+		"welcome": "Welcome to our tour agency",
+		"explore": "Explore our tours",
+		"title2": "Discover the Riviera Maya with Us",
+        "line1": "Experience unforgettable moments in paradise destinations.",
+        "line2": "Explore our archaeological tours, culinary adventures, and relaxing beach escapes."
+	},
+	"menu": {
+		"home": "Home",
+		"tours": "Tours",
+		"contact": "Contacts",
+		"spanish": "spanish",
+		"english": "english",
+		"reserveTour": "Reserve a Tour"
+	},
+	"contact": {
+		"title": "Contact Us",
+		"subtitle": "Do you have questions or comments? Send us a message.",
+		"name": "Name",
+		"email": "Email",
+		"message": "Message",
+		"send": "Send",
+		"thankYou": "Thank you for your message!",
+		"saveError": "There was an error saving your message. Please try again."
+	},
+	"reservation": {
+		"name": "Name",
+		"email": "Email",
+		"phone": "Phone",
+		"reserveDate": "Reservation Date",
+		"numberOfPeople": "Number of People",
+		"reserveButton": "Reserve",
+		"thankYouForReserving": "Thank you for reserving with us.",
+		"proceedToPay": "Proceed to Payment",
+		"paidSuccess": "Payment successful! Your reservation is confirmed.",
+		"paidError": "Payment status uncertain. Contact support.",
+		"paidCancelled": "Payment cancelled. You can try again.",
+		"exito": {
+			"titulo": "Payment Successful!",
+			"mensaje": "Thank you, <strong>{{nombre}}</strong>. Your reservation for the tour \"<strong>{{tour}}</strong>\" has been confirmed."
+		},
+		"codigo": "Reservation Code",
+		"fecha": "Reservation Date",
+		"personas": "Number of People",
+		"costo_unitario": "Unit Price",
+		"total_pagado": "Total Paid",
+		"email_conf": "Confirmation Email",
+		"error": "Could not load reservation information.",
+		"volver_inicio": "Back to Home",
+		"imprimir": "Print",
+		"cancelado": {
+			"titulo": "¡Pago cancelado!",
+			"mensaje": "Hola, <strong>{{nombre}}s</strong>. Tu intento de pago para el tour \"<strong>{{tour}}</strong>\" fue cancelado."
+		},
+		"reintentar": "Puedes volver a intentar tu pago desde el siguiente enlace:",
+		"btn_reintentar": "Reintentar pago",
+		"error_cancel": "No se encontró información de la reserva cancelada."
+	},
+	"legal": {
+		"terms_title": "Terms and Conditions",
+		"terms_content": "By using this website and/or booking a tour with Riviera Maya Tours, you agree to the following terms and conditions:\n\n1. Bookings and Payments:\n- All bookings are subject to availability.\n- Full payment is required to confirm your booking.\n\n2. Cancellations:\n- Cancellations made more than 48 hours in advance will receive a full refund.\n- Cancellations within 48 hours of the tour are non-refundable.\n\n3. Itinerary Changes:\n- Riviera Maya Tours reserves the right to modify the itinerary due to weather or safety concerns.\n\n4. Liability:\n- Participating in tours involves inherent risks.\n- Riviera Maya Tours is not responsible for loss, injury, or personal damage during tours.\n\n5. Website Use:\n- This site must not be used for fraudulent or illegal activity.\n\n6. Privacy:\n- Your personal information will be used only for booking-related purposes.\n\nThank you for choosing Riviera Maya Tours.",
+		"privacy_title": "Privacy Policy",
+        "privacy_content": "At Riviera Maya Tours, we value and protect your privacy. This policy explains how we collect, use, and safeguard your personal information.\n\n1. Information We Collect:\n- Name, email, phone number, and booking details.\n\n2. Use of Information:\n- We use your data to manage bookings and improve our services.\n- We may send booking-related communications or promotions if you consent.\n\n3. Sharing Information:\n- We do not share your personal data with third parties, except for payment processing or legal compliance.\n\n4. Security:\n- We implement security measures to protect your personal data from unauthorized access.\n\n5. User Rights:\n- You can access, modify, or delete your personal data by contacting us.\n\n6. Cookies:\n- We use cookies to enhance your browsing experience. You can disable them in your browser settings.\n\n7. Policy Changes:\n- We reserve the right to modify this policy at any time. Updates will be posted on this page.\n\nThank you for choosing Riviera Maya Tours.",
+		"legalButton": "Back to home"
+	},
+	"categorias": {
+		"parques": "Parks",
+		"ruinas_mayas": "Mayan ruins",
+		"cenotes": "Cenotes"
+	}
+
+}

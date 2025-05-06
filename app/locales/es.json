@@ -1,0 +1,73 @@
+{
+	"app": {
+		"title": "Tours Riviera Maya",
+		"welcome": "Explora la Riviera Maya",
+		"explore": "Encuentra las mejores experiencias de aventura, cultura y naturaleza.",
+		"title2": "Descubre la Riviera Maya con Nosotros",
+        "line1": "Vive experiencias inolvidables en destinos paradisíacos.",
+        "line2": "Explora nuestras opciones de tours arqueológicos, aventuras gastronómicas y momentos de relajación frente al mar."
+	},
+	"menu": {
+		"home": "Inicio",
+		"tours": "Tours",
+		"contact": "Contacto",
+		"spanish": "Español",
+		"english": "Ingles",
+		"reserveTour": "Reservar un tour"
+	},
+	"contact": {
+		"title": "Contáctanos",
+		"subtitle": "¿Tienes dudas o comentarios? Envíanos un mensaje.",
+		"name": "Nombre",
+		"email": "Correo electrónico",
+		"message": "Mensaje",
+		"send": "Enviar",
+		"thankYou": "¡Gracias por tu mensaje!",
+		"saveError": "Hubo un error guardando tu mensaje. Intenta de nuevo."
+	},
+	"reservation": {
+		"name": "Nombre",
+		"email": "Correo Electrónico",
+		"phone": "Teléfono",
+		"reserveDate": "Fecha de Reserva",
+		"numberOfPeople": "Número de Personas",
+		"reserveButton": "Reservar",
+		"thankYouForReserving": "Gracias por reservar con nosotros.",
+		"proceedToPay": "Pagar ahora",
+		"paidSuccess": "¡Pago exitoso! Tu reserva está confirmada.",
+		"paidError": "Estado de pago incierto. Contacta al soporte.",
+		"paidCancelled": "Pago cancelado. Puedes intentarlo de nuevo.",
+		"exito": {
+			"titulo": "¡Pago realizado con éxito!",
+			"mensaje": "Gracias, <strong>{{nombre}}</strong>. Tu reserva para el tour \"<strong>{{tour}}</strong>\" ha sido confirmada."
+			},
+		"codigo": "Código de reserva",
+		"fecha": "Fecha de la reserva",
+		"personas": "Cantidad de personas",
+		"costo_unitario": "Costo unitario",
+		"total_pagado": "Total pagado",
+		"email_conf": "Correo de confirmación",
+		"error": "No se pudo cargar la información de la reserva.",
+		"volver_inicio": "Volver al inicio",
+		"imprimir": "Imprimir",
+		"cancelado": {
+			"titulo": "¡Pago cancelado!",
+			"mensaje": "Hola, <strong>{{nombre}}s</strong>. Tu intento de pago para el tour \"<strong>{{tour}}</strong>\" fue cancelado."
+		},
+		"reintentar": "Puedes volver a intentar tu pago desde el siguiente enlace:",
+		"btn_reintentar": "Reintentar pago",
+		"error_cancel": "No se encontró información de la reserva cancelada."
+	},
+	"legal": {
+		"terms_title": "Términos y Condiciones",
+		"terms_content": "Al utilizar este sitio web y/o reservar un tour con Riviera Maya Tours, usted acepta los siguientes términos y condiciones:\n\n1. Reservas y Pagos:\n- Todas las reservas están sujetas a disponibilidad.\n- Se requiere el pago completo para confirmar la reserva.\n\n2. Cancelaciones:\n- Las cancelaciones con más de 48 horas de anticipación recibirán un reembolso completo.\n- Las cancelaciones dentro de las 48 horas previas al tour no son reembolsables.\n\n3. Cambios de Itinerario:\n- Riviera Maya Tours se reserva el derecho de modificar el itinerario por razones climáticas o de seguridad.\n\n4. Responsabilidad:\n- Participar en los tours implica aceptar ciertos riesgos inherentes.\n- Riviera Maya Tours no se hace responsable por pérdidas, lesiones o daños personales durante los tours.\n\n5. Uso del Sitio Web:\n- Está prohibido utilizar este sitio para actividades fraudulentas o ilegales.\n\n6. Privacidad:\n- Su información personal será utilizada únicamente para fines relacionados con su reserva.\n\nGracias por confiar en Riviera Maya Tours.",
+		"privacy_title": "Política de Privacidad",
+    	"privacy_content": "En Riviera Maya Tours, valoramos y protegemos su privacidad. Esta política explica cómo recopilamos, usamos y protegemos su información personal.\n\n1. Información que recopilamos:\n- Nombre, correo electrónico, número de teléfono y detalles de la reserva.\n\n2. Uso de la información:\n- Usamos sus datos para gestionar su reserva y mejorar nuestros servicios.\n- Podemos enviarle comunicaciones relacionadas con su reserva o promociones si usted lo autoriza.\n\n3. Compartir información:\n- No compartimos su información personal con terceros, excepto para procesar pagos o cumplir con obligaciones legales.\n\n4. Seguridad:\n- Implementamos medidas de seguridad para proteger su información personal contra accesos no autorizados.\n\n5. Derechos del usuario:\n- Usted puede acceder, modificar o eliminar su información personal contactándonos.\n\n6. Cookies:\n- Utilizamos cookies para mejorar la experiencia de navegación. Puede desactivarlas desde la configuración de su navegador.\n\n7. Cambios en la política:\n- Nos reservamos el derecho de modificar esta política en cualquier momento. Las modificaciones estarán disponibles en esta página.\n\nGracias por confiar en Riviera Maya Tours.",
+		"legalButton": "Volver al inicio"
+	},
+	"categorias": {
+		"parques": "Parques",
+		"ruinas_mayas": "Ruinas mayas",
+		"cenotes": "Cenotes"
+		}
+}
