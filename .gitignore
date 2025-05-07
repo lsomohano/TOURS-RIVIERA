@@ -81,3 +81,4 @@ public/
 
 # Mac system files
 .DS_Store.env
+app/wait-for-it.sh
