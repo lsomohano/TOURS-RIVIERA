@@ -16,8 +16,8 @@ Este proyecto es una aplicación web para ofrecer, gestionar y reservar tours tu
 1. **Clona el repositorio**
 
 ```bash
-git clone https://github.com/tu_usuario/tours-riviera-maya.git
-cd tours-riviera-maya
+git clone https://github.com/lsomohano/TOURS-RIVIERA.git
+cd TOURS-RIVIERA
 ```
 
 2. **Instala las dependencias**
