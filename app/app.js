@@ -1,15 +1,11 @@
-// app.js
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const i18n = require('i18n');
 const expressLayouts = require('express-ejs-layouts');
 const cookieParser = require('cookie-parser');
-const session = require('express-session'); // ✅ Solo aquí
+const session = require('express-session');
 const flash = require('express-flash');
-const Stripe = require('stripe');
-
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
 
@@ -21,7 +17,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 
-app.use(session({ // ✅ Solo una vez
+app.use(session({
   secret: 'secreto123',
   resave: false,
   saveUninitialized: false,
@@ -58,16 +54,21 @@ const contactRoutes = require('./routers/contact');
 const tourRoutes = require('./routers/tours');
 const reservaRoutes = require('./routers/reservar');
 const legalRoutes = require('./routers/legal');
-const adminRoutes = require('./routers/admin');
-const authRoutes = require('./routers/auth');
+//const adminRoutes = require('./routers/admin');
+//const authRoutes = require('./routers/auth');
 
 app.use(routes);
 app.use(contactRoutes);
 app.use(tourRoutes);
 app.use(reservaRoutes);
 app.use(legalRoutes);
-app.use('/admin', adminRoutes);
-app.use('/admin', authRoutes); // rutas como /login, /logout
+//app.use('/admin', adminRoutes);
+//app.use('/admin', authRoutes); // rutas como /login, /logout
+
+// Inicializar Stripe y arrancar el servidor
+const Stripe = require('stripe');
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+app.locals.stripe = stripe;
 
 app.listen(3000, () => {
   console.log('Servidor corriendo en http://localhost:3000');

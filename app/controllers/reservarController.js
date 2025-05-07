@@ -1,4 +1,3 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const ReservaModel = require('../models/reservasModel');
 const TourModel = require('../models/TourModel');
 
@@ -8,7 +7,6 @@ exports.getReserva = async (req, res) => {
 
   try {
     const [results] = await TourModel.getById(tourId);
-    //const [results] = await ReservaModel.getTourById(tourId);
 
     if (results.length === 0) {
       return res.status(404).send('Tour no encontrado');
@@ -34,8 +32,13 @@ exports.postReserva = async (req, res) => {
   try {
     const { tour_id, nombre, email, telefono, fecha_reserva, personas } = req.body;
 
+    // Validación de campos
     if (!tour_id || !nombre || !email || !telefono || !fecha_reserva || !personas) {
       return res.status(400).send('Faltan campos en el formulario');
+    }
+
+    if (isNaN(personas) || parseInt(personas, 10) <= 0) {
+      return res.status(400).send('El número de personas debe ser un valor positivo');
     }
 
     const [tours] = await ReservaModel.getTourPrecioById(tour_id);
@@ -63,6 +66,7 @@ exports.postReserva = async (req, res) => {
 
     const reservaId = result.insertId;
 
+    const stripe = req.app.locals.stripe;
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [{
@@ -82,6 +86,8 @@ exports.postReserva = async (req, res) => {
 
     await ReservaModel.actualizarStripeSessionId(reservaId, session.id);
 
+    // Mensaje de éxito
+    req.flash('success', 'Reserva realizada correctamente');
     res.redirect(303, session.url);
 
   } catch (error) {
@@ -94,7 +100,13 @@ exports.postReserva = async (req, res) => {
 exports.reservaSuccess = async (req, res) => {
   const { session_id, reservaId } = req.query;
 
+  // Validación de parámetros
+  if (!session_id || !reservaId) {
+    return res.status(400).send('Faltan parámetros necesarios');
+  }
+
   try {
+    const stripe = req.app.locals.stripe;
     const stripeSession = await stripe.checkout.sessions.retrieve(session_id);
 
     if (stripeSession.payment_status === 'paid') {
@@ -122,6 +134,11 @@ exports.reservaSuccess = async (req, res) => {
 // GET: Cancelación
 exports.reservaCancel = async (req, res) => {
   const { reservaId } = req.query;
+
+  // Validación de parámetro
+  if (!reservaId) {
+    return res.status(400).send('Falta el parámetro reservaId');
+  }
 
   try {
     const [reservas] = await ReservaModel.getReservaConTour(reservaId);

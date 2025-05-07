@@ -30,11 +30,11 @@ services:
     restart: always
     env_file:
       - .env
-    #environment:
-    #  MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}  # Contraseña del usuario root
-    #  MYSQL_DATABASE: ${DB_NAME}           # Base de datos inicial
-    #  MYSQL_USER: ${DB_USER}               # Nombre de usuario para conexiones
-    #  MYSQL_PASSWORD: ${DB_PASSWORD}       # Contraseña del usuario no root
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}  # Contraseña del usuario root
+      MYSQL_DATABASE: ${DB_NAME}           # Base de datos inicial
+      MYSQL_USER: ${DB_USER}               # Nombre de usuario para conexiones
+      MYSQL_PASSWORD: ${DB_PASSWORD}       # Contraseña del usuario no root
     ports:
       - "3306:3306"
     volumes:
