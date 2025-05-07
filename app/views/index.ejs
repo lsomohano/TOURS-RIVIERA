@@ -26,7 +26,7 @@
   <div class="tour-grid">
     <% tours.forEach(tour => { %>
       <div class="tour-card">
-        <img src="<%= tour.imagen || '/images/default-tour.jpg' %>" alt="<%= tour.nombre %>">
+        <img src="<%= tour.imagen_destacada || '/images/default-tour.jpg' %>" alt="<%= tour.nombre %>">
         <div class="tour-info">
           <h3><%= tour.nombre %></h3>
           <p><%= tour.descripcion %></p>

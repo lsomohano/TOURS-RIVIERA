@@ -31,7 +31,9 @@ i18n.configure({
   defaultLocale: 'en',
   directory: path.join(__dirname, 'locales'),
   objectNotation: true,
-  updateFiles: false
+  updateFiles: false,
+  queryParameter: 'lang',         // ✅ permite cambiar con ?lang=es
+  cookie: 'lang'                  // ✅ permite guardar el idioma en cookie
 });
 app.use(i18n.init);
 
