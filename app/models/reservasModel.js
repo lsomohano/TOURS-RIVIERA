@@ -15,26 +15,52 @@ const ReservaModel = {
 
   crearReserva: (datos) => {
     const {
-      tour_id, nombre, email, telefono, fecha_reserva,
-      personas, reserva_codigo, costo_unitario, costo_pagado
+      tour_id,
+      usuario_id,
+      reserva_codigo = null,
+      nombre_cliente,
+      email = null,
+      telefono = null,
+      cantidad_personas,
+      fecha_reserva,
+      metodo_pago = 'stripe',
+      costo_unitario = null,
+      total_pagado = null,
+      stripe_session_id = null,
+      estado = 'pendiente'
     } = datos;
 
     return db.promise().query(`
       INSERT INTO reservas (
-        tour_id, nombre, email, telefono, fecha_reserva, personas,
-        pago_confirmado, reserva_codigo, costo_unitario, costo_pagado
-      )
-      VALUES (?, ?, ?, ?, ?, ?, FALSE, ?, ?, ?)`,
-      [
         tour_id,
-        nombre,
+        usuario_id,
+        reserva_codigo,
+        nombre_cliente,
         email,
         telefono,
+        cantidad_personas,
         fecha_reserva,
-        personas,
-        reserva_codigo,
+        estado,
+        metodo_pago,
+        stripe_session_id,
         costo_unitario,
-        costo_pagado
+        total_pagado
+      )
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        tour_id,
+        usuario_id,
+        reserva_codigo,
+        nombre_cliente,
+        email,
+        telefono,
+        cantidad_personas,
+        fecha_reserva,
+        estado,
+        metodo_pago,
+        stripe_session_id,
+        costo_unitario,
+        total_pagado
       ]
     );
   },
@@ -48,7 +74,7 @@ const ReservaModel = {
 
   confirmarPago: (reservaId) => {
     return db.promise().query(
-      'UPDATE reservas SET pago_confirmado = TRUE WHERE id = ?',
+      'UPDATE reservas SET estado = "pagado" WHERE id = ?',
       [reservaId]
     );
   },

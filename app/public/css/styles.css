@@ -53,7 +53,7 @@
   
   /* HERO */
   .hero {
-    height: 90vh;
+    height: 70vh;
     background: url('/images/hero.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;

@@ -46,6 +46,7 @@
 		"personas": "Number of People",
 		"costo_unitario": "Unit Price",
 		"total_pagado": "Total Paid",
+		"metodo_pago": "Payment method",
 		"email_conf": "Confirmation Email",
 		"error": "Could not load reservation information.",
 		"volver_inicio": "Back to Home",

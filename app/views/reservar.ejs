@@ -1,41 +1,57 @@
 <section class="reservation-form">
-    <% if (success && success.length) { %>
-      <div class="alert alert-success"><%= success[0] %></div>
-    <% } %>
-    <% if (error && error.length) { %>
-      <div class="alert alert-error"><%= error[0] %></div>
-    <% } %>
-    <h2>
-        <%= __('menu.reserveTour') %>: <%= tour.nombre %>
-    </h2>
-    <form action="/reservar" method="POST">
-      
-      <input type="hidden" name="tour_id" value="<%= tour.id %>">
-      <div class="form-group">
-        <label for="nombre"><%= __('reservation.name') %></label>
-        <input type="text" id="nombre" name="nombre" placeholder="<%= __('reservation.name') %>" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="email"><%= __('reservation.email') %></label>
-        <input type="email" id="email" name="email" placeholder="<%= __('reservation.email') %>" required>
-      </div>
-  
-      <div class="form-group">
-        <label for="telefono"><%= __('reservation.phone') %></label>
-        <input type="text" id="telefono" name="telefono" placeholder="<%= __('reservation.phone') %>" required>
-      </div>
-  
-      <div class="form-group">
-        <label for="fecha_reserva"><%= __('reservation.reserveDate') %></label>
-        <input type="date" id="fecha_reserva" name="fecha_reserva" required>
-      </div>
-  
-      <div class="form-group">
-        <label for="personas"><%= __('reservation.numberOfPeople') %></label>
-        <input type="number" id="personas" name="personas" placeholder="<%= __('reservation.numberOfPeople') %>" min="1" required>
-      </div>
-  
-      <button type="submit" class="btn-reservar"><%= __('reservation.reserveButton') %></button>
-    </form>
+  <% if (success && success.length) { %>
+    <div class="alert alert-success"><%= success[0] %></div>
+  <% } %>
+  <% if (error && error.length) { %>
+    <div class="alert alert-error"><%= error[0] %></div>
+  <% } %>
+
+  <h2>
+    <%= __('menu.reserveTour') %>: <%= tour.nombre %>
+  </h2>
+
+  <form action="/reservar" method="POST">
+    <input type="hidden" name="tour_id" value="<%= tour.id %>">
+
+    <div class="form-group">
+      <label for="nombre_cliente"><%= __('reservation.name') %></label>
+      <input type="text" id="nombre_cliente" name="nombre_cliente" placeholder="<%= __('reservation.name') %>" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email"><%= __('reservation.email') %></label>
+      <input type="email" id="email" name="email" placeholder="<%= __('reservation.email') %>" required>
+    </div>
+
+    <div class="form-group">
+      <label for="telefono"><%= __('reservation.phone') %></label>
+      <input type="text" id="telefono" name="telefono" placeholder="<%= __('reservation.phone') %>" required>
+    </div>
+
+    <div class="form-group">
+      <label for="fecha_reserva"><%= __('reservation.reserveDate') %></label>
+      <input type="date" id="fecha_reserva" name="fecha_reserva" required>
+    </div>
+
+    <div class="form-group">
+      <label for="cantidad_personas"><%= __('reservation.numberOfPeople') %></label>
+      <input type="number" id="cantidad_personas" name="cantidad_personas" placeholder="<%= __('reservation.numberOfPeople') %>" min="1" required>
+    </div>
+
+    <div class="form-group">
+      <label for="metodo_pago"><%= __('reservation.paymentMethod') %></label>
+      <select id="metodo_pago" name="metodo_pago" required>
+        <option value="stripe">Stripe</option>
+        <option value="efectivo">Efectivo</option>
+        <option value="transferencia">Transferencia</option>
+      </select>
+    </div>
+
+    <!--<div class="form-group">
+      <label for="total_pagado"><%= __('reservation.totalPaid') %></label>
+      <input type="number" step="0.01" id="total_pagado" name="total_pagado" placeholder="<%= __('reservation.totalPaid') %>">
+    </div>-->
+
+    <button type="submit" class="btn-reservar"><%= __('reservation.reserveButton') %></button>
+  </form>
 </section>

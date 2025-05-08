@@ -30,14 +30,14 @@ exports.getReserva = async (req, res) => {
 // POST: Crear reserva y redirigir a Stripe
 exports.postReserva = async (req, res) => {
   try {
-    const { tour_id, nombre, email, telefono, fecha_reserva, personas } = req.body;
+    const { tour_id, nombre_cliente, email, telefono, fecha_reserva, cantidad_personas, metodo_pago, total_pagado } = req.body;
 
-    // Validación de campos
-    if (!tour_id || !nombre || !email || !telefono || !fecha_reserva || !personas) {
+    // Validación de campos obligatorios
+    if (!tour_id || !nombre_cliente || !email || !telefono || !fecha_reserva || !cantidad_personas || !metodo_pago) {
       return res.status(400).send('Faltan campos en el formulario');
     }
 
-    if (isNaN(personas) || parseInt(personas, 10) <= 0) {
+    if (isNaN(cantidad_personas) || parseInt(cantidad_personas, 10) <= 0) {
       return res.status(400).send('El número de personas debe ser un valor positivo');
     }
 
@@ -47,26 +47,29 @@ exports.postReserva = async (req, res) => {
     }
 
     const precioPorPersona = tours[0].precio;
-    const total = precioPorPersona * parseInt(personas, 10) * 100;
+    const cantidad = parseInt(cantidad_personas, 10);
+    const totalCalculado = precioPorPersona * cantidad;
 
     const [countRows] = await ReservaModel.getTotalReservas();
     const reservaCodigo = `RSV-${String(countRows[0].total + 1).padStart(6, '0')}`;
 
     const [result] = await ReservaModel.crearReserva({
       tour_id,
-      nombre,
+      nombre_cliente,
       email,
       telefono,
       fecha_reserva,
-      personas,
+      cantidad_personas: cantidad,
+      metodo_pago,
       reserva_codigo: reservaCodigo,
       costo_unitario: precioPorPersona,
-      costo_pagado: precioPorPersona * parseInt(personas, 10)
+      total_pagado: totalCalculado
     });
 
     const reservaId = result.insertId;
 
     const stripe = req.app.locals.stripe;
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [{
@@ -75,7 +78,7 @@ exports.postReserva = async (req, res) => {
           product_data: {
             name: `Reserva Tour #${reservaId}`,
           },
-          unit_amount: Math.round(total),
+          unit_amount: Math.round(totalCalculado * 100),
         },
         quantity: 1,
       }],
@@ -86,7 +89,6 @@ exports.postReserva = async (req, res) => {
 
     await ReservaModel.actualizarStripeSessionId(reservaId, session.id);
 
-    // Mensaje de éxito
     req.flash('success', 'Reserva realizada correctamente');
     res.redirect(303, session.url);
 

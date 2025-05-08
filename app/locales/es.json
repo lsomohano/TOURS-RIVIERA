@@ -46,6 +46,7 @@
 		"personas": "Cantidad de personas",
 		"costo_unitario": "Costo unitario",
 		"total_pagado": "Total pagado",
+		"metodo_pago": "Método de pago",
 		"email_conf": "Correo de confirmación",
 		"error": "No se pudo cargar la información de la reserva.",
 		"volver_inicio": "Volver al inicio",
