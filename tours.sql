@@ -18,13 +18,18 @@
 CREATE TABLE IF NOT EXISTS `reservas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tour_id` int(11) NOT NULL,
-  `usuario_id` int(11) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
+  `reserva_codigo` varchar(50) DEFAULT NULL,
+  `nombre_cliente` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `telefono` varchar(255) DEFAULT NULL,
   `cantidad_personas` int(11) NOT NULL,
   `fecha_reserva` date NOT NULL,
   `estado` enum('pendiente','pagado','cancelado') DEFAULT 'pendiente',
   `metodo_pago` enum('stripe','efectivo','transferencia') DEFAULT 'stripe',
   `stripe_session_id` varchar(255) DEFAULT NULL,
-  `total_pagado` decimal(10,2) DEFAULT NULL,
+  `costo_unitario` decimal(20,2) DEFAULT NULL,
+  `total_pagado` decimal(20,2) DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -32,9 +37,13 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   KEY `usuario_id` (`usuario_id`),
   CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`),
   CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.reservas: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla tours.reservas: ~2 rows (aproximadamente)
+INSERT INTO `reservas` (`id`, `tour_id`, `usuario_id`, `reserva_codigo`, `nombre_cliente`, `email`, `telefono`, `cantidad_personas`, `fecha_reserva`, `estado`, `metodo_pago`, `stripe_session_id`, `costo_unitario`, `total_pagado`, `created_at`, `updated_at`) VALUES
+	(1, 1, NULL, NULL, 'Leonel Somohano Carmona', NULL, NULL, 2, '2025-05-10', 'pagado', 'stripe', 'cs_test_a1G6nVT9NDX0wTPZrg1wbgaoguYHloIR8DtSJrGykyRU0W76xdeiap5oja', NULL, NULL, '2025-05-08 04:34:55', '2025-05-08 04:35:42'),
+	(2, 2, NULL, NULL, 'Leonel Somohano Carmona', NULL, NULL, 3, '2025-05-16', 'pagado', 'stripe', 'cs_test_a1JQoDFCpRVrqmMztES2iKBMhVlWXsaU73on3npB1Phb6mEqPWOlkenelV', 129.50, 388.50, '2025-05-08 04:58:15', '2025-05-08 04:58:59'),
+	(3, 3, NULL, 'RSV-000003', 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 4, '2025-05-23', 'pagado', 'stripe', 'cs_test_a15HJshdumG9DAf5ZRbvhIjNR2mdtGUH6HYK5Omm5q7otXTwfSCeWN9aEU', 75.00, 300.00, '2025-05-08 05:17:21', '2025-05-08 05:18:19');
 
 -- Volcando estructura para tabla tours.tours
 CREATE TABLE IF NOT EXISTS `tours` (
@@ -55,9 +64,16 @@ CREATE TABLE IF NOT EXISTS `tours` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tours: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tours: ~6 rows (aproximadamente)
+INSERT INTO `tours` (`id`, `nombre`, `descripcion`, `lugar_salida`, `lugar_destino`, `duracion`, `idioma`, `precio`, `cupo_maximo`, `disponible`, `imagen_destacada`, `fecha_inicio`, `fecha_fin`, `publicado`, `created_at`, `updated_at`) VALUES
+	(1, 'Tour a Chichén Itzá', 'Explora una de las siete maravillas del mundo moderno con guía profesional, comida incluida y visita a un cenote.', 'Cancún', 'Chichén Itzá', 10, 'es', 89.99, 40, 1, '/images/chichen.jpg', '2025-06-01', '2025-12-31', 1, '2025-05-08 03:58:46', '2025-05-08 04:01:49'),
+	(2, 'Aventura en Xcaret', 'Disfruta un día completo en el parque Xcaret con actividades acuáticas, cultura mexicana y espectáculo nocturno.', 'Playa del Carmen', 'Xcaret', 12, 'es', 129.50, 50, 1, '/images/xcaret.jpg', '2025-06-01', '2025-12-31', 1, '2025-05-08 03:58:46', '2025-05-08 04:01:55'),
+	(3, 'Tour de Cenotes Secretos', 'Nada en tres impresionantes cenotes ocultos en la selva maya. Incluye transporte y refrigerios.', 'Tulum', 'Ruta de los Cenotes', 6, 'es', 75.00, 20, 1, '/images/cenotes.jpg', '2025-06-15', '2025-12-15', 1, '2025-05-08 03:58:46', '2025-05-08 04:01:59'),
+	(4, 'Chichén Itzá Tour', 'Explore one of the New Seven Wonders of the World with a professional guide, lunch included, and a cenote visit.', 'Cancun', 'Chichén Itzá', 10, 'en', 89.99, 40, 1, '/images/chichen.jpg', '2025-06-01', '2025-12-31', 1, '2025-05-08 03:59:19', '2025-05-08 04:02:06'),
+	(5, 'Xcaret Adventure', 'Enjoy a full day at Xcaret Park with water activities, Mexican culture, and a night show.', 'Playa del Carmen', 'Xcaret', 12, 'en', 129.50, 50, 1, '/images/xcaret.jpg', '2025-06-01', '2025-12-31', 1, '2025-05-08 03:59:19', '2025-05-08 04:02:12'),
+	(6, 'Secret Cenotes Tour', 'Swim in three stunning hidden cenotes in the Mayan jungle. Includes transportation and snacks.', 'Tulum', 'Cenote Route', 6, 'en', 75.00, 20, 1, '/images/cenotes.jpg', '2025-06-15', '2025-12-15', 1, '2025-05-08 03:59:19', '2025-05-08 04:02:20');
 
 -- Volcando estructura para tabla tours.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
@@ -69,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.usuarios: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla tours.usuarios: ~0 rows (aproximadamente)
 INSERT INTO `usuarios` (`id`, `username`, `password`, `role`) VALUES
 	(1, 'admin', '$2a$10$g1ZrF9XoH4WnAkU3cD4WeeQ6HRKjBqUI9lYpE/BGm5XutjvG/MTzG', 'admin');
 
