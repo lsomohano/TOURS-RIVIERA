@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const tourController = require('../controllers/toursController');
+const toursController = require('../controllers/toursController');
 
 // Ruta principal
-router.get('/tours', tourController.index);
+router.get('/tours', toursController.index);
+router.get('/tours/:id', toursController.detalle); // Nueva ruta
 
 module.exports = router;

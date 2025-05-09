@@ -1,19 +1,25 @@
-<section class="tours-section">
-  <h2><%= __('menu.tours') %></h2>
-  <div class="tour-grid">
+<section class="tours-section container py-4">
+  <h2 class="mb-4 text-center"><%= __('menu.tours') %></h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
     <% tours.forEach(tour => { %>
-      <div class="tour-card">
-        <img src="<%= tour.imagen_destacada || '/images/default-tour.jpg' %>" alt="<%= tour.nombre %>">
-        <div class="tour-info">
-          <h3><%= tour.nombre %></h3>
-          <p><%= tour.descripcion %></p>
-          <p class="precio">$<%= tour.precio %> MXN</p>
-          <a href="/reservar/<%= tour.id %>" class="btn-reservar">
-            <%= __('Reservar') %>
-          </a>
+      <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="<%= tour.imagen_destacada || '/images/default-tour.jpg' %>" class="card-img-top" alt="<%= tour.nombre %>">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title"><%= tour.nombre %></h5>
+            <p class="card-text text-muted small"><%= tour.descripcion.substring(0, 100) %>...</p>
+            <p class="precio fw-bold text-success mt-auto">$<%= tour.precio %> MXN</p>
+          </div>
+          <div class="card-footer bg-white border-0 d-flex justify-content-between">
+            <a href="/tours/<%= tour.id %>" class="btn btn-outline-primary btn-sm">
+              <i class="bi bi-info-circle"></i> Ver detalles
+            </a>
+            <a href="/reservar/<%= tour.id %>" class="btn btn-success btn-sm">
+              <i class="bi bi-calendar-check"></i> <%= __('Reservar') %>
+            </a>
+          </div>
         </div>
       </div>
     <% }) %>
   </div>
 </section>
-  
