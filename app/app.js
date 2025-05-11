@@ -44,6 +44,12 @@ app.use((req, res, next) => {
     res.setLocale(lang);
     res.cookie('lang', lang, { maxAge: 900000, httpOnly: true });
   }
+  //res.locals.locale = req.getLocale(); // 👈 para usar en EJS
+  next();
+});
+
+app.use((req, res, next) => {
+  res.locals.originalUrl = req.originalUrl;
   next();
 });
 

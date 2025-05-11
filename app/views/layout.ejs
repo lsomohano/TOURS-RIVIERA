@@ -11,66 +11,80 @@
   <link rel="stylesheet" href="/css/styles.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
-<body>
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="/"><%= __('app.title') %></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-          <li class="nav-item"><a class="nav-link" href="/"><%= __('menu.home') %></a></li>
-          <li class="nav-item"><a class="nav-link" href="/tours"><%= __('menu.tours') %></a></li>
-          <li class="nav-item"><a class="nav-link" href="/contact"><%= __('menu.contact') %></a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-              🌐 <%= locale.toUpperCase() %>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="/?lang=es">Español</a></li>
-              <li><a class="dropdown-item" href="/?lang=en">English</a></li>
-            </ul>
-          </li>
-        </ul>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="/"><%= __('app.title') %></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+            <li class="nav-item"><a class="nav-link" href="/"><%= __('menu.home') %></a></li>
+            <li class="nav-item"><a class="nav-link" href="/tours"><%= __('menu.tours') %></a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact"><%= __('menu.contact') %></a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                🌐 <%= locale.toUpperCase() %>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <% const cleanUrl = originalUrl.replace(/([?&])lang=[^&]*/, '').replace(/[?&]$/, ''); %>
+                <li><a class="dropdown-item" href="<%= cleanUrl + (cleanUrl.includes('?') ? '&' : '?') + 'lang=es' %>">Español</a></li>
+                <li><a class="dropdown-item" href="<%= cleanUrl + (cleanUrl.includes('?') ? '&' : '?') + 'lang=en' %>">English</a></li>
+                <!--<li><a class="dropdown-item" href="/?lang=es">Español</a></li>
+                <li><a class="dropdown-item" href="/?lang=en">English</a></li>-->
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- HERO -->
-  <header class="hero text-white d-flex align-items-center">
-    <div class="container text-center">
-      <h1 class="display-4"><%= __('app.welcome') %></h1>
-      <p class="lead"><%= __('app.explore') %></p>
-    </div>
-  </header>
+    <!-- HERO -->
+    <header class="hero text-white d-flex align-items-center justify-content-center position-relative" style="background-image: url('/images/hero.png');">
+      <!--<div class="overlay"></div>-->
 
-  <!-- MAIN CONTENT -->
-  <main class="container py-5">
-    <%- body %>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="bg-dark text-white py-4 mt-auto">
-    <div class="container text-center">
-      <p class="mb-1">&copy; <%= new Date().getFullYear() %> Riviera Maya Tours</p>
-      <div class="mb-2">
-        <a href="/terminos-condiciones" class="text-white me-2" target="_blank"><%= __('legal.terms_title') %></a> |
-        <a href="/politica-privacidad" class="text-white ms-2" target="_blank"><%= __('legal.privacy_title') %></a>
+      <div class="container text-center hero-content">
+        <h1 class="display-3 fw-bold animate-fade-up"><%= __('app.welcome') %></h1>
+        <p class="lead mt-3 animate-fade-up delay-1"><%= __('app.explore') %></p>
+        <a href="/tours" class="btn btn-outline-light btn-lg mt-4 animate-fade-up delay-2">
+          <i class="bi bi-arrow-right-circle me-2"></i> Tours
+        </a>
       </div>
-      <div class="social-icons">
-        <a href="https://facebook.com" class="text-white me-3" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://instagram.com" class="text-white me-3" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://wa.me/1234567890" class="text-white" target="_blank"><i class="fab fa-whatsapp"></i></a>
-      </div>
-    </div>
-  </footer>
+    </header>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <!-- MAIN CONTENT -->
+    <main class="container py-5">
+      <%- body %>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white py-4 mt-auto">
+      <div class="container text-center">
+        <p class="mb-1">&copy; <%= new Date().getFullYear() %> Riviera Maya Tours</p>
+        <div class="mb-2">
+          <a href="/terminos-condiciones" class="text-white me-2" target="_blank"><%= __('legal.terms_title') %></a> |
+          <a href="/politica-privacidad" class="text-white ms-2" target="_blank"><%= __('legal.privacy_title') %></a>
+        </div>
+        <div class="social-icons">
+          <a href="https://facebook.com" class="text-white me-3" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://instagram.com" class="text-white me-3" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/1234567890" class="text-white" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery (Select2 lo necesita) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
+  </body>
 </html>

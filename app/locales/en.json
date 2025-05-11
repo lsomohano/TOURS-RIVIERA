@@ -70,6 +70,27 @@
 		"parques": "Parks",
 		"ruinas_mayas": "Mayan ruins",
 		"cenotes": "Cenotes"
+	},
+	"tours": {
+		"title": "Explore our tours",
+		"filter_by": "FILTER BY:",
+		"placeholder_name": "Tour name",
+		"price_range": "Price range",
+		"price_under_500": "Less than $500",
+		"price_500_1000": "$500 - $1000",
+		"price_over_1000": "More than $1000",
+		"duration": "Tour duration",
+		"duration_short": "1-3 hrs",
+		"duration_medium": "4-8 hrs",
+		"duration_long": "Full day",
+		"trip_type": "Trip type",
+		"type_adventure": "Adventure",
+		"type_relaxation": "Relaxation",
+		"type_cultural": "Cultural",
+		"travel_mode": "Travel mode",
+		"mode_group": "Group",
+		"mode_private": "Private",
+		"button_filter": "Filter"
 	}
 
 }

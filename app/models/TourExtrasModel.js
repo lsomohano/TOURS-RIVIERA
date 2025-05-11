@@ -27,7 +27,50 @@ const TourExtrasModel = {
 
   getRecomendaciones: (tourId) => {
     return db.promise().query('SELECT * FROM tour_recomendaciones WHERE tour_id = ? ORDER BY FIELD(momento, "antes", "durante", "despues")', [tourId]);
+  },
+
+  getPreciosPorPersonas: (tourId) => {
+    return db.promise().query(
+      'SELECT personas_max, precio_base FROM tour_precios_privados WHERE tour_id = ? ',
+      [tourId]
+    );
+  },
+
+  getPreciosPrivadosCalculados: async (tourId) => {
+    const [rows] = await db.promise().query(`
+      SELECT personas_max, precio_base, incremento_pct, aplica_desde
+      FROM tour_precios_privados
+      WHERE tour_id = ? AND activo = 1
+    `, [tourId]);
+
+    const resultados = [];
+
+    rows.forEach(row => {
+      const precioBase = Number(row.precio_base);
+      const incrementoPct = Number(row.incremento_pct);
+      const aplicaDesde = Number(row.aplica_desde);
+      const personasMax = Number(row.personas_max);
+
+      for (let i = 1; i <= personasMax; i++) {
+        let total = 0;
+
+        if (i <= aplicaDesde) {
+          total = precioBase;
+        } else {
+          total = precioBase + (precioBase * incrementoPct / 100 * (i - aplicaDesde));
+        }
+
+        resultados.push({
+          personas: i,
+          precio_total: Number(total.toFixed(2)),
+          precio_por_persona: Number((total / i).toFixed(2))
+        });
+      }
+    });
+
+    return resultados;
   }
+  
 };
 
 module.exports = TourExtrasModel;

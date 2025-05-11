@@ -67,7 +67,7 @@ exports.postReserva = async (req, res) => {
     });
 
     const reservaId = result.insertId;
-
+    console.log(process.env.DOMAIN);
     const stripe = req.app.locals.stripe;
 
     const session = await stripe.checkout.sessions.create({

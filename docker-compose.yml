@@ -36,7 +36,7 @@ services:
       MYSQL_USER: ${DB_USER}               # Nombre de usuario para conexiones
       MYSQL_PASSWORD: ${DB_PASSWORD}       # Contraseña del usuario no root
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
 

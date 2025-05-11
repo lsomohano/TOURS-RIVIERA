@@ -1,5 +1,62 @@
-<section class="tours-section container py-4">
-  <h2 class="mb-4 text-center"><%= __('menu.tours') %></h2>
+<h1 class="text-center"><%= __('tours.title') %></h1>
+<section class="tours-section container py-5">
+  <!-- Filtros -->
+  <div class="filtro-tours mb-4">
+    <form class="d-flex flex-wrap gap-2 align-items-center" method="GET" action="/tours">
+      <div class="filtro-icono">
+        <i class="fas fa-sliders-h me-2"></i> <%= __('tours.filter_by') %>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <i class="fas fa-search"></i>
+        <input type="text" class="form-control form-control-sm" placeholder="<%= __('tours.placeholder_name') %>" name="nombre" value="<%= req.query.nombre || '' %>" />
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <i class="fas fa-dollar-sign"></i>
+        <select class="form-select form-select-sm" name="precio">
+          <option value=""><%= __('tours.price_range') %></option>
+          <option value="1" <%= req.query.precio === '1' ? 'selected' : '' %>><%= __('tours.price_under_500') %></option>
+          <option value="2" <%= req.query.precio === '2' ? 'selected' : '' %>><%= __('tours.price_500_1000') %></option>
+          <option value="3" <%= req.query.precio === '3' ? 'selected' : '' %>><%= __('tours.price_over_1000') %></option>
+        </select>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <i class="fas fa-clock"></i>
+        <select class="form-select form-select-sm" name="duracion">
+          <option value=""><%= __('tours.duration') %></option>
+          <option value="corto" <%= req.query.duracion === 'corto' ? 'selected' : '' %>><%= __('tours.duration_short') %></option>
+          <option value="medio" <%= req.query.duracion === 'medio' ? 'selected' : '' %>><%= __('tours.duration_medium') %></option>
+          <option value="largo" <%= req.query.duracion === 'largo' ? 'selected' : '' %>><%= __('tours.duration_long') %></option>
+        </select>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <i class="fas fa-tag"></i>
+        <select class="form-select form-select-sm" name="tipo">
+          <option value=""><%= __('tours.trip_type') %></option>
+          <option value="aventura" <%= req.query.tipo === 'aventura' ? 'selected' : '' %>><%= __('tours.type_adventure') %></option>
+          <option value="relajacion" <%= req.query.tipo === 'relajacion' ? 'selected' : '' %>><%= __('tours.type_relaxation') %></option>
+          <option value="cultural" <%= req.query.tipo === 'cultural' ? 'selected' : '' %>><%= __('tours.type_cultural') %></option>
+        </select>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <i class="fas fa-tag"></i>
+        <select class="form-select form-select-sm" name="modalidad">
+          <option value=""><%= __('tours.travel_mode') %></option>
+          <option value="grupo" <%= req.query.modalidad === 'grupo' ? 'selected' : '' %>><%= __('tours.mode_group') %></option>
+          <option value="privado" <%= req.query.modalidad === 'privado' ? 'selected' : '' %>><%= __('tours.mode_private') %></option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-outline-secondary btn-sm rounded-pill px-3 ms-auto">
+        <i class="fas fa-filter me-2"></i><%= __('tours.button_filter') %>
+      </button>
+    </form>
+  </div>
+
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <% tours.forEach(tour => { %>
       <div class="col">
@@ -21,5 +78,53 @@
         </div>
       </div>
     <% }) %>
+
+    <% const startItem = (page - 1) * limit + 1; %>
+<% const endItem = Math.min(startItem + limit - 1, totalTours); %>
+
+
+  </div>
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4">
+    <div class="mb-2 mb-md-0 text-muted">
+      Mostrando <%= startItem %>–<%= endItem %> de <%= totalTours %> tours
+    </div>
+
+    <nav aria-label="Paginación de tours">
+      <ul class="pagination mb-0">
+
+        <% if (page > 1) { %>
+          <li class="page-item">
+            <a class="page-link" href="?<%= Object.entries(query).map(([k,v]) => k !== 'page' ? `${k}=${encodeURIComponent(v)}` : '').filter(Boolean).join('&') %>&page=<%= page - 1 %>">
+              <i class="fas fa-angle-left"></i>
+            </a>
+          </li>
+        <% } else { %>
+          <li class="page-item disabled">
+            <span class="page-link"><i class="fas fa-angle-left"></i></span>
+          </li>
+        <% } %>
+
+        <% for (let i = 1; i <= totalPages; i++) { %>
+          <li class="page-item <%= page === i ? 'active' : '' %>">
+            <a class="page-link" href="?<%= Object.entries(query).map(([k,v]) => k !== 'page' ? `${k}=${encodeURIComponent(v)}` : '').filter(Boolean).join('&') %>&page=<%= i %>">
+              <%= i %>
+            </a>
+          </li>
+        <% } %>
+
+        <% if (page < totalPages) { %>
+          <li class="page-item">
+            <a class="page-link" href="?<%= Object.entries(query).map(([k,v]) => k !== 'page' ? `${k}=${encodeURIComponent(v)}` : '').filter(Boolean).join('&') %>&page=<%= page + 1 %>">
+              <i class="fas fa-angle-right"></i>
+            </a>
+          </li>
+        <% } else { %>
+          <li class="page-item disabled">
+            <span class="page-link"><i class="fas fa-angle-right"></i></span>
+          </li>
+        <% } %>
+
+      </ul>
+    </nav>
   </div>
 </section>

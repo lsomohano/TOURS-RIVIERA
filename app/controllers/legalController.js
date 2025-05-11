@@ -1,5 +1,5 @@
 // controllers/indexController.js
-const db = require('../config/db'); // Conexión a la base de datos
+//const db = require('../config/db'); // Conexión a la base de datos
 
 exports.legalPP = (req, res) => {
     res.render('politica-privacidad', {

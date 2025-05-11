@@ -4,15 +4,55 @@
     box-sizing: border-box;
   }
   
-  .hero {
-    background-image: url('/images/hero.jpg');
-    background-size: cover;
-    background-position: center;
-    min-height: 350px;
-    padding: 60px 0;
-    color: white;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+ .hero {
+  background-image: url('/images/hero.png'); /* O usa la variable dinámica */
+  background-size: cover;
+  background-position: center;
+  min-height: 400px;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 20px;
+  color: white;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero .overlay {
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  z-index: 1;
+}
+
+.hero .hero-content {
+  position: relative;
+  z-index: 2;
+  /*max-width: 1200px;*/
+}
+
+.animate-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease-out forwards;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+
+.hero::before,
+.hero::after {
+  content: none;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
   
   
   /* TOURS SECTION */
@@ -397,3 +437,122 @@ button.btn-reservar:hover {
   color: #333;
 }
 
+/*.filtro-tours {
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+    padding: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }*/
+
+  .filtro-tours {
+  position: sticky;
+  top: 1rem; /* Puedes ajustar el espacio desde el top */
+  z-index: 1020; /* Por encima del contenido normal, debajo de navbar fija */
+  background: #fff; /* Fondo blanco para que no se vea raro al hacer scroll */
+
+  background-color: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+  .filtro-tours .filtro-icono {
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+    font-weight: 500;
+    border-right: 1px solid #dee2e6;
+    padding-right: 20px;
+    margin-right: 10px;
+  }
+
+  .filtro-tours .form-select {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    /*padding-left: 0;*/
+    font-size: 1rem;
+  }
+
+  .filtro-tours .form-control {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    /*padding-left: 0;*/
+    font-size: 0.9rem;
+  }
+
+  .filtro-tours .form-select:focus,
+  .filtro-tours .form-control:focus {
+    box-shadow: none;
+    border-color: #86b7fe;
+  }
+
+  .filtro-tours i {
+    color: #000;
+  }
+
+  .filtro-tours {
+    margin-bottom: 2rem;
+  }
+
+/*#sugerencias {
+      border: 0px solid #ccc;
+      max-height: 200px;
+      overflow-y: auto;
+      position: absolute;
+      background: white;
+      width: 100%;
+      z-index: 999;
+    }
+    #sugerencias div {
+      padding: 8px;
+      cursor: pointer;
+    }
+    #sugerencias div:hover {
+      background-color: #f0f0f0;
+    }*/
+#sugerencias {
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+}
+
+.sugerencia-item {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.sugerencia-item:hover {
+  background-color: #f7f7f7;
+}
+
+.sugerencia-item:active {
+  background-color: #007bff;
+  color: white;
+}
+
+.error {
+  padding: 10px;
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
