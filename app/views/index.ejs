@@ -6,7 +6,7 @@
   </p>
 </section>
 
-<section class="categorias">
+<!--<section class="categorias">
   <div class="categoria">
     <img src="/images/parques.jpg" alt="<%= __('categorias.parques') %>">
     <div class="overlay"><%= __('categorias.parques') %></div>
@@ -19,7 +19,45 @@
     <img src="/images/cenotes.jpg" alt="<%= __('categorias.cenotes') %>">
     <div class="overlay"><%= __('categorias.cenotes') %></div>
   </div>
-</section>
+</section>-->
+<div class="row">
+  <!-- Tours en grupo -->
+  <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+    <div class="px-4 text-center d-flex flex-column align-items-center">
+      <i class="bi bi-people display-1 mb-3 color-caribe icon-hover"></i>
+      <h5 class="fw-semibold"><%= __('group_tours.title') %></h5>
+      <p><%= __('group_tours.desc') %></p>
+      <a href="#" class="color-caribe text-decoration-none fw-semibold">
+        <%= __('learn_more') %>
+      </a>
+    </div>
+  </div>
+
+  <!-- Tours privados -->
+  <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+    <div class="px-4 text-center d-flex flex-column align-items-center">
+      <i class="bi bi-person-check display-1 mb-3 color-caribe icon-hover"></i>
+      <h5 class="fw-semibold"><%= __('private_tours.title') %></h5>
+      <p><%= __('private_tours.desc') %></p>
+      <a href="#" class="color-caribe text-decoration-none fw-semibold">
+        <%= __('learn_more') %>
+      </a>
+    </div>
+  </div>
+
+  <!-- Transportación -->
+  <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+    <div class="px-4 text-center d-flex flex-column align-items-center" >
+      <i class="bi bi-car-front display-1 mb-3 color-caribe icon-hover"></i>
+      <h5 class="fw-semibold"><%= __('transport.title') %></h5>
+      <p><%= __('transport.desc') %></p>
+      <a href="#" class="color-caribe text-decoration-none fw-semibold">
+        <%= __('learn_more') %>
+      </a>
+    </div>
+  </div>
+</div>
+
 
 <section class="tours-section container py-4">
   <h2 class="mb-4 text-center"><%= __('menu.tours') %></h2>

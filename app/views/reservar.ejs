@@ -9,13 +9,16 @@
   <h2>
     <%= __('menu.reserveTour') %>: <%= tour.nombre %>
   </h2>
-
+  <p class="tour-modalidad">
+    <strong>Modalidad:</strong> 
+    <%= tour.modalidad === 'grupo' ? 'Tour en grupo (compartido)' : 'Tour privado (solo para ti y tus acompañantes)' %>
+  </p> 
   <form action="/reservar" method="POST">
     <input type="hidden" name="tour_id" value="<%= tour.id %>">
 
     <div class="form-group">
       <label for="punto_encuentro"><%= __('reservation.name') %></label>
-      <input type="text" id="direccion" placeholder="Ej. Hotel Riu Playa del Carmen" autocomplete="off">
+      <input type="text" id="punto_encuentro" name="punto_encuentro" placeholder="Ej. Hotel Riu Playa del Carmen" autocomplete="off">
       <!-- Contenedor para las sugerencias -->
       <ul id="sugerencias" class="list-group mt-2" style="display: none; position: absolute; width: 100%; z-index: 1000; background-color: #fff; border: 1px solid #ccc; border-radius: 8px;">
         <!-- Las sugerencias se agregan dinámicamente aquí -->
@@ -62,12 +65,18 @@
       <label for="total_pagado"><%= __('reservation.totalPaid') %></label>
       <input type="number" step="0.01" id="total_pagado" name="total_pagado" placeholder="<%= __('reservation.totalPaid') %>">
     </div>-->
-
+    <% if (tour.modalidad === 'privado') { %>
+      <div class="form-group">
+        <label for="peticiones_especiales">¿Tienes peticiones especiales?</label>
+        <textarea id="peticiones_especiales" name="peticiones_especiales" rows="3"></textarea>
+      </div>
+    <% } %>
+    <input type="hidden" name="modalidad" value="<%= tour.modalidad %>">
     <button type="submit" class="btn-reservar"><%= __('reservation.reserveButton') %></button>
   </form>
 </section>
 <script>
-  const input = document.getElementById('direccion');
+  const input = document.getElementById('punto_encuentro');
   const sugerencias = document.getElementById('sugerencias');
   let timeoutId;
 

@@ -27,32 +27,64 @@ exports.getReserva = async (req, res) => {
   }
 };
 
-// POST: Crear reserva y redirigir a Stripe
 exports.postReserva = async (req, res) => {
   try {
-    const { tour_id, nombre_cliente, email, telefono, fecha_reserva, cantidad_personas, metodo_pago, total_pagado } = req.body;
+    const {
+      tour_id,
+      nombre_cliente,
+      email,
+      telefono,
+      fecha_reserva,
+      cantidad_personas,
+      metodo_pago,
+      modalidad,
+      punto_encuentro,
+      peticiones_especiales
+    } = req.body;
 
     // Validación de campos obligatorios
     if (!tour_id || !nombre_cliente || !email || !telefono || !fecha_reserva || !cantidad_personas || !metodo_pago) {
       return res.status(400).send('Faltan campos en el formulario');
     }
 
-    if (isNaN(cantidad_personas) || parseInt(cantidad_personas, 10) <= 0) {
+    const cantidad = parseInt(cantidad_personas, 10);
+    if (isNaN(cantidad) || cantidad <= 0) {
       return res.status(400).send('El número de personas debe ser un valor positivo');
     }
 
+    if (modalidad !== 'privado' && modalidad !== 'grupo') {
+      return res.status(400).send('Tipo de tour inválido');
+    }
+
+    // Obtener datos del tour
     const [tours] = await ReservaModel.getTourPrecioById(tour_id);
     if (tours.length === 0) {
       return res.status(404).send('Tour no encontrado');
     }
 
-    const precioPorPersona = tours[0].precio;
-    const cantidad = parseInt(cantidad_personas, 10);
-    const totalCalculado = precioPorPersona * cantidad;
+    let precioPorPersona;
+    let totalCalculado;
+    console.log('Modalidad recibida:', modalidad);
+    if (modalidad === 'privado') {
+      // Precio total calculado por grupo (privado)
+      totalCalculado = await ReservaModel.getPrecioPrivado(tour_id, cantidad);
+      precioPorPersona = totalCalculado / cantidad;
+      
+    } else {
+      // Precio por persona (grupo)
+      precioPorPersona = tours[0].precio;
+      totalCalculado = precioPorPersona * cantidad;
+    }
 
+    if (isNaN(precioPorPersona) || isNaN(totalCalculado)) {
+      return res.status(500).send('Error al calcular el precio');
+    }
+
+    // Generar código de reserva
     const [countRows] = await ReservaModel.getTotalReservas();
     const reservaCodigo = `RSV-${String(countRows[0].total + 1).padStart(6, '0')}`;
 
+    // Crear reserva en base de datos
     const [result] = await ReservaModel.crearReserva({
       tour_id,
       nombre_cliente,
@@ -60,16 +92,18 @@ exports.postReserva = async (req, res) => {
       telefono,
       fecha_reserva,
       cantidad_personas: cantidad,
+      punto_encuentro,
+      peticiones_especiales,
       metodo_pago,
       reserva_codigo: reservaCodigo,
       costo_unitario: precioPorPersona,
-      total_pagado: totalCalculado
+      total_pagado: totalCalculado,
     });
 
     const reservaId = result.insertId;
-    console.log(process.env.DOMAIN);
-    const stripe = req.app.locals.stripe;
 
+    const stripe = req.app.locals.stripe;
+    const stripeAmount = Math.round(Number(totalCalculado) * 100);
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [{
@@ -78,7 +112,8 @@ exports.postReserva = async (req, res) => {
           product_data: {
             name: `Reserva Tour #${reservaId}`,
           },
-          unit_amount: Math.round(totalCalculado * 100),
+          unit_amount: stripeAmount, // en centavos
+          //unit_amount: Math.round(totalCalculado * 100), // en centavos
         },
         quantity: 1,
       }],
@@ -87,6 +122,7 @@ exports.postReserva = async (req, res) => {
       cancel_url: `${process.env.DOMAIN}/reservar_cancel?reservaId=${reservaId}`,
     });
 
+    // Actualizar session ID en base de datos
     await ReservaModel.actualizarStripeSessionId(reservaId, session.id);
 
     req.flash('success', 'Reserva realizada correctamente');

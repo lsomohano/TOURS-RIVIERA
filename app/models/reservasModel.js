@@ -26,6 +26,8 @@ const ReservaModel = {
       metodo_pago = 'stripe',
       costo_unitario = null,
       total_pagado = null,
+      punto_encuentro = null,
+      peticiones_especiales = null,
       stripe_session_id = null,
       estado = 'pendiente'
     } = datos;
@@ -42,11 +44,13 @@ const ReservaModel = {
         fecha_reserva,
         estado,
         metodo_pago,
+        punto_encuentro,
+        peticiones_especiales,
         stripe_session_id,
         costo_unitario,
         total_pagado
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         tour_id,
         usuario_id,
@@ -58,6 +62,8 @@ const ReservaModel = {
         fecha_reserva,
         estado,
         metodo_pago,
+        punto_encuentro,
+        peticiones_especiales,
         stripe_session_id,
         costo_unitario,
         total_pagado
@@ -87,7 +93,31 @@ const ReservaModel = {
       WHERE r.id = ?`,
       [reservaId]
     );
+  },
+
+  getPrecioPrivado: async (tourId, cantidadPersonas) => {
+    try {
+      const [rows] = await db.promise().query(
+        `SELECT calcular_precio_privado(?, ?) AS totalCalculado`,
+        [tourId, cantidadPersonas]
+      );
+  
+      const total = rows[0]?.totalCalculado;
+      //console.log('Valor:', total, 'Tipo:', typeof total); // string
+      const totalNum = parseFloat(total);
+      //console.log('Total como número:', totalNum, 'Tipo:', typeof totalNum); // number
+
+      if (isNaN(totalNum)) {
+        throw new Error('Precio calculado no es un número válido');
+      }
+
+      return totalNum;
+    } catch (error) {
+      console.error('Error en getPrecioPrivado:', error);
+      throw error;
+    }
   }
+
 };
 
 module.exports = ReservaModel;

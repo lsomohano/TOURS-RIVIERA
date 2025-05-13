@@ -91,6 +91,18 @@
 		"mode_group": "Group",
 		"mode_private": "Private",
 		"button_filter": "Filter"
+	},
+	"our_services": "Our Services",
+	"group_tours": {
+		"title": "Group Tours",
+		"desc": "Explore with fellow travelers and enjoy shared experiences at an affordable price."
+	},
+	"private_tours": {
+		"title": "Private Tours",
+		"desc": "Travel at your own pace with a personalized tour just for you and your group."
+	},
+	"transportation": {
+		"title": "Transportation",
+		"desc": "Comfortable and safe transfers from the airport to your hotel and back."
 	}
-
 }
