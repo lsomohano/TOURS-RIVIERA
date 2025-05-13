@@ -437,19 +437,8 @@ button.btn-reservar:hover {
   color: #333;
 }
 
-/*.filtro-tours {
-    background-color: #f8f9fa;
-    border-radius: 6px;
-    border: 1px solid #dee2e6;
-    padding: 10px 20px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 20px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  }*/
-
-  .filtro-tours {
+/* Mejora filtros de tours */
+.filtro-tours {
   position: sticky;
   top: 1rem; /* Puedes ajustar el espacio desde el top */
   z-index: 1020; /* Por encima del contenido normal, debajo de navbar fija */
@@ -505,22 +494,7 @@ button.btn-reservar:hover {
     margin-bottom: 2rem;
   }
 
-/*#sugerencias {
-      border: 0px solid #ccc;
-      max-height: 200px;
-      overflow-y: auto;
-      position: absolute;
-      background: white;
-      width: 100%;
-      z-index: 999;
-    }
-    #sugerencias div {
-      padding: 8px;
-      cursor: pointer;
-    }
-    #sugerencias div:hover {
-      background-color: #f0f0f0;
-    }*/
+/* Mejora sugerencias */
 #sugerencias {
   position: absolute;
   width: 100%;
@@ -561,6 +535,10 @@ button.btn-reservar:hover {
   color: #00cfc8 !important;
 }
 
+.color-payments {
+  color: #020215 !important;
+}
+
 .bi {
   transition: transform 0.3s ease;
 }
@@ -568,3 +546,97 @@ button.btn-reservar:hover {
 .bi:hover {
   transform: scale(1.1);
 }
+
+.reservation-form {
+  max-width: 620px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.reservation-form h2 {
+  font-size: 28px;
+  text-align: center;
+  color: #007b5e;
+  margin-bottom: 25px;
+}
+
+.reservation-form .form-group {
+  margin-bottom: 20px;
+}
+
+.reservation-form label {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.reservation-form input,
+.reservation-form select,
+.reservation-form textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.reservation-form input:focus,
+.reservation-form select:focus,
+.reservation-form textarea:focus {
+  border-color: #00a98f;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0, 169, 143, 0.2);
+}
+
+.reservation-form textarea {
+  resize: vertical;
+}
+
+button.btn-reservar {
+  background-color: #007b5e;
+  color: #fff;
+  padding: 14px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  transition: background 0.3s, box-shadow 0.2s;
+  font-weight: bold;
+}
+
+button.btn-reservar:hover {
+  background-color: #005f47;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.alert-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+

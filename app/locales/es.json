@@ -26,6 +26,7 @@
 		"saveError": "Hubo un error guardando tu mensaje. Intenta de nuevo."
 	},
 	"reservation": {
+		"meetingPoint":"Punto de Encuentro",
 		"name": "Nombre",
 		"email": "Correo Electrónico",
 		"phone": "Teléfono",
@@ -37,6 +38,11 @@
 		"paidSuccess": "¡Pago exitoso! Tu reserva está confirmada.",
 		"paidError": "Estado de pago incierto. Contacta al soporte.",
 		"paidCancelled": "Pago cancelado. Puedes intentarlo de nuevo.",
+		"paymentMethod": "Payment Method",
+        "specialRequests": "¿Tienes peticiones especiales?",
+		"placeholderspecialRequests": "Escribe aquí si necesitas algo especial...",
+		"modeGroup": "Modalidad: Tour en grupo (compartido)",
+		"modePrivate": "Modalidad: Tour privado (solo para ti y tus acompañantes)",
 		"exito": {
 			"titulo": "¡Pago realizado con éxito!",
 			"mensaje": "Gracias, <strong>{{nombre}}</strong>. Tu reserva para el tour \"<strong>{{tour}}</strong>\" ha sido confirmada."
@@ -104,5 +110,29 @@
 	"transportation": {
 		"title": "Transportación",
 		"desc": "Traslados cómodos y seguros desde el aeropuerto a tu hotel y viceversa."
+	},
+	"payment": {
+		"method": {
+		"sectionTitle": "Nuestros métodos de pago",
+		"stripe": "Tarjeta (Stripe)",
+		"cash": "Efectivo",
+		"transfer": "Transferencia bancaria"
+		}
+	},
+	"transport": {
+		"form": {
+			"title": "Reserva tu transportación",
+			"origin": "Origen",
+			"destination": "Destino",
+			"date": "Fecha",
+			"time": "Hora",
+			"passengers": "Pasajeros",
+			"service_type": "Tipo de servicio",
+			"submit": "Apartar transporte",
+			"option": {
+				"airport": "Aeropuerto",
+				"hotel": "Hotel"
+			}
+		}
 	}
 }

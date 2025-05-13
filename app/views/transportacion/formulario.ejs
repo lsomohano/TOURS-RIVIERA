@@ -1,0 +1,54 @@
+<section class="container py-5">
+  <h2 class="text-center fw-bold mb-4"><%= __('transport.form.title') %></h2>
+
+  <form action="/transportacion" method="POST" class="bg-light p-4 rounded shadow">
+    <div class="row g-3">
+
+      <div class="col-md-6">
+        <label for="origen" class="form-label"><%= __('transport.form.origin') %></label>
+        <select name="origen" id="origen" class="form-select" required>
+          <option value="Aeropuerto"><%= __('transport.form.option.airport') %></option>
+          <option value="Hotel"><%= __('transport.form.option.hotel') %></option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label for="destino" class="form-label"><%= __('transport.form.destination') %></label>
+        <select name="destino" id="destino" class="form-select" required>
+          <% destinos.forEach(destino => { %>
+            <option value="<%= destino %>"><%= destino %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label for="tipo_servicio" class="form-label"><%= __('transport.form.service_type') %></label>
+        <select name="tipo_servicio" id="tipo_servicio" class="form-select" required>
+            <% servicios.forEach(tipo => { %>
+                <option value="<%= tipo %>"><%= tipo.replace('_', ' ') %></option>
+            <% }) %>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label for="fecha" class="form-label"><%= __('transport.form.date') %></label>
+        <input type="date" name="fecha" id="fecha" class="form-control" required>
+      </div>
+
+      <div class="col-md-6">
+        <label for="hora" class="form-label"><%= __('transport.form.time') %></label>
+        <input type="time" name="hora" id="hora" class="form-control" required>
+      </div>
+
+      <div class="col-md-6">
+        <label for="pasajeros" class="form-label"><%= __('transport.form.passengers') %></label>
+        <input type="number" name="pasajeros" id="pasajeros" class="form-control" min="1" required>
+      </div>
+
+      <div class="col-12 text-center mt-4">
+        <button type="submit" class="btn btn-primary px-4 fw-semibold"><%= __('transport.form.submit') %></button>
+      </div>
+
+    </div>
+  </form>
+</section>

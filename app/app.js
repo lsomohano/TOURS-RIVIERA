@@ -62,6 +62,7 @@ const contactRoutes = require('./routers/contact');
 const tourRoutes = require('./routers/tours');
 const reservaRoutes = require('./routers/reservar');
 const legalRoutes = require('./routers/legal');
+const transportRoutes = require('./routers/transport');
 //const adminRoutes = require('./routers/admin');
 //const authRoutes = require('./routers/auth');
 
@@ -70,6 +71,7 @@ app.use(contactRoutes);
 app.use(tourRoutes);
 app.use(reservaRoutes);
 app.use(legalRoutes);
+app.use(transportRoutes);
 //app.use('/admin', adminRoutes);
 //app.use('/admin', authRoutes); // rutas como /login, /logout
 

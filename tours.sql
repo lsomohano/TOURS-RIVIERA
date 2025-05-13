@@ -2,7 +2,7 @@
 -- Host:                         localhost
 -- Versión del servidor:         5.7.44 - MySQL Community Server (GPL)
 -- SO del servidor:              Linux
--- HeidiSQL Versión:             12.8.0.6908
+-- HeidiSQL Versión:             12.10.0.7000
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   KEY `usuario_id` (`usuario_id`),
   CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`),
   CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla tours.reservas: ~12 rows (aproximadamente)
 INSERT INTO `reservas` (`id`, `tour_id`, `usuario_id`, `reserva_codigo`, `nombre_cliente`, `email`, `telefono`, `cantidad_personas`, `fecha_reserva`, `estado`, `metodo_pago`, `stripe_session_id`, `costo_unitario`, `total_pagado`, `punto_encuentro`, `peticiones_especiales`, `created_at`, `updated_at`) VALUES
@@ -81,7 +81,34 @@ INSERT INTO `reservas` (`id`, `tour_id`, `usuario_id`, `reserva_codigo`, `nombre
 	(9, 8, NULL, 'RSV-000009', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 6, '2025-05-17', 'pendiente', 'stripe', 'cs_test_a1eGxr9qhVLBJFRaSIWWr56HDZGEekUExBUAPKX9Is3qzWmsFtR2cqfh8J', 1300.00, 7800.00, NULL, NULL, '2025-05-13 12:49:12', '2025-05-13 12:49:13'),
 	(10, 8, NULL, 'RSV-000010', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-16', 'pendiente', 'stripe', NULL, 206.50, NULL, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', '2025-05-13 13:58:27', '2025-05-13 13:58:27'),
 	(11, 8, NULL, 'RSV-000011', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-16', 'pagado', 'stripe', 'cs_test_a1lv6CnhftzmhVzyNn5I90FHjC29B5J1SD7UvSrqp0SVCBLOXCB6TxqWkk', 206.50, 826.00, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', '2025-05-13 14:15:22', '2025-05-13 14:16:19'),
-	(12, 7, NULL, 'RSV-000012', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-24', 'pagado', 'stripe', 'cs_test_a1fOvi74q2qvEkkpCpwY548WGdopsUbV38gDPDesn2XVEDR9VUivvLDqNP', 210.00, 840.00, 'Hotel Real Zací, Anillo Periférico de Valladolid, Valladolid, Yucatán, 97784, México', '', '2025-05-13 14:19:34', '2025-05-13 14:20:27');
+	(12, 7, NULL, 'RSV-000012', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-24', 'pagado', 'stripe', 'cs_test_a1fOvi74q2qvEkkpCpwY548WGdopsUbV38gDPDesn2XVEDR9VUivvLDqNP', 210.00, 840.00, 'Hotel Real Zací, Anillo Periférico de Valladolid, Valladolid, Yucatán, 97784, México', '', '2025-05-13 14:19:34', '2025-05-13 14:20:27'),
+	(13, 7, NULL, 'RSV-000013', 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 5, '2025-05-17', 'pagado', 'stripe', 'cs_test_a1FVzSc0jKyUnW43SImOLPXhkzHvHFznlx3JelBhIUvcZ4ALDLOYuW3qrN', 192.00, 960.00, 'Hotel Riu Palace Mexico, Ha Mz3 Lt4, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', '2025-05-13 16:02:35', '2025-05-13 16:05:18');
+
+-- Volcando estructura para tabla tours.tarifas_transporte
+CREATE TABLE IF NOT EXISTS `tarifas_transporte` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `origen` varchar(100) NOT NULL,
+  `destino` varchar(100) NOT NULL,
+  `tipo_servicio` enum('compartido','privado','privado_redondo') NOT NULL,
+  `precio` decimal(10,2) NOT NULL,
+  `max_pasajeros` int(11) DEFAULT NULL,
+  `activo` tinyint(1) DEFAULT '1',
+  `creado_en` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla tours.tarifas_transporte: ~10 rows (aproximadamente)
+INSERT INTO `tarifas_transporte` (`id`, `origen`, `destino`, `tipo_servicio`, `precio`, `max_pasajeros`, `activo`, `creado_en`) VALUES
+	(1, 'Aeropuerto', 'Cancún Hotel Zone', 'compartido', 15.00, NULL, 1, '2025-05-13 21:45:55'),
+	(2, 'Aeropuerto', 'Cancún Hotel Zone', 'privado', 35.00, 4, 1, '2025-05-13 21:45:55'),
+	(3, 'Aeropuerto', 'Playa del Carmen', 'privado', 60.00, 4, 1, '2025-05-13 21:45:55'),
+	(4, 'Aeropuerto', 'Tulum', 'privado', 100.00, 4, 1, '2025-05-13 21:45:55'),
+	(5, 'Aeropuerto', 'Tulum', 'privado_redondo', 180.00, 4, 1, '2025-05-13 21:45:55'),
+	(6, 'Aeropuerto', 'Cancún Hotel Zone', 'compartido', 15.00, NULL, 1, '2025-05-13 21:46:01'),
+	(7, 'Aeropuerto', 'Cancún Hotel Zone', 'privado', 35.00, 4, 1, '2025-05-13 21:46:01'),
+	(8, 'Aeropuerto', 'Playa del Carmen', 'privado', 60.00, 4, 1, '2025-05-13 21:46:01'),
+	(9, 'Aeropuerto', 'Tulum', 'privado', 100.00, 4, 1, '2025-05-13 21:46:01'),
+	(10, 'Aeropuerto', 'Tulum', 'privado_redondo', 180.00, 4, 1, '2025-05-13 21:46:01');
 
 -- Volcando estructura para tabla tours.tours
 CREATE TABLE IF NOT EXISTS `tours` (
@@ -265,7 +292,7 @@ CREATE TABLE IF NOT EXISTS `tour_puntos_encuentro` (
   CONSTRAINT `tour_puntos_encuentro_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_puntos_encuentro: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_puntos_encuentro: ~0 rows (aproximadamente)
 INSERT INTO `tour_puntos_encuentro` (`id`, `tour_id`, `direccion`, `coordenadas`, `hora`) VALUES
 	(1, 4, 'Malecon las maericas', '21.14635398059483, -86.82137411140395', '08:00:00');
 
@@ -318,7 +345,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.usuarios: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla tours.usuarios: ~0 rows (aproximadamente)
 INSERT INTO `usuarios` (`id`, `username`, `password`, `role`) VALUES
 	(1, 'admin', '$2a$10$g1ZrF9XoH4WnAkU3cD4WeeQ6HRKjBqUI9lYpE/BGm5XutjvG/MTzG', 'admin');
 

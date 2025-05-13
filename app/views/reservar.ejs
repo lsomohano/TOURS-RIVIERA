@@ -1,31 +1,33 @@
 <section class="reservation-form">
   <% if (success && success.length) { %>
-    <div class="alert alert-success"><%= success[0] %></div>
+    <div class="alert alert-success">
+      <span class="alert-icon">✅</span>
+      <%= success[0] %>
+    </div>
   <% } %>
   <% if (error && error.length) { %>
-    <div class="alert alert-error"><%= error[0] %></div>
+    <div class="alert alert-error">
+      <span class="alert-icon">❌</span>
+      <%= error[0] %>
+    </div>
   <% } %>
 
-  <h2>
-    <%= __('menu.reserveTour') %>: <%= tour.nombre %>
-  </h2>
+  <h2><%= __('menu.reserveTour') %>: <%= tour.nombre %></h2>
+
   <p class="tour-modalidad">
-    <strong>Modalidad:</strong> 
-    <%= tour.modalidad === 'grupo' ? 'Tour en grupo (compartido)' : 'Tour privado (solo para ti y tus acompañantes)' %>
-  </p> 
+    <strong>
+      <%= tour.modalidad === 'grupo' ?  __('reservation.modeGroup') : __('reservation.modePrivate') %>
+    </strong> 
+  </p>
+
   <form action="/reservar" method="POST">
     <input type="hidden" name="tour_id" value="<%= tour.id %>">
-
-    <div class="form-group">
-      <label for="punto_encuentro"><%= __('reservation.name') %></label>
-      <input type="text" id="punto_encuentro" name="punto_encuentro" placeholder="Ej. Hotel Riu Playa del Carmen" autocomplete="off">
-      <!-- Contenedor para las sugerencias -->
-      <ul id="sugerencias" class="list-group mt-2" style="display: none; position: absolute; width: 100%; z-index: 1000; background-color: #fff; border: 1px solid #ccc; border-radius: 8px;">
-        <!-- Las sugerencias se agregan dinámicamente aquí -->
-      </ul>
-      <!--<div id="sugerencias"></div>-->
-    </div>
     
+    <div class="form-group">
+      <label for="punto_encuentro"><%= __('reservation.meetingPoint') || 'Punto de encuentro' %></label>
+      <input type="text" id="punto_encuentro" name="punto_encuentro" placeholder="Ej. Hotel Riu Playa del Carmen" autocomplete="off">
+      <ul id="sugerencias" class="list-group mt-2"></ul>
+    </div>
 
     <div class="form-group">
       <label for="nombre_cliente"><%= __('reservation.name') %></label>
@@ -61,20 +63,19 @@
       </select>
     </div>
 
-    <!--<div class="form-group">
-      <label for="total_pagado"><%= __('reservation.totalPaid') %></label>
-      <input type="number" step="0.01" id="total_pagado" name="total_pagado" placeholder="<%= __('reservation.totalPaid') %>">
-    </div>-->
     <% if (tour.modalidad === 'privado') { %>
       <div class="form-group">
-        <label for="peticiones_especiales">¿Tienes peticiones especiales?</label>
-        <textarea id="peticiones_especiales" name="peticiones_especiales" rows="3"></textarea>
+        <label for="peticiones_especiales"><%= __('reservation.specialRequests') %></label>
+        <textarea id="peticiones_especiales" name="peticiones_especiales" rows="3" placeholder="Escribe aquí si necesitas algo especial..."></textarea>
       </div>
     <% } %>
+
     <input type="hidden" name="modalidad" value="<%= tour.modalidad %>">
+
     <button type="submit" class="btn-reservar"><%= __('reservation.reserveButton') %></button>
   </form>
 </section>
+
 <script>
   const input = document.getElementById('punto_encuentro');
   const sugerencias = document.getElementById('sugerencias');

@@ -26,6 +26,7 @@
 		"saveError": "There was an error saving your message. Please try again."
 	},
 	"reservation": {
+		"meetingPoint":"Meeting Point",
 		"name": "Name",
 		"email": "Email",
 		"phone": "Phone",
@@ -37,6 +38,11 @@
 		"paidSuccess": "Payment successful! Your reservation is confirmed.",
 		"paidError": "Payment status uncertain. Contact support.",
 		"paidCancelled": "Payment cancelled. You can try again.",
+		"paymentMethod": "Payment Method",
+		"specialRequests": "Do you have any special requests?",
+		"placeholderspecialRequests": "Write here if you need anything special...",
+		"modeGroup":"Type: Group tour (shared experience)",
+		"modePrivate":"Type: Private tour (exclusively for you and your group)",
 		"exito": {
 			"titulo": "Payment Successful!",
 			"mensaje": "Thank you, <strong>{{nombre}}</strong>. Your reservation for the tour \"<strong>{{tour}}</strong>\" has been confirmed."
@@ -104,5 +110,29 @@
 	"transportation": {
 		"title": "Transportation",
 		"desc": "Comfortable and safe transfers from the airport to your hotel and back."
+	},
+	"payment": {
+		"method": {
+		"sectionTitle": "Our payment methods",
+		"stripe": "Card (Stripe)",
+		"cash": "Cash",
+		"transfer": "Bank transfer"
+		}
+	},
+	"transport": {
+		"form": {
+			"title": "Book your transportation",
+			"origin": "Origin",
+			"destination": "Destination",
+			"date": "Date",
+			"time": "Time",
+			"passengers": "Passengers",
+			"service_type": "Service type",
+			"submit": "Book transportation",
+			"option": {
+				"airport": "Airport",
+				"hotel": "Hotel"
+			}
+		}
 	}
 }
