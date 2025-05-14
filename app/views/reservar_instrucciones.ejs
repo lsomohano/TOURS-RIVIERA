@@ -1,0 +1,28 @@
+<section class="reserva-container">
+  <h1><%= __('instruccionesPago.gracias', reserva.nombre_cliente) %></h1>
+  <p><strong><%= __('instruccionesPago.codigo') %></strong> <%= reserva.reserva_codigo %></p>
+  <p><strong><%= __('instruccionesPago.tour') %></strong> <%= reserva.nombre_tour %></p>
+  <p><strong><%= __('instruccionesPago.fecha') %></strong> 
+    <%= new Date(reserva.fecha_reserva).toLocaleDateString(locale === 'es' ? 'es-MX' : 'en-US') %></p>
+  <p><strong><%= __('instruccionesPago.personas') %></strong> <%= reserva.cantidad_personas %></p>
+  <p><strong><%= __('instruccionesPago.total') %></strong> $<%= Number(reserva.total_pagado).toFixed(2) %> MXN</p>
+  <p><strong><%= __('instruccionesPago.pago') %></strong> <%= reserva.metodo_pago %></p>
+
+  <% if (reserva.metodo_pago === 'efectivo') { %>
+    <h3><%= __('instruccionesPago.efectivo_titulo') %></h3>
+    <p><%= __('instruccionesPago.efectivo_texto1') %></p>
+    <p><%= __('instruccionesPago.efectivo_texto2') %></p>
+  <% } else if (reserva.metodo_pago === 'transferencia') { %>
+    <h3><%= __('instruccionesPago.transferencia_titulo') %></h3>
+    <p><%= __('instruccionesPago.transferencia_texto1') %></p>
+    <ul>
+      <li><strong><%= __('instruccionesPago.banco') %>:</strong> BBVA</li>
+      <li><strong><%= __('instruccionesPago.nombre') %>:</strong> Tours Riviera Maya SA de CV</li>
+      <li><strong><%= __('instruccionesPago.cuenta') %>:</strong> 1234567890</li>
+      <li><strong><%= __('instruccionesPago.clabe') %>:</strong> 012345678901234567</li>
+    </ul>
+    <p><%= __('instruccionesPago.comprobante') %> <a href="mailto:pagos@toursriviera.com">pagos@toursriviera.com</a></p>
+  <% } %>
+
+  <p><%= __('instruccionesPago.dudas') %> <a href="https://wa.me/5219999999999" target="_blank">+52 1 999 999 9999</a></p>
+</section>

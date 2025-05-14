@@ -135,5 +135,26 @@
 				"hotel": "Hotel"
 			}
 		}
+	},
+	"instruccionesPago":{
+		"gracias": "Thank you for your reservation, %s!",
+		"codigo": "Reservation code:",
+		"tour": "Tour:",
+		"fecha": "Date:",
+		"personas": "Number of people:",
+		"total": "Total to pay:",
+		"pago": "Payment method:",
+		"efectivo_titulo": "Instructions for cash payment",
+		"efectivo_texto1": "Please make the cash payment directly at the meeting point before the tour starts.",
+		"efectivo_texto2": "We will contact you to confirm the exact time and location.",
+		"transferencia_titulo": "Instructions for bank transfer payment",
+		"transferencia_texto1": "Please transfer the total amount to the following bank account:",
+		"banco": "Bank",
+		"nombre": "Beneficiary name",
+		"cuenta": "Account number",
+		"clabe": "Interbank CLABE",
+		"comprobante": "After making the transfer, please send your receipt to:",
+		"dudas": "If you have any questions, contact us via WhatsApp:"
 	}
+
 }
