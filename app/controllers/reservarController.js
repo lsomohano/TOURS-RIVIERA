@@ -64,14 +64,10 @@ exports.postReserva = async (req, res) => {
 
     let precioPorPersona;
     let totalCalculado;
-    console.log('Modalidad recibida:', modalidad);
     if (modalidad === 'privado') {
-      // Precio total calculado por grupo (privado)
       totalCalculado = await ReservaModel.getPrecioPrivado(tour_id, cantidad);
       precioPorPersona = totalCalculado / cantidad;
-      
     } else {
-      // Precio por persona (grupo)
       precioPorPersona = tours[0].precio;
       totalCalculado = precioPorPersona * cantidad;
     }
@@ -84,7 +80,10 @@ exports.postReserva = async (req, res) => {
     const [countRows] = await ReservaModel.getTotalReservas();
     const reservaCodigo = `RSV-${String(countRows[0].total + 1).padStart(6, '0')}`;
 
-    // Crear reserva en base de datos
+    // Estado de pago depende del método
+    let estado_pago = (metodo_pago === 'efectivo' || metodo_pago === 'transferencia') ? 'pendiente_pago' : 'pendiente_stripe';
+
+    // Crear reserva
     const [result] = await ReservaModel.crearReserva({
       tour_id,
       nombre_cliente,
@@ -98,35 +97,42 @@ exports.postReserva = async (req, res) => {
       reserva_codigo: reservaCodigo,
       costo_unitario: precioPorPersona,
       total_pagado: totalCalculado,
+      estado_pago,
     });
 
     const reservaId = result.insertId;
 
-    const stripe = req.app.locals.stripe;
-    const stripeAmount = Math.round(Number(totalCalculado) * 100);
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [{
-        price_data: {
-          currency: 'mxn',
-          product_data: {
-            name: `Reserva Tour #${reservaId}`,
+    // 🔁 Si pago es con tarjeta, crear sesión Stripe
+    if (metodo_pago === 'stripe') {
+      const stripe = req.app.locals.stripe;
+      const stripeAmount = Math.round(Number(totalCalculado) * 100);
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: [{
+          price_data: {
+            currency: 'mxn',
+            product_data: {
+              name: `Reserva Tour #${reservaId}`,
+            },
+            unit_amount: stripeAmount,
           },
-          unit_amount: stripeAmount, // en centavos
-          //unit_amount: Math.round(totalCalculado * 100), // en centavos
-        },
-        quantity: 1,
-      }],
-      mode: 'payment',
-      success_url: `${process.env.DOMAIN}/reservar_success?session_id={CHECKOUT_SESSION_ID}&reservaId=${reservaId}`,
-      cancel_url: `${process.env.DOMAIN}/reservar_cancel?reservaId=${reservaId}`,
-    });
+          quantity: 1,
+        }],
+        mode: 'payment',
+        success_url: `${process.env.DOMAIN}/reservar_success?session_id={CHECKOUT_SESSION_ID}&reservaId=${reservaId}`,
+        cancel_url: `${process.env.DOMAIN}/reservar_cancel?reservaId=${reservaId}`,
+      });
 
-    // Actualizar session ID en base de datos
-    await ReservaModel.actualizarStripeSessionId(reservaId, session.id);
+      // Guardar ID de sesión de Stripe
+      await ReservaModel.actualizarStripeSessionId(reservaId, session.id);
 
-    req.flash('success', 'Reserva realizada correctamente');
-    res.redirect(303, session.url);
+      req.flash('success', 'Reserva realizada correctamente');
+      return res.redirect(303, session.url);
+    }
+
+    // 💵 Si es efectivo o transferencia, redirigir a instrucciones de pago
+    req.flash('success', 'Reserva registrada. Sigue las instrucciones para completar el pago.');
+    return res.redirect(`/reservar_instrucciones?reservaId=${reservaId}`);
 
   } catch (error) {
     console.error('Error al procesar reserva:', error);
@@ -195,4 +201,36 @@ exports.reservaCancel = async (req, res) => {
     console.error('Error en /reservar_cancel:', error);
     res.status(500).send('Error al mostrar cancelación');
   }
-}
+};
+
+exports.getInstruccionesPago = async (req, res) => {
+  try {
+    const { reservaId } = req.query;
+
+    if (!reservaId) {
+      return res.status(400).send('ID de reserva no proporcionado');
+    }
+
+    const reservas = await ReservaModel.getReservaById(reservaId);
+    if (!reservas || reservas.length === 0) {
+      return res.status(404).send('Reserva no encontrada');
+    }
+
+    const reserva = reservas[0]; // Ya es un array directamente
+
+    // Solo mostrar instrucciones si el método no es tarjeta
+    if (reserva.metodo_pago === 'tarjeta') {
+      return res.redirect('/'); // o mostrar mensaje que no aplica
+    }
+
+    res.render('reservar_instrucciones', { 
+      reserva,
+      locale: req.getLocale(),
+      currentUrl: req.originalUrl
+    });
+
+  } catch (error) {
+    console.error('Error al mostrar instrucciones de pago:', error);
+    res.status(500).send('Ocurrió un error al mostrar las instrucciones de pago');
+  }
+};

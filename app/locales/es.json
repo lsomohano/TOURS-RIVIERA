@@ -134,5 +134,26 @@
 				"hotel": "Hotel"
 			}
 		}
-	}
+	},
+	"instruccionesPago":{
+		"gracias": "¡Gracias por tu reserva, %s!",
+		"codigo": "Código de reserva:",
+		"tour": "Tour:",
+		"fecha": "Fecha:",
+		"personas": "Personas:",
+		"total": "Total a pagar:",
+		"pago": "Método de pago:",
+		"efectivo_titulo": "Instrucciones para pago en efectivo",
+		"efectivo_texto1": "Por favor realiza el pago en efectivo en nuestro punto de encuentro antes del inicio del tour.",
+		"efectivo_texto2": "Te contactaremos para confirmar hora exacta y ubicación.",
+		"transferencia_titulo": "Instrucciones para pago por transferencia",
+		"transferencia_texto1": "Por favor transfiere el monto total a la siguiente cuenta:",
+		"banco": "Banco",
+		"nombre": "Nombre",
+		"cuenta": "Cuenta",
+		"clabe": "CLABE",
+		"comprobante": "Una vez hecho el pago, por favor envía tu comprobante a:",
+		"dudas": "Si tienes dudas, contáctanos por WhatsApp:"
+		}
+
 }

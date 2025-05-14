@@ -116,7 +116,15 @@ const ReservaModel = {
       console.error('Error en getPrecioPrivado:', error);
       throw error;
     }
-  }
+  },
+
+  getReservaById: async (reservaId) => {
+    const [rows] = await db.promise().query(
+      'SELECT r.*, t.nombre AS nombre_tour FROM reservas r INNER JOIN tours t ON r.tour_id = t.id WHERE r.id = ?',
+      [reservaId]
+    );
+    return rows; // Retorna directamente el arreglo de filas
+  } 
 
 };
 

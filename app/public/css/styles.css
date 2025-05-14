@@ -4,6 +4,10 @@
     box-sizing: border-box;
   }
   
+  body {
+    font-family: 'Roboto', sans-serif
+  }
+
  .hero {
   background-image: url('/images/hero.png'); /* O usa la variable dinámica */
   background-size: cover;
