@@ -92,7 +92,12 @@ Este sistema permite realizar pagos seguros con tarjeta mediante Stripe. Asegúr
 ├── docker-compose.yml
 └── app.js
 ```
+## Ususio de sistema 
+Email: admin@demo.com
 
+Contraseña: password123
+
+Rol: admin
 ## 🛠 Mantenimiento
 
 Para reportar errores o sugerencias, abre un issue o un pull request.

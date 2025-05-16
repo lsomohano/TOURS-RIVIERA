@@ -63,6 +63,8 @@ const tourRoutes = require('./routers/tours');
 const reservaRoutes = require('./routers/reservar');
 const legalRoutes = require('./routers/legal');
 const transportRoutes = require('./routers/transport');
+app.use('/', require('./routers/auth'));
+app.use('/', require('./routers/admin'));
 //const adminRoutes = require('./routers/admin');
 //const authRoutes = require('./routers/auth');
 
