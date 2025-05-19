@@ -59,7 +59,15 @@ jspm_packages/
 
 # Gatsby files
 .cache/
-public/
+# Ignora todo en public/
+app/public/*
+
+# Pero no ignores public/css/
+!app/public/css/
+!app/public/css/**
+
+# Asegúrate de seguir ignorando imágenes
+app/public/images/
 
 # VuePress build output
 .vuepress/dist/
