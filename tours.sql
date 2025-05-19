@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.reservas: ~13 rows (aproximadamente)
+-- Volcando datos para la tabla tours.reservas: ~18 rows (aproximadamente)
 INSERT INTO `reservas` (`id`, `tour_id`, `usuario_id`, `reserva_codigo`, `nombre_cliente`, `email`, `telefono`, `cantidad_personas`, `fecha_reserva`, `estado`, `metodo_pago`, `stripe_session_id`, `costo_unitario`, `total_pagado`, `punto_encuentro`, `peticiones_especiales`, `created_at`, `updated_at`) VALUES
 	(1, 1, NULL, NULL, 'Leonel Somohano Carmona', NULL, NULL, 2, '2025-05-10', 'pagado', 'stripe', 'cs_test_a1G6nVT9NDX0wTPZrg1wbgaoguYHloIR8DtSJrGykyRU0W76xdeiap5oja', NULL, NULL, NULL, NULL, '2025-05-08 04:34:55', '2025-05-08 04:35:42'),
 	(2, 2, NULL, NULL, 'Leonel Somohano Carmona', NULL, NULL, 3, '2025-05-16', 'pagado', 'stripe', 'cs_test_a1JQoDFCpRVrqmMztES2iKBMhVlWXsaU73on3npB1Phb6mEqPWOlkenelV', 129.50, 388.50, NULL, NULL, '2025-05-08 04:58:15', '2025-05-08 04:58:59'),
@@ -297,7 +297,7 @@ CREATE TABLE IF NOT EXISTS `tour_puntos_encuentro` (
   CONSTRAINT `tour_puntos_encuentro_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_puntos_encuentro: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_puntos_encuentro: ~1 rows (aproximadamente)
 INSERT INTO `tour_puntos_encuentro` (`id`, `tour_id`, `direccion`, `coordenadas`, `hora`) VALUES
 	(1, 4, 'Malecon las maericas', '21.14635398059483, -86.82137411140395', '08:00:00');
 
@@ -352,11 +352,9 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.usuarios: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla tours.usuarios: ~1 rows (aproximadamente)
 INSERT INTO `usuarios` (`id`, `nombre`, `email`, `password`, `rol`, `creado_en`) VALUES
-	(1, 'Admin Pruebas Mod', 'admin@demo.com', '$2b$10$zN2P6iRWtnLwX6.2iKU6eeQpRz0UIJTK/MCToh9hq5aj0U7OxiFSS', 'admin', '2025-05-16 12:50:03'),
-	(2, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '$2b$10$pNK3tpt9hc.BsQqNYXZ/LuGMYDjFpsmoOEfoWBgAIB3yIQ7leeQzm', 'admin', '2025-05-17 17:45:43'),
-	(3, 'Leonel Somohano Carmona', 'lsomohano20@gmail.com', '$2b$10$rd4m4x.aLzKBKqdwtC8jtebts1KfbxSlsDMqUaon7QSJgjFKe/mye', 'admin', '2025-05-17 21:01:46');
+	(1, 'Admin Pruebas Mod', 'admin@demo.com', '$2b$10$zN2P6iRWtnLwX6.2iKU6eeQpRz0UIJTK/MCToh9hq5aj0U7OxiFSS', 'admin', '2025-05-16 12:50:03');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
