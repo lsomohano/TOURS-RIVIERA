@@ -1,6 +1,19 @@
-const { Usuario } = require('../models');
+const UsuarioModel = require('../models/usuarioModel');
+const bcrypt = require('bcrypt');
 
-exports.mostrarUsuarios = async (req, res) => {
-  const usuarios = await Usuario.findAll();
-  res.render('admin/usuarios', { usuarios });
+
+async function mostrarDashboard(req, res) {
+  try {
+    res.render('admin/dashboard', {
+      layout: 'layouts/admin',
+      title: 'Panel de Administración'
+    });
+  } catch (err) {
+    console.error('Error al obtener usuarios:', err);
+    res.status(500).send('Error al obtener usuarios');
+  }
+}
+
+module.exports = { 
+  mostrarDashboard
 };

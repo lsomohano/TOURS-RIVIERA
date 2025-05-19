@@ -1,0 +1,74 @@
+<%- include('../../partials/titles', { title: title, botones: botones }) %>
+<%- include('../../partials/messages') %>
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+     
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="tabla-reservas" class="table table-hover table-striped text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Reserva</th>
+                            <th>Cliente</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Pax</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Método Pago</th>
+                            <th>Precio U.</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% if (reservas.length === 0) { %>
+                        <tr>
+                        <td colspan="12" class="text-center text-muted">No hay reservas registradas.</td>
+                        </tr>
+                    <% } else { %>
+                        <% reservas.forEach(reserva => { %>
+                        <tr>
+                            <td><%= reserva.id %></td>
+                            <td><%= reserva.reserva_codigo %></td>
+                            <td><%= reserva.nombre_cliente %></td>
+                            <td><%= reserva.email %></td>
+                            <td><%= reserva.telefono %></td>
+                            <td><%= reserva.cantidad_personas %></td>
+                            <td><%= new Date(reserva.fecha_reserva).toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' }) %></td>
+                            <td><%= reserva.estado %></td>
+                            <td><%= reserva.metodo_pago %></td>
+                            <td><%= reserva.costo_unitario %></td>
+                            <td><%= reserva.total_pagado %></td>
+                            <td>
+                            <a href="/admin/reservas/<%= reserva.id %>/edit" class="btn btn-sm btn-primary">Editar</a>
+                            <form action="/admin/reservas/<%= reserva.id %>/delete" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta reserva?')">Eliminar</button>
+                            </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+    </section>
+    <!-- /.content -->
+<script>
+  $(document).ready(function () {
+    $('#tabla-reservas').DataTable({
+      responsive: true,
+      autoWidth: false,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json'
+      }
+    });
+  });
+</script>

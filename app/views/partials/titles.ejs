@@ -1,0 +1,23 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1><%= title %></h1>
+      </div>
+      <div class="col-sm-6">
+        <% if (botones && botones.length > 0) { %>
+          
+          <% botones.forEach(function(boton) { %>
+            <a href="<%= boton.href %>" class="btn <%= boton.class || 'btn-primary' %> mb-3 float-sm-right ml-2">
+              <% if (boton.icon) { %>
+                <i class="<%= boton.icon %>"></i>
+              <% } %>
+              <%= boton.text %>
+            </a>
+          <% }); %>
+        
+        <% } %>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>

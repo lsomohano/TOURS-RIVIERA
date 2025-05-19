@@ -1,0 +1,63 @@
+<%- include('../../partials/titles', { title: title, botones: botones }) %>
+<%- include('../../partials/messages') %>
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        
+      
+        <div class="card-body">
+          <table id="tabla-usuarios" class="table table-hover text-nowrap">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (usuarios.length === 0) { %>
+                <tr>
+                  <td colspan="5" class="text-center text-muted">No hay usuarios registrados.</td>
+                </tr>
+              <% } else { %>
+                <% usuarios.forEach(usuario => { %>
+                  <tr>
+                    <td><%= usuario.id %></td>
+                    <td><%= usuario.nombre %></td>
+                    <td><%= usuario.email %></td>
+                    <td><%= usuario.rol %></td>
+                    <td>
+                      <a href="/admin/usuarios/<%= usuario.id %>/edit" class="btn btn-sm btn-primary">Editar</a>
+                      <form action="/admin/usuarios/<%= usuario.id %>/delete" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">Eliminar</button>
+                      </form>
+                    </td>
+                  </tr>
+                <% }) %>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+     
+<script>
+  $(document).ready(function () {
+    $('#tabla-usuarios').DataTable({
+      responsive: true,
+      autoWidth: false,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json'
+      }
+    });
+  });
+</script>

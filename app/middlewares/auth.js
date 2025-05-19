@@ -6,8 +6,10 @@ function requireLogin(req, res, next) {
 }
 
 function requireAdmin(req, res, next) {
-  if (!req.session.usuario || req.session.usuario.rol !== 'admin') {
-    return res.status(403).send('Acceso denegado');
+  const usuario = req.session.usuario;
+  if (!usuario || usuario.rol !== 'admin') {
+    req.flash('error', 'Debes iniciar sesión como administrador');
+    return res.redirect('/login');
   }
   next();
 }

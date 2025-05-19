@@ -95,6 +95,14 @@ const ReservaModel = {
     );
   },
 
+  getReservaConTourLista: () => {
+    return db.promise().query(`
+      SELECT r.*, t.nombre AS tour_nombre
+      FROM reservas r
+      JOIN tours t ON t.id = r.tour_id`
+    );
+  },
+
   getPrecioPrivado: async (tourId, cantidadPersonas) => {
     try {
       const [rows] = await db.promise().query(

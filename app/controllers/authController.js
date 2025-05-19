@@ -1,20 +1,26 @@
 const Usuario = require('../models/usuarioModel');
 
 async function mostrarLogin(req, res) {
-  res.render('login', { error: null });
+  res.render(
+    'login', { 
+      title: 'Iniciar sesión', 
+      layout: 'layouts/login',
+      error: null 
+    });
 }
 
 async function procesarLogin(req, res) {
-  const { email, password } = req.body;
-  const usuario = await Usuario.findByEmail(email);
-
+  console.log('Procesando login para:', req.body.email);
+  const usuario = await Usuario.findByEmail(req.body.email);
   if (!usuario) {
-    return res.render('login', { error: 'Credenciales inválidas' });
+    console.log('Usuario no encontrado');
+    return res.render('login', { title: 'Iniciar sesión', layout: 'layouts/login', error: 'Credenciales inválidas' });
   }
 
-  const valido = await Usuario.comparePassword(password, usuario.password);
+  const valido = await Usuario.comparePassword(req.body.password, usuario.password);
   if (!valido) {
-    return res.render('login', { error: 'Credenciales inválidas' });
+    console.log('Password inválido');
+    return res.render('login', { title: 'Iniciar sesión', layout: 'layouts/login', error: 'Credenciales inválidas' });
   }
 
   req.session.usuario = {
@@ -22,8 +28,18 @@ async function procesarLogin(req, res) {
     nombre: usuario.nombre,
     rol: usuario.rol
   };
-
-  res.redirect('/admin');
+  console.log('Login exitoso, redirigiendo...');
+  return res.redirect('/admin');
 }
 
-module.exports = { mostrarLogin, procesarLogin };
+async function logout(req, res) {
+  req.session.destroy(err => {
+    if (err) {
+      console.error('Error cerrando sesión:', err);
+      return res.status(500).send('Error al cerrar sesión');
+    }
+    res.redirect('/login'); // Redirige después de cerrar sesión
+  });
+}
+
+module.exports = { mostrarLogin, procesarLogin, logout };

@@ -6,13 +6,15 @@ const expressLayouts = require('express-ejs-layouts');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('express-flash');
-
+const methodOverride = require('method-override');
 const app = express();
 
 app.use(expressLayouts);
 app.set('layout', 'layout');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+//app.set('layout', 'layouts/admin'); // 👈 layout por defecto para admin
+//app.set('layout', 'layouts/login'); // 👈 layout por defecto para admin
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
@@ -55,6 +57,10 @@ app.use((req, res, next) => {
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 // Rutas
 const routes = require('./routers/index');

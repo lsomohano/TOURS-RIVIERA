@@ -1,13 +1,34 @@
 <!DOCTYPE html>
-<html lang="<%= locale %>">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title><%= title || 'Login' %></title>
-  <link rel="stylesheet" href="/css/login.css">
+  <title>Iniciar Sesión - Tours Riviera</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- AdminLTE -->
+  <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
 </head>
-<body class="login-layout">
-  <main>
-    <%- body %>
-  </main>
+<body class="hold-transition login-page">
+
+<div class="login-box">
+  <div class="login-logo">
+    <a href="#"><b>Tours</b>Riviera</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body login-card-body">
+      <%- body %>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+<script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/adminlte/dist/js/adminlte.min.js"></script>
 </body>
 </html>

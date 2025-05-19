@@ -1,15 +1,31 @@
-// views/admin/dashboard.ejs
-<div class="admin-dashboard">
-  <h1>Bienvenido al panel de administración</h1>
-  <div class="stats">
-    <div class="stat-box">
-      <h3><%= totalReservasHoy %></h3>
-      <p>Reservas de hoy</p>
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Dashboard</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Blank Page</li>
+        </ol>
+      </div>
     </div>
-    <div class="stat-box">
-      <h3>$<%= totalIngresosHoy %></h3>
-      <p>Ingresos de hoy</p>
+  </div><!-- /.container-fluid -->
+</section>
+<%- include('../partials/messages') %>
+  <!-- Main content -->
+  <section class="content">
+
+  <!-- Default box -->
+  <div class="card">
+       
+    <div class="card-body">
+      Start creating your amazing application!
     </div>
+        
+    <!-- /.card-footer-->
   </div>
-  <a href="/logout">Cerrar sesión</a>
-</div>
+  <!-- /.card -->
+</section>
+<!-- /.content -->

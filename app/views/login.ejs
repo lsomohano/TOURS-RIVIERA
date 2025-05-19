@@ -1,19 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Login</title>
-</head>
-<body>
-  <% if (error) { %>
-    <p style="color: red;"><%= error %></p>
-  <% } %>
-  <form method="POST" action="/login">
-    <label>Email:</label><br/>
-    <input type="email" name="email" required /><br/>
-    <label>Password:</label><br/>
-    <input type="password" name="password" required /><br/><br/>
-    <button type="submit">Ingresar</button>
-  </form>
-</body>
-</html>
+
+
+<p class="login-box-msg">Inicia Sesión</p>
+
+      <!--<% if (messages && messages.error) { %>
+        <div class="alert alert-danger"><%= messages.error %></div>
+      <% } %>
+      <% if (messages && messages.success) { %>
+        <div class="alert alert-success"><%= messages.success %></div>
+      <% } %>-->
+      <% if (error) { %>
+        <div class="alert alert-danger text-center">
+          <%= error %>
+        </div>
+      <% } %>
+      <form action="/login" method="POST">
+        <div class="input-group mb-3">
+          <input type="email" name="email" class="form-control" placeholder="Correo electrónico" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember" name="remember">
+              <label for="remember">Recordarme</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+          </div>
+        </div>
+      </form>
+
+      <p class="mb-1 mt-3">
+        <a href="#">¿Olvidaste tu contraseña?</a>
+      </p>
+
