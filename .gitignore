@@ -66,6 +66,9 @@ app/public/*
 !app/public/css/
 !app/public/css/**
 
+!app/public/adminlte/
+!app/public/adminlte/**
+
 # Asegúrate de seguir ignorando imágenes
 app/public/images/
 
