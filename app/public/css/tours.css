@@ -1,0 +1,42 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  h1, h3 {
+    color: #1c3f60;
+  }
+  
+  .carousel-item img {
+    object-fit: cover;
+    height: 400px;
+  }
+  
+  ul {
+    padding-left: 1.5rem;
+  }
+  
+  ul li {
+    margin-bottom: 0.4rem;
+  }
+  
+  ol li {
+    margin-bottom: 0.6rem;
+  }
+  
+  iframe {
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .btn-success {
+    background-color: #198754;
+    border-color: #157347;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+  }
+  
+  .btn-success:hover {
+    background-color: #157347;
+    border-color: #14532d;
+  }
