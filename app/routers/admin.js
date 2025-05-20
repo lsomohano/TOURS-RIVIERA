@@ -7,5 +7,6 @@ const AdminController = require('../controllers/adminController');
 router.get('/admin', requireAdmin, AdminController.mostrarDashboard);
 router.use('/admin/usuarios', require('./admin/usuarios'));
 router.use('/admin/reservas', require('./admin/reservas'));
+router.use('/admin/tours', require('./admin/tours'));
 
 module.exports = router;

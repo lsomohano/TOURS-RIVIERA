@@ -1,0 +1,83 @@
+<%- include('../../partials/titles', { title: title, botones: botones }) %>
+<%- include('../../partials/messages') %>
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+     
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="tabla-reservas" class="table table-hover table-striped text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Estatus</th>
+                            <th>Idioma</th>
+                            <th>Tour</th>
+                            <th>Duraciòn</th>
+                            <th>Tipo</th>
+                            <th>Modalidad</th>
+                            <th>Precio</th>
+                            <th>Cupo Max</th>
+                            <th>Creado</th>
+                            <th>Actualizado</th>
+                            <th>Acciones</th>
+                            <th>Descripciòn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% if (tours.length === 0) { %>
+                        <tr>
+                        <td colspan="12" class="text-center text-muted">No hay tours registrados.</td>
+                        </tr>
+                    <% } else { %>
+                        <% tours.forEach(tour => { %>
+                        <tr>
+                            <td><%= tour.id %></td>
+                            <td>
+                                <% if (tour.publicado == 1) { %>
+                                    <span class="badge bg-success">Publicado</span>
+                                <% } else { %>
+                                    <span class="badge bg-danger">No publicado</span>
+                                <% } %>
+                            </td>
+                            <td><%= tour.idioma %></td>
+                            <td><%= tour.nombre %></td>
+                            <td><%= tour.duracion %></td>
+                            <td><%= tour.tipo %></td>
+                            <td><%= tour.modalidad %></td>
+                            <td><%= tour.precio %></td>
+                            <td><%= tour.cupo_maximo %></td>
+                            <td><%= new Date(tour.created_at).toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' }) %></td>
+                            <td><%= new Date(tour.updated_at).toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' }) %></td>
+                            
+                            <td>
+                                <a href="/admin/tours/<%= tour.id %>/edit" class="btn btn-sm btn-primary">Editar</a>
+                                <form action="/admin/tours/<%= tour.id %>/delete" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta reserva?')">Eliminar</button>
+                                </form>
+                            </td>
+                            <td><%= tour.descripcion %></td>
+                        </tr>
+                        <% }) %>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+    </section>
+    <!-- /.content -->
+<script>
+  $(document).ready(function () {
+    $('#tabla-reservas').DataTable({
+      responsive: true,
+      autoWidth: false,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json'
+      }
+    });
+  });
+</script>

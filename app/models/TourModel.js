@@ -1,6 +1,10 @@
 const db = require('../config/db');
 
 const TourModel = {
+  getAllAdmin: () => {
+    return db.promise().query('SELECT * FROM tours');
+  },
+
   getAll: (idioma = 'en') => {
     return db.promise().query('SELECT * FROM tours WHERE idioma = ?', [idioma]);
   },

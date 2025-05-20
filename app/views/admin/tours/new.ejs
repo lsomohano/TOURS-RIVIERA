@@ -1,0 +1,64 @@
+<%- include('../../partials/titles', { title: 'Crear nuevo tour', botones: botones }) %>
+<%- include('../../partials/messages') %>
+
+<section class="content">
+  <div class="card">
+    <div class="card-body">
+      <form action="/admin/tours/crear" method="POST" enctype="multipart/form-data">
+        <!-- Información general -->
+        <div class="mb-4">
+          <h5 class="mb-3">Información general</h5>
+
+          <div class="form-group">
+            <label for="nombre">Nombre del tour</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+          </div>
+
+          <div class="form-group">
+            <label for="precio">Precio</label>
+            <input type="number" class="form-control" id="precio" name="precio" required>
+          </div>
+
+          <div class="form-group">
+            <label for="publicado">Publicado</label>
+            <select class="form-control" id="publicado" name="publicado">
+              <option value="1">Sí</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Detalles -->
+        <div class="mb-4">
+          <h5 class="mb-3">Detalles del tour</h5>
+
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea class="form-control" id="descripcion" name="detalles[descripcion]" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="itinerario">Itinerario</label>
+            <textarea class="form-control" id="itinerario" name="detalles[itinerario]" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="incluye">Incluye</label>
+            <textarea class="form-control" id="incluye" name="detalles[incluye]" rows="2"></textarea>
+          </div>
+        </div>
+
+        <!-- Imágenes -->
+        <div class="mb-4">
+          <h5 class="mb-3">Imágenes del tour</h5>
+          <div class="form-group">
+            <label for="imagenes">Selecciona imágenes (múltiples)</label>
+            <input type="file" class="form-control-file" id="imagenes" name="imagenes" multiple accept="image/*">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar tour</button>
+      </form>
+    </div>
+  </div>
+</section>
