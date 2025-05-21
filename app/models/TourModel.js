@@ -1,6 +1,35 @@
 const db = require('../config/db');
 
 const TourModel = {
+  create: (data) => {
+    const sql = `
+      INSERT INTO tours (
+        nombre, descripcion, lugar_salida, lugar_destino, duracion,
+        tipo, modalidad, idioma, precio, cupo_maximo,
+        disponible, imagen_destacada, fecha_inicio, fecha_fin, publicado
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
+      const values = [
+        data.nombre,
+        data.descripcion,
+        data.lugar_salida,
+        data.lugar_destino,
+        data.duracion,
+        data.tipo,
+        data.modalidad,
+        data.idioma,
+        data.precio,
+        data.cupo_maximo,
+        data.disponible,
+        data.imagen_destacada,
+        data.fecha_inicio,
+        data.fecha_fin,
+        data.publicado
+      ];
+
+    return db.promise().query(sql, values);
+  },
   getAllAdmin: () => {
     return db.promise().query('SELECT * FROM tours');
   },

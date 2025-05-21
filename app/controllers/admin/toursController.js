@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 //const db = require('../../db'); // ajusta según la ubicación
 const tourModel = require('../../models/TourModel');
+const path = require('path');
 
 exports.listarTours = async (req, res) => {
   try {
@@ -29,11 +30,56 @@ exports.createForm = async (req, res) => {
   });
 };
 
-exports.create = async (req, res) => {
-  const tour = await Tour.create(req.body);
-  await TourDetalles.create({ ...req.body.detalles, tour_id: tour.id });
-  // Aquí también puedes procesar imágenes si las subes
-  res.redirect('/admin/tours');
+exports.crear = async (req, res) => {
+  try {
+    const {
+      nombre,
+      descripcion,
+      lugar_salida,
+      lugar_destino,
+      duracion,
+      cupo_maximo,
+      precio,
+      tipo,
+      modalidad,
+      idioma,
+      fecha_inicio,
+      fecha_fin,
+    } = req.body;
+
+    const disponible = req.body.disponible ? 1 : 0;
+    const publicado = req.body.publicado ? 1 : 0;
+
+    // Imagen
+    let imagen_destacada = '';
+    if (req.file) {
+      imagen_destacada = `/uploads/${req.file.filename}`;
+    }
+
+    // Aquí haces el insert a tu base de datos, por ejemplo:
+    await tourModel.create({
+      nombre,
+      descripcion,
+      lugar_salida,
+      lugar_destino,
+      duracion,
+      cupo_maximo,
+      precio,
+      tipo,
+      modalidad,
+      idioma,
+      fecha_inicio,
+      fecha_fin,
+      disponible,
+      publicado,
+      imagen_destacada
+    });
+
+    res.redirect('/admin/tours');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al crear el tour');
+  }
 };
 
 exports.editForm = async (req, res) => {

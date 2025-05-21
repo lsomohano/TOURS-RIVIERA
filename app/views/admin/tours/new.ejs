@@ -4,60 +4,99 @@
 <section class="content">
   <div class="card">
     <div class="card-body">
-      <form action="/admin/tours/crear" method="POST" enctype="multipart/form-data">
-        <!-- Información general -->
+      <form action="/admin/tours/new" method="POST" enctype="multipart/form-data" class="mx-auto" style="max-width: 700px;">
+        
         <div class="mb-4">
-          <h5 class="mb-3">Información general</h5>
+          <label for="nombre" class="form-label">Nombre del tour</label>
+          <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Tour a Chichén Itzá" required>
+        </div>
 
-          <div class="form-group">
-            <label for="nombre">Nombre del tour</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        <div class="mb-4">
+          <label for="descripcion" class="form-label">Descripción</label>
+          <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describe brevemente el tour..."></textarea>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label for="lugar_salida" class="form-label">Lugar de salida</label>
+            <input type="text" class="form-control" id="lugar_salida" name="lugar_salida" placeholder="Ej. Playa del Carmen">
+          </div>
+          <div class="col-md-6">
+            <label for="lugar_destino" class="form-label">Lugar de destino</label>
+            <input type="text" class="form-control" id="lugar_destino" name="lugar_destino" placeholder="Ej. Tulum">
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-4">
+            <label for="duracion" class="form-label">Duración (horas)</label>
+            <input type="number" class="form-control" id="duracion" name="duracion" min="1">
+          </div>
+          <div class="col-md-4">
+            <label for="cupo_maximo" class="form-label">Cupo máximo</label>
+            <input type="number" class="form-control" id="cupo_maximo" name="cupo_maximo" min="1">
+          </div>
+          <div class="col-md-4">
+            <label for="precio" class="form-label">Precio ($MXN)</label>
+            <input type="number" step="0.01" class="form-control" id="precio" name="precio" required>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label for="tipo" class="form-label">Tipo</label>
+            <select class="form-select" id="tipo" name="tipo">
+              <option value="">-- Selecciona --</option>
+              <option value="aventura">Aventura</option>
+              <option value="relajacion">Relajación</option>
+              <option value="cultural">Cultural</option>
+            </select>
           </div>
 
-          <div class="form-group">
-            <label for="precio">Precio</label>
-            <input type="number" class="form-control" id="precio" name="precio" required>
-          </div>
-
-          <div class="form-group">
-            <label for="publicado">Publicado</label>
-            <select class="form-control" id="publicado" name="publicado">
-              <option value="1">Sí</option>
-              <option value="0">No</option>
+          <div class="col-md-6">
+            <label for="modalidad" class="form-label">Modalidad</label>
+            <select class="form-select" id="modalidad" name="modalidad" required>
+              <option value="grupo">Grupo</option>
+              <option value="privado">Privado</option>
             </select>
           </div>
         </div>
 
-        <!-- Detalles -->
-        <div class="mb-4">
-          <h5 class="mb-3">Detalles del tour</h5>
-
-          <div class="form-group">
-            <label for="descripcion">Descripción</label>
-            <textarea class="form-control" id="descripcion" name="detalles[descripcion]" rows="3"></textarea>
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label for="idioma" class="form-label">Idioma</label>
+            <input type="text" class="form-control" id="idioma" name="idioma" value="es">
           </div>
 
-          <div class="form-group">
-            <label for="itinerario">Itinerario</label>
-            <textarea class="form-control" id="itinerario" name="detalles[itinerario]" rows="3"></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="incluye">Incluye</label>
-            <textarea class="form-control" id="incluye" name="detalles[incluye]" rows="2"></textarea>
+          <div class="col-md-6">
+            <label for="imagen_destacada" class="form-label">Imagen destacada</label>
+            <input type="file" class="form-control" id="imagen_destacada" name="imagen_destacada" accept="image/*">
+            <!--<input type="file" class="form-control" id="imagen_destacada" name="imagen_destacada">-->
           </div>
         </div>
 
-        <!-- Imágenes -->
-        <div class="mb-4">
-          <h5 class="mb-3">Imágenes del tour</h5>
-          <div class="form-group">
-            <label for="imagenes">Selecciona imágenes (múltiples)</label>
-            <input type="file" class="form-control-file" id="imagenes" name="imagenes" multiple accept="image/*">
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label for="fecha_inicio" class="form-label">Fecha inicio</label>
+            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio">
+          </div>
+          <div class="col-md-6">
+            <label for="fecha_fin" class="form-label">Fecha fin</label>
+            <input type="date" class="form-control" id="fecha_fin" name="fecha_fin">
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Guardar tour</button>
+        <div class="form-check mb-2">
+          <input type="checkbox" class="form-check-input" id="disponible" name="disponible" checked>
+          <label class="form-check-label" for="disponible">Disponible</label>
+        </div>
+
+        <div class="form-check mb-4">
+          <input type="checkbox" class="form-check-input" id="publicado" name="publicado">
+          <label class="form-check-label" for="publicado">Publicado</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Guardar tour</button>
       </form>
     </div>
   </div>
