@@ -75,32 +75,38 @@
           </div>
         </div>
 
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" name="disponible" value="1" <%= tour.disponible ? 'checked' : '' %>>
-          <label class="form-check-label">Disponible</label>
-        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <% if (tour.imagen_destacada) { %>
+            <div class="form-group">
+                <label>Imagen destacada actual</label><br>
+                <img src="<%= tour.imagen_destacada %>" width="150" class="img-thumbnail mb-2">
+            </div>
+            <% } %>
 
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" name="publicado" value="1" <%= tour.publicado ? 'checked' : '' %>>
-          <label class="form-check-label">Publicado</label>
-        </div>
-
-        <% if (tour.imagen_destacada) { %>
-          <div class="form-group">
-            <label>Imagen destacada actual</label><br>
-            <img src="<%= tour.imagen_destacada %>" width="150" class="img-thumbnail mb-2">
+            <div class="form-group">
+                <label for="imagen_destacada">Imagen destacada</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="imagen_destacada" name="imagen_destacada" accept="image/*">
+                    <label class="custom-file-label" for="imagen_destacada">Selecciona una imagen</label>
+                </div>
+            </div>
           </div>
-        <% } %>
-
-        <div class="form-group">
-              <label for="imagen_destacada">Imagen destacada</label>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="imagen_destacada" name="imagen_destacada" accept="image/*">
-                <label class="custom-file-label" for="imagen_destacada">Selecciona una imagen</label>
-              </div>
+          <div class="form-group col-md-6">
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" name="disponible" value="1" <%= tour.disponible ? 'checked' : '' %>>
+                <label class="form-check-label">Disponible</label>
+            </div>
+          
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" name="publicado" value="1" <%= tour.publicado ? 'checked' : '' %>>
+                <label class="form-check-label">Publicado</label>
+            </div>
+          </div>
+          
         </div>
 
-        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <button type="submit" class="btn btn-primary btn-block">Guardar cambios</button>
       </form>
     </div>
   </div>
