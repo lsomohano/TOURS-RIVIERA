@@ -5,30 +5,33 @@ const TourModel = {
     const sql = `
       INSERT INTO tours (
         nombre, descripcion, lugar_salida, lugar_destino, duracion,
-        tipo, modalidad, idioma, precio, cupo_maximo,
-        disponible, imagen_destacada, fecha_inicio, fecha_fin, publicado
+        cupo_maximo, precio, tipo, modalidad, idioma,
+        fecha_inicio, fecha_fin, disponible, publicado, imagen_destacada
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-      const values = [
-        data.nombre,
-        data.descripcion,
-        data.lugar_salida,
-        data.lugar_destino,
-        data.duracion,
-        data.tipo,
-        data.modalidad,
-        data.idioma,
-        data.precio,
-        data.cupo_maximo,
-        data.disponible,
-        data.imagen_destacada,
-        data.fecha_inicio,
-        data.fecha_fin,
-        data.publicado
-      ];
+    const values = [
+      data.nombre,
+      data.descripcion,
+      data.lugar_salida,
+      data.lugar_destino,
+      data.duracion,
+      data.cupo_maximo,
+      data.precio,
+      data.tipo,
+      data.modalidad,
+      data.idioma,
+      data.fecha_inicio,
+      data.fecha_fin,
+      data.disponible,
+      data.publicado,
+      data.imagen_destacada
+    ];
 
     return db.promise().query(sql, values);
+  },
+  update: (id, datos) => {
+    return db.promise().query('UPDATE tours SET ? WHERE id = ?', [datos, id]);
   },
   getAllAdmin: () => {
     return db.promise().query('SELECT * FROM tours');
@@ -41,15 +44,6 @@ const TourModel = {
   getById: (id) => {
     return db.promise().query('SELECT * FROM tours WHERE id = ?', [id]);
   },
-
-  create: (data) => {
-    const { nombre, descripcion, precio } = data;
-    return db.promise().query(
-      'INSERT INTO tours (nombre, descripcion, precio) VALUES (?, ?, ?)',
-      [nombre, descripcion, precio]
-    );
-  },
-
   getFiltered: (filters, idioma = 'es') => {
     const { nombre, precio, duracion, tipo } = filters;
 

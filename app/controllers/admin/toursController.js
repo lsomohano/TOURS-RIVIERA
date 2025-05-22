@@ -25,7 +25,7 @@ exports.listarTours = async (req, res) => {
 exports.createForm = async (req, res) => {
   res.render('admin/tours/new',{
         layout: 'layouts/admin',
-        title: 'Admin | Tours',
+        title: 'Admin | Crear Nuevo Tour',
         botones: []
   });
 };
@@ -37,26 +37,35 @@ exports.crear = async (req, res) => {
       descripcion,
       lugar_salida,
       lugar_destino,
-      duracion,
-      cupo_maximo,
-      precio,
       tipo,
       modalidad,
       idioma,
       fecha_inicio,
-      fecha_fin,
+      fecha_fin
     } = req.body;
+
+    // Conversión segura para numéricos y ENUM válidos
+    const duracion = req.body.duracion ? parseInt(req.body.duracion) : null;
+    const cupo_maximo = req.body.cupo_maximo ? parseInt(req.body.cupo_maximo) : 0;
+    const precio = req.body.precio ? parseFloat(req.body.precio) : 0.0;
+
+    // Validar ENUM tipo
+    const tiposValidos = ['aventura', 'relajacion', 'cultural'];
+    const tipoValido = tiposValidos.includes(tipo) ? tipo : null;
+
+    // Validar ENUM modalidad (requerido)
+    const modalidadesValidas = ['grupo', 'privado'];
+    const modalidadValida = modalidadesValidas.includes(modalidad) ? modalidad : 'grupo';
 
     const disponible = req.body.disponible ? 1 : 0;
     const publicado = req.body.publicado ? 1 : 0;
 
-    // Imagen
-    let imagen_destacada = '';
+    let imagen_destacada = null;
     if (req.file) {
       imagen_destacada = `/uploads/${req.file.filename}`;
+      console.log('Imagen a guardar:', imagen_destacada);
     }
 
-    // Aquí haces el insert a tu base de datos, por ejemplo:
     await tourModel.create({
       nombre,
       descripcion,
@@ -65,11 +74,11 @@ exports.crear = async (req, res) => {
       duracion,
       cupo_maximo,
       precio,
-      tipo,
-      modalidad,
+      tipo: tipoValido,
+      modalidad: modalidadValida,
       idioma,
-      fecha_inicio,
-      fecha_fin,
+      fecha_inicio: fecha_inicio || null,
+      fecha_fin: fecha_fin || null,
       disponible,
       publicado,
       imagen_destacada
@@ -83,15 +92,55 @@ exports.crear = async (req, res) => {
 };
 
 exports.editForm = async (req, res) => {
-  const tour = await Tour.findByPk(req.params.id);
-  const detalles = await TourDetalles.findOne({ where: { tour_id: tour.id } });
-  const imagenes = await TourImagenes.findAll({ where: { tour_id: tour.id } });
-  res.render('admin/tours/edit', { tour, detalles, imagenes });
+  try {
+    const { id } = req.params;
+    const [[tour]] = await tourModel.getById(id); // <-- debe devolver un objeto con las propiedades correctas
+
+    if (!tour) {
+      return res.status(404).send('Tour no encontrado');
+    }
+
+    res.render('admin/tours/edit', {
+        tour,
+        layout: 'layouts/admin',
+        title: 'Admin | Editar Tour',
+        botones: []
+    });
+  } catch (error) {
+    console.error('Error al cargar el tour para editar:', error);
+    res.status(500).send('Error interno del servidor');
+  }
 };
 
 exports.update = async (req, res) => {
-  await Tour.update(req.body, { where: { id: req.params.id } });
-  await TourDetalles.update(req.body.detalles, { where: { tour_id: req.params.id } });
-  // Actualizar imágenes si corresponde
-  res.redirect('/admin/tours');
+  const { id } = req.params;
+
+  try {
+    const datos = {
+      nombre: req.body.nombre,
+      descripcion: req.body.descripcion,
+      lugar_salida: req.body.lugar_salida,
+      lugar_destino: req.body.lugar_destino,
+      duracion: req.body.duracion,
+      tipo: req.body.tipo,
+      modalidad: req.body.modalidad,
+      idioma: req.body.idioma,
+      precio: req.body.precio,
+      cupo_maximo: req.body.cupo_maximo,
+      disponible: req.body.disponible || 0,
+      publicado: req.body.publicado || 0,
+      fecha_inicio: req.body.fecha_inicio,
+      fecha_fin: req.body.fecha_fin,
+    };
+
+    if (req.file) {
+      datos.imagen_destacada = '/uploads/' + req.file.filename;
+    }
+
+    await tourModel.update(id, datos);
+    res.redirect('/admin/tours');
+  } catch (error) {
+    console.error('Error al actualizar el tour:', error);
+    res.status(500).send('Hubo un error al actualizar el tour');
+  }
 };

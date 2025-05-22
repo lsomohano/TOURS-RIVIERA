@@ -6,10 +6,11 @@ const upload = require('../../config/multer');
 
 router.get('/', requireAdmin, tourController.listarTours);
 router.get('/new', requireAdmin, tourController.createForm);
-//router.post('/new', requireAdmin,tourController.create);
-router.get('/edit/:id', requireAdmin,tourController.editForm);
-router.post('/edit/:id', requireAdmin,tourController.update);
-
 router.post('/new', requireAdmin, upload.single('imagen_destacada'), tourController.crear);
+router.get('/:id/edit', requireAdmin,tourController.editForm);
+router.post('/:id/edit', requireAdmin, upload.single('imagen_destacada'),tourController.update);
+//router.post('/new', requireAdmin, upload.single('imagen_destacada'), tourController.crear);
+
+
 
 module.exports = router;
