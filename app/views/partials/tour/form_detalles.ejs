@@ -1,0 +1,62 @@
+<!-- Incluye Summernote si no está aún -->
+<link rel="stylesheet" href="/adminlte/plugins/summernote/summernote-bs4.min.css">
+<script src="/adminlte/plugins/summernote/summernote-bs4.min.js"></script>
+
+<form action="/admin/tours/<%= tour.id %>/detalles" method="POST">
+
+    <div class="row">
+        <!-- Columna izquierda -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="duracion">Duración</label>
+            <input type="text" class="form-control" name="duracion" id="duracion" value="<%= detalles?.duracion || '' %>">
+          </div>
+          <div class="form-group">
+            <label for="lenguaje">Lenguaje</label>
+            <input type="text" class="form-control" name="lenguaje" id="lenguaje" value="<%= detalles?.lenguaje || '' %>">
+          </div>
+          <div class="form-group">
+            <label for="incluye">Incluye</label>
+            <textarea class="form-control summernote" name="incluye" id="incluye"><%= detalles?.incluye || '' %></textarea>
+          </div>
+          <div class="form-group">
+            <label for="no_incluye">No incluye</label>
+            <textarea class="form-control summernote" name="no_incluye" id="no_incluye"><%= detalles?.no_incluye || '' %></textarea>
+          </div>
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="porque_hacerlo">¿Por qué hacerlo?</label>
+            <textarea class="form-control summernote" name="porque_hacerlo" id="porque_hacerlo"><%= detalles?.porque_hacerlo || '' %></textarea>
+          </div>
+          <div class="form-group">
+            <label for="que_esperar">¿Qué esperar?</label>
+            <textarea class="form-control summernote" name="que_esperar" id="que_esperar"><%= detalles?.que_esperar || '' %></textarea>
+          </div>
+          <div class="form-group">
+            <label for="recomendaciones">Recomendaciones</label>
+            <textarea class="form-control summernote" name="recomendaciones" id="recomendaciones"><%= detalles?.recomendaciones || '' %></textarea>
+          </div>
+        </div>
+      </div>
+    
+     <button type="submit" class="btn btn-primary btn-block">
+        <i class="fas fa-save mr-1"></i>Guardar detalles
+    </button>
+</form>
+
+<script>
+  $(function () {
+    $('.summernote').summernote({
+      height: 150,
+      toolbar: [
+        ['style', ['bold', 'italic', 'underline']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['link']],
+        ['view', ['codeview']]
+      ]
+    });
+  });
+</script>

@@ -4,7 +4,6 @@ const TourExtrasModel = {
   getDetalles: (tourId) => {
     return db.promise().query('SELECT * FROM tour_detalles WHERE tour_id = ?', [tourId]);
   },
-
   getImagenes: (tourId) => {
     return db.promise().query('SELECT * FROM tour_imagenes WHERE tour_id = ? ORDER BY orden', [tourId]);
   },
@@ -24,7 +23,7 @@ const TourExtrasModel = {
   getItinerario: (tourId) => {
     return db.promise().query('SELECT * FROM tour_itinerario WHERE tour_id = ? ORDER BY paso_numero', [tourId]);
   },
-
+ 
   getRecomendaciones: (tourId) => {
     return db.promise().query('SELECT * FROM tour_recomendaciones WHERE tour_id = ? ORDER BY FIELD(momento, "antes", "durante", "despues")', [tourId]);
   },

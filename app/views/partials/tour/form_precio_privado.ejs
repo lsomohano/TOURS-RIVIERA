@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-3">
+    <form action="/admin/tours/<%= tour.id %>/precio-privado" method="POST">
+      <div class="form-group">
+        <label for="personas_max">Máximo de personas</label>
+        <input type="number" class="form-control" name="personas_max" required
+               value="<%= precioPrivado ? precioPrivado.personas_max : '' %>">
+      </div>
+
+      <div class="form-group">
+        <label for="precio_base">Precio base (MXN)</label>
+        <input type="number" step="0.01" class="form-control" name="precio_base" required
+               value="<%= precioPrivado ? precioPrivado.precio_base : '' %>">
+      </div>
+
+      <div class="form-group">
+        <label for="incremento_pct">Incremento (%) por persona extra</label>
+        <input type="number" step="0.01" class="form-control" name="incremento_pct"
+               value="<%= precioPrivado && precioPrivado.incremento_pct !== null ? precioPrivado.incremento_pct : '' %>">
+      </div>
+
+      <div class="form-group">
+        <label for="aplica_desde">Aplica desde (personas)</label>
+        <input type="number" class="form-control" name="aplica_desde"
+               value="<%= precioPrivado && precioPrivado.aplica_desde !== null ? precioPrivado.aplica_desde : '' %>">
+      </div>
+
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" name="activo" id="activo" value="1"
+               <%= !precioPrivado || precioPrivado.activo ? 'checked' : '' %>>
+        <label class="form-check-label" for="activo">Activo</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Guardar precio privado</button>
+    </form>
+  </div>
+
+  <div class="col-md-9">
+    <% if (precioPrivado) { %>
+      <div class="table-responsive">
+            <table class="table table-bordered align-middle text-center">
+              <thead class="table-light">
+                <tr>
+                  <th># Personas</th>
+                  <th>Precio Total</th>
+                  <th>Precio por Persona</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% PreciosPrivadosCalculados.forEach(p => { %>
+                  <tr>
+                    <td><%= p.personas %></td>
+                    <td>$<%= p.precio_total.toFixed(2) %></td>
+                    <td>$<%= p.precio_por_persona.toFixed(2) %></td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+    <% } else { %>
+      <p class="text-muted">Aún no se ha definido un precio privado para este tour.</p>
+    <% } %>
+    
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="row">
+  <!-- Columna izquierda: Formulario -->
+  <div class="col-md-3">
+    <h4>Agregar recomendación</h4>
+    <form action="/admin/tours/<%= tour.id %>/recomendaciones" method="POST">
+      <div class="form-group">
+        <label for="momento">Momento</label>
+        <select class="form-control" name="momento" required>
+          <option value="antes">Antes</option>
+          <option value="durante">Durante</option>
+          <option value="despues">Después</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="recomendacion">Recomendación</label>
+        <textarea class="form-control" name="recomendacion" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+  </div>
+
+  <!-- Columna derecha: Lista de recomendaciones -->
+  <div class="col-md-9">
+    <h4>Recomendaciones existentes</h4>
+    <% ["antes", "durante", "despues"].forEach(momento => { %>
+      <h5 class="mt-3 text-capitalize"><%= momento %></h5>
+      <ul class="list-group mb-3">
+        <% recomendaciones.filter(r => r.momento === momento).forEach(rec => { %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= rec.recomendacion %>
+            <form action="/admin/tours/<%= tour.id %>/recomendaciones/<%= rec.id %>/delete" method="POST" onsubmit="return confirm('¿Eliminar esta recomendación?');">
+              <button class="btn btn-sm btn-danger">Eliminar</button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+    <% }) %>
+  </div>
+</div>

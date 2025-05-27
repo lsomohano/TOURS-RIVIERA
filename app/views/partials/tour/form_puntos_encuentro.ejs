@@ -1,0 +1,42 @@
+<div class="row">
+  <!-- Columna izquierda: Formulario -->
+  <div class="col-md-3">
+    <h4>Agregar punto de encuentro</h4>
+    <form action="/admin/tours/<%= tour.id %>/puntos" method="POST">
+      <div class="form-group">
+        <label>Dirección</label>
+        <input type="text" class="form-control" name="direccion" required>
+      </div>
+
+      <div class="form-group">
+        <label>Coordenadas (lat,lng)</label>
+        <input type="text" class="form-control" name="coordenadas">
+      </div>
+
+      <div class="form-group">
+        <label>Hora</label>
+        <input type="time" class="form-control" name="hora" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Agregar punto</button>
+    </form>
+  </div>
+
+  <!-- Columna derecha: Lista de puntos -->
+  <div class="col-md-9">
+    <h4>Puntos de encuentro existentes</h4>
+    <ul class="list-group">
+      <% puntos.forEach(punto => { %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <strong><%= punto.hora %></strong> - <%= punto.direccion %><br>
+            <small><%= punto.coordenadas %></small>
+          </div>
+          <form method="POST" action="/admin/tours/<%= tour.id %>/puntos/<%= punto.id %>/delete" onsubmit="return confirm('¿Eliminar este punto?');">
+            <button class="btn btn-danger btn-sm">Eliminar</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="row">
+  <!-- Columna izquierda: Formulario de carga -->
+  <div class="col-md-3">
+    <h4>Subir nueva imagen</h4>
+    <form action="/admin/tours/<%= tour.id %>/imagenes/upload" method="POST" enctype="multipart/form-data" class="mb-4">
+      <!--<div class="form-group">
+        <label for="imagen">Imagen</label>
+        <input type="file" name="imagen" class="form-control" required />
+      </div>-->
+
+      <div class="form-group">
+        <label for="imagen">Imagen</label>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="imagen" name="imagen" accept="image/*">
+            <label class="custom-file-label" for="imagen">Selecciona una imagen</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="descripcion">Descripción (opcional)</label>
+        <input type="text" name="descripcion" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-primary mt-2">Subir imagen</button>
+    </form>
+  </div>
+
+  <!-- Columna derecha: Galería de imágenes -->
+  <div class="col-md-9">
+    <h4>Imágenes del tour</h4>
+    <div class="row">
+      <% imagenes.forEach(imagen => { %>
+        <div class="col-sm-4 mb-3">
+          <div class="card">
+            <img src="<%= imagen.url_imagen %>" class="card-img-top" alt="Imagen del tour" />
+            <div class="card-body">
+              <p class="card-text"><%= imagen.descripcion || "Sin descripción" %></p>
+              <a href="/admin/tours/imagenes/<%= imagen.id %>/delete?tourId=<%= tour.id %>" class="btn btn-danger btn-sm"
+                 onclick="return confirm('¿Eliminar esta imagen?')">
+                Eliminar
+              </a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</div>

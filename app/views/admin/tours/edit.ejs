@@ -4,114 +4,64 @@
 <section class="content">
   <div class="card">
     <div class="card-body">
-      <form action="/admin/tours/<%= tour.id %>/edit" method="POST" enctype="multipart/form-data">
-        
-        <div class="form-group">
-          <label>Nombre</label>
-          <input type="text" class="form-control" name="nombre" value="<%= tour.nombre %>" required>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="tour-tab" data-toggle="tab" href="#tour" role="tab" aria-controls="tour" aria-selected="true">Tour</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="detalles-tab" data-toggle="tab" href="#detalles" role="tab" aria-controls="detalles" aria-selected="false">Detalles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="itinerario-tab" data-toggle="tab" href="#itinerario" role="tab" aria-controls="detalles" aria-selected="false">Itinerario</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="galeria-tab" data-toggle="tab" href="#galeria" role="tab" aria-controls="galeria" aria-selected="false">Galeria</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="recomenda-tab" data-toggle="tab" href="#recomenda" role="tab" aria-controls="recomenda" aria-selected="false">Recomendaciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="puntos-tab" data-toggle="tab" href="#puntos" role="tab" aria-controls="puntos" aria-selected="false">Puntos de encuentro</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="politicas-tab" data-toggle="tab" href="#politicas" role="tab" aria-controls="politicas" aria-selected="false">Políticas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="precio_privado-tab" data-toggle="tab" href="#precio_privado" role="tab" aria-controls="precio_privado" aria-selected="false">Precio Privado</a>
+        </li>
+      </ul>
+      <div class="tab-content mt-3" id="myTabContent">
+        <div class="tab-pane fade show active" id="tour" role="tabpanel" aria-labelledby="tour-tab">
+           <%- include('../../partials/tour/form_general') %>
         </div>
-
-        <div class="form-group">
-          <label>Descripción</label>
-          <textarea class="form-control" name="descripcion" rows="3"><%= tour.descripcion %></textarea>
+        <div class="tab-pane fade" id="detalles" role="tabpanel" aria-labelledby="detalles-tab">
+          <%- include('../../partials/tour/form_detalles') %>
         </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label>Lugar de salida</label>
-            <input type="text" class="form-control" name="lugar_salida" value="<%= tour.lugar_salida %>">
-          </div>
-          <div class="form-group col-md-6">
-            <label>Lugar de destino</label>
-            <input type="text" class="form-control" name="lugar_destino" value="<%= tour.lugar_destino %>">
-          </div>
+        <div class="tab-pane fade" id="itinerario" role="tabpanel" aria-labelledby="itinerario-tab">
+          <%- include('../../partials/tour/form_itinerario') %>
         </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-4">
-            <label>Duración (días)</label>
-            <input type="number" class="form-control" name="duracion" value="<%= tour.duracion %>">
-          </div>
-          <div class="form-group col-md-4">
-            <label>Tipo</label>
-            <select class="form-control" name="tipo">
-              <option value="aventura" <%= tour.tipo === 'aventura' ? 'selected' : '' %>>Aventura</option>
-              <option value="relajacion" <%= tour.tipo === 'relajacion' ? 'selected' : '' %>>Relajación</option>
-              <option value="cultural" <%= tour.tipo === 'cultural' ? 'selected' : '' %>>Cultural</option>
-            </select>
-          </div>
-          <div class="form-group col-md-4">
-            <label>Modalidad</label>
-            <select class="form-control" name="modalidad">
-              <option value="grupo" <%= tour.modalidad === 'grupo' ? 'selected' : '' %>>Grupo</option>
-              <option value="privado" <%= tour.modalidad === 'privado' ? 'selected' : '' %>>Privado</option>
-            </select>
-          </div>
+        <div class="tab-pane fade" id="galeria" role="tabpanel" aria-labelledby="galeria-tab">
+          <%- include('../../partials/tour/form_galeria') %>
         </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-4">
-            <label>Idioma</label>
-            <input type="text" class="form-control" name="idioma" value="<%= tour.idioma %>">
-          </div>
-          <div class="form-group col-md-4">
-            <label>Precio</label>
-            <input type="number" step="0.01" class="form-control" name="precio" value="<%= tour.precio %>">
-          </div>
-          <div class="form-group col-md-4">
-            <label>Cupo máximo</label>
-            <input type="number" class="form-control" name="cupo_maximo" value="<%= tour.cupo_maximo %>">
-          </div>
+        <div class="tab-pane fade" id="recomenda" role="tabpanel" aria-labelledby="recomenda-tab">
+          <%- include('../../partials/tour/form_recomendaciones') %>
         </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label>Fecha inicio</label>
-            <input type="date" class="form-control" name="fecha_inicio" value="<%= tour.fecha_inicio?.toISOString().split('T')[0] %>">
-          </div>
-          <div class="form-group col-md-6">
-            <label>Fecha fin</label>
-            <input type="date" class="form-control" name="fecha_fin" value="<%= tour.fecha_fin?.toISOString().split('T')[0] %>">
-          </div>
+        <div class="tab-pane fade" id="puntos" role="tabpanel" aria-labelledby="puntos-tab">
+          <%- include('../../partials/tour/form_puntos_encuentro') %>
         </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <% if (tour.imagen_destacada) { %>
-            <div class="form-group">
-                <label>Imagen destacada actual</label><br>
-                <img src="<%= tour.imagen_destacada %>" width="150" class="img-thumbnail mb-2">
-            </div>
-            <% } %>
-
-            <div class="form-group">
-                <label for="imagen_destacada">Imagen destacada</label>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="imagen_destacada" name="imagen_destacada" accept="image/*">
-                    <label class="custom-file-label" for="imagen_destacada">Selecciona una imagen</label>
-                </div>
-            </div>
-          </div>
-          <div class="form-group col-md-6">
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" name="disponible" value="1" <%= tour.disponible ? 'checked' : '' %>>
-                <label class="form-check-label">Disponible</label>
-            </div>
-          
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" name="publicado" value="1" <%= tour.publicado ? 'checked' : '' %>>
-                <label class="form-check-label">Publicado</label>
-            </div>
-          </div>
-          
+        <div class="tab-pane fade" id="politicas" role="tabpanel" aria-labelledby="politicas-tab">
+          <%- include('../../partials/tour/form_politicas') %>
         </div>
-
-        <button type="submit" class="btn btn-primary btn-block">Guardar cambios</button>
-      </form>
+        <div class="tab-pane fade" id="precio_privado" role="tabpanel" aria-labelledby="precio_privado-tab">
+          <%- include('../../partials/tour/form_precio_privado') %>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
 <script>
+  // Actualizar nombre del archivo en input file (de tu form Tour)
   document.addEventListener('DOMContentLoaded', function () {
     const fileInputs = document.querySelectorAll('.custom-file-input');
     fileInputs.forEach(input => {
@@ -121,4 +71,29 @@
       });
     });
   });
+
+  // Opcional: Inicializar tabs manualmente (si fuera necesario)
+  /*$(function () {
+    $('#myTab a').on('click', function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+  });*/
+
+  // Activar pestaña según el hash de la URL
+    const hash = window.location.hash;
+    if (hash) {
+      const tabLink = document.querySelector(`#myTab a[href="${hash}"]`);
+      if (tabLink) {
+        new bootstrap.Tab(tabLink).show();
+      }
+    }
+
+    // Al hacer clic en una pestaña, actualizar el hash en la URL
+    const tabLinks = document.querySelectorAll('#myTab a[data-toggle="tab"]');
+    tabLinks.forEach(tab => {
+      tab.addEventListener('shown.bs.tab', function (e) {
+        history.replaceState(null, null, e.target.getAttribute('href'));
+      });
+    });
 </script>

@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrearPaso">+ Agregar Paso</button>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Hora Aproximada</th>
+      <th>Descripción</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% itinerario.forEach(paso => { %>
+      <tr>
+        <td><%= paso.paso_numero %></td>
+        <td><%= paso.hora_aprox ? paso.hora_aprox.substring(0, 5) : '' %></td>
+        <td><%= paso.descripcion %></td>
+        <td>
+          <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalEditarPaso<%= paso.id %>">Editar</button>
+          <form action="/admin/tours/itinerario/<%= paso.id %>/delete" method="POST" class="d-inline">
+            <input type="hidden" name="tour_id" value="<%= tour.id %>">
+            <button class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este paso?')">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+
+      <!-- Modal Editar -->
+      <div class="modal fade" id="modalEditarPaso<%= paso.id %>" tabindex="-1" role="dialog" aria-labelledby="editarPaso<%= paso.id %>Label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <form action="/admin/tours/itinerario/<%= paso.id %>/update" method="POST" class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editarPaso<%= paso.id %>Label">Editar Paso</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label>Paso número</label>
+                <input type="number" name="paso_numero" class="form-control" value="<%= paso.paso_numero %>">
+              </div>
+              <div class="mb-3">
+                <label>Hora Aproximada</label>
+                <input type="time" name="hora_aprox" class="form-control" value="<%= paso.hora_aprox ? paso.hora_aprox.substring(0,5) : '' %>">
+              </div>
+              <div class="mb-3">
+                <label>Descripción</label>
+                <textarea name="descripcion" class="form-control" rows="3"><%= paso.descripcion %></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+  </tbody>
+</table>
+
+<!-- Modal Crear -->
+<div class="modal fade" id="modalCrearPaso" tabindex="-1" role="dialog" aria-labelledby="modalCrearPasoLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form action="/admin/tours/<%= tour.id %>/itinerario" method="POST" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCrearPasoLabel">Nuevo Paso</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label>Paso número</label>
+          <input type="number" name="paso_numero" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label>Hora Aproximada</label>
+          <input type="time" name="hora_aprox" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label>Descripción</label>
+          <textarea name="descripcion" class="form-control" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Guardar Paso</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

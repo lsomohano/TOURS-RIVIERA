@@ -1,0 +1,7 @@
+<form action="/admin/tours/<%= tour.id %>/politicas" method="POST">
+  <div class="form-group">
+    <label for="politicas">Políticas de Cancelación</label>
+    <textarea name="politicas" class="form-control" rows="6" required><%- politicas ? politicas.politicas : '' %></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
