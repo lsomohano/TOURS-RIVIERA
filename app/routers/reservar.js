@@ -8,4 +8,6 @@ router.get('/reservar_success', reservarController.reservaSuccess);
 router.get('/reservar_cancel', reservarController.reservaCancel);
 router.get('/reservar_instrucciones', reservarController.getInstruccionesPago);
 
+// Mostrar formulario de pago
+router.get('/pagar/:token', reservarController.getInstruccionesPagoToken);
 module.exports = router;

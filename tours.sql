@@ -68,26 +68,26 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.reservas: ~13 rows (aproximadamente)
-INSERT INTO `reservas` (`id`, `tour_id`, `usuario_id`, `reserva_codigo`, `nombre_cliente`, `email`, `telefono`, `cantidad_personas`, `fecha_reserva`, `estado`, `metodo_pago`, `stripe_session_id`, `costo_unitario`, `total_pagado`, `punto_encuentro`, `peticiones_especiales`, `created_at`, `updated_at`) VALUES
-	(1, 1, NULL, NULL, 'Leonel Somohano Carmona', NULL, NULL, 2, '2025-05-10', 'pagado', 'stripe', 'cs_test_a1G6nVT9NDX0wTPZrg1wbgaoguYHloIR8DtSJrGykyRU0W76xdeiap5oja', NULL, NULL, NULL, NULL, '2025-05-08 04:34:55', '2025-05-08 04:35:42'),
-	(2, 2, NULL, NULL, 'Leonel Somohano Carmona', NULL, NULL, 3, '2025-05-16', 'pagado', 'stripe', 'cs_test_a1JQoDFCpRVrqmMztES2iKBMhVlWXsaU73on3npB1Phb6mEqPWOlkenelV', 129.50, 388.50, NULL, NULL, '2025-05-08 04:58:15', '2025-05-08 04:58:59'),
-	(3, 3, NULL, 'RSV-000003', 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 4, '2025-05-23', 'pagado', 'stripe', 'cs_test_a15HJshdumG9DAf5ZRbvhIjNR2mdtGUH6HYK5Omm5q7otXTwfSCeWN9aEU', 75.00, 300.00, NULL, NULL, '2025-05-08 05:17:21', '2025-05-08 05:18:19'),
-	(4, 4, NULL, 'RSV-000004', 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pendiente', 'stripe', NULL, 89.99, 269.97, NULL, NULL, '2025-05-10 04:09:05', '2025-05-10 04:09:05'),
-	(5, 4, NULL, 'RSV-000005', 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pendiente', 'stripe', NULL, 89.99, 269.97, NULL, NULL, '2025-05-10 04:31:32', '2025-05-10 04:31:32'),
-	(6, 4, NULL, 'RSV-000006', 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pendiente', 'stripe', NULL, 89.99, 269.97, NULL, NULL, '2025-05-10 04:35:17', '2025-05-10 04:35:17'),
-	(7, 4, NULL, 'RSV-000007', 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pagado', 'stripe', 'cs_test_a1st0ltA1o7hnlwqTeMmBq9cOlwID3kKV74YObgyDLRhYmtR0eGj9KmpVd', 89.99, 269.97, NULL, NULL, '2025-05-10 04:41:35', '2025-05-10 04:43:07'),
-	(8, 8, NULL, 'RSV-000008', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-17', 'pagado', 'stripe', 'cs_test_a1rrFDsdhmaqQq6o3rxqD68fWwIkHqjHKZFrawUJUnIKmYgpzwDlworVXz', 1300.00, 6500.00, NULL, NULL, '2025-05-13 12:36:21', '2025-05-13 12:37:56'),
-	(9, 8, NULL, 'RSV-000009', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 6, '2025-05-17', 'pendiente', 'stripe', 'cs_test_a1eGxr9qhVLBJFRaSIWWr56HDZGEekUExBUAPKX9Is3qzWmsFtR2cqfh8J', 1300.00, 7800.00, NULL, NULL, '2025-05-13 12:49:12', '2025-05-13 12:49:13'),
-	(10, 8, NULL, 'RSV-000010', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-16', 'pendiente', 'stripe', NULL, 206.50, NULL, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', '2025-05-13 13:58:27', '2025-05-13 13:58:27'),
-	(11, 8, NULL, 'RSV-000011', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-16', 'pagado', 'stripe', 'cs_test_a1lv6CnhftzmhVzyNn5I90FHjC29B5J1SD7UvSrqp0SVCBLOXCB6TxqWkk', 206.50, 826.00, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', '2025-05-13 14:15:22', '2025-05-13 14:16:19'),
-	(12, 7, NULL, 'RSV-000012', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-24', 'pagado', 'stripe', 'cs_test_a1fOvi74q2qvEkkpCpwY548WGdopsUbV38gDPDesn2XVEDR9VUivvLDqNP', 210.00, 840.00, 'Hotel Real Zací, Anillo Periférico de Valladolid, Valladolid, Yucatán, 97784, México', '', '2025-05-13 14:19:34', '2025-05-13 14:20:27'),
-	(13, 7, NULL, 'RSV-000013', 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 5, '2025-05-17', 'pagado', 'stripe', 'cs_test_a1FVzSc0jKyUnW43SImOLPXhkzHvHFznlx3JelBhIUvcZ4ALDLOYuW3qrN', 192.00, 960.00, 'Hotel Riu Palace Mexico, Ha Mz3 Lt4, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', '2025-05-13 16:02:35', '2025-05-13 16:05:18'),
-	(14, 5, NULL, 'RSV-000014', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-23', 'pendiente', 'transferencia', 'cs_test_a11miyZvaTp1tnKlnEMWvmAy5yLBzvoj9dH9sRm9vS7PzJrQL3PbxarMEb', 129.50, 647.50, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', NULL, '2025-05-14 01:46:06', '2025-05-14 01:46:06'),
-	(15, 5, NULL, 'RSV-000015', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-24', 'pendiente', 'efectivo', NULL, 129.50, 647.50, 'Hotel Riu Palace Mexico, Ha Mz3 Lt4, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', NULL, '2025-05-14 02:22:43', '2025-05-14 02:22:43'),
-	(16, 4, NULL, 'RSV-000016', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 2, '2025-05-23', 'pagado', 'stripe', 'cs_test_a1xfaQW35hOaQvY0bxHxrMtccusNEik9tDSqKxifsKsOF4v632SFNdwitV', 1500.00, 3000.00, 'Riu Latino, Boulevard Costa Mujeres, Costa Mujeres, Isla Mujeres, Quintana Roo, 77440, México', NULL, '2025-05-14 03:04:57', '2025-05-14 03:05:28'),
-	(17, 7, NULL, 'RSV-000017', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-22', 'pendiente', 'efectivo', NULL, 211.90, 1059.50, 'lkdsfh kdhf isfhsofiahdsaofidshfpoads', '', '2025-05-14 03:38:57', '2025-05-14 03:38:57'),
-	(18, 4, NULL, 'RSV-000018', 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 3, '2025-05-24', 'pendiente', 'efectivo', NULL, 1500.00, 4500.00, 'Hotel Riu Palace Peninsula, Km 5,5 Lote 6-C, Boulevard Kukulcán, Distrito 8, Cancún, Benito Juárez, Quintana Roo, 77500, México', NULL, '2025-05-14 04:49:57', '2025-05-14 04:49:57');
+-- Volcando datos para la tabla tours.reservas: ~18 rows (aproximadamente)
+INSERT INTO `reservas` (`id`, `tour_id`, `usuario_id`, `reserva_codigo`, `token_pago`, `nombre_cliente`, `email`, `telefono`, `cantidad_personas`, `fecha_reserva`, `estado`, `metodo_pago`, `stripe_session_id`, `costo_unitario`, `total_pagado`, `punto_encuentro`, `peticiones_especiales`, `created_at`, `updated_at`) VALUES
+	(1, 1, NULL, NULL, NULL, 'Leonel Somohano Carmona', NULL, NULL, 2, '2025-05-10', 'pagado', 'stripe', 'cs_test_a1G6nVT9NDX0wTPZrg1wbgaoguYHloIR8DtSJrGykyRU0W76xdeiap5oja', NULL, NULL, NULL, NULL, '2025-05-08 04:34:55', '2025-05-08 04:35:42'),
+	(2, 2, NULL, NULL, NULL, 'Leonel Somohano Carmona', NULL, NULL, 3, '2025-05-16', 'pagado', 'stripe', 'cs_test_a1JQoDFCpRVrqmMztES2iKBMhVlWXsaU73on3npB1Phb6mEqPWOlkenelV', 129.50, 388.50, NULL, NULL, '2025-05-08 04:58:15', '2025-05-08 04:58:59'),
+	(3, 3, NULL, 'RSV-000003', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 4, '2025-05-23', 'pagado', 'stripe', 'cs_test_a15HJshdumG9DAf5ZRbvhIjNR2mdtGUH6HYK5Omm5q7otXTwfSCeWN9aEU', 75.00, 300.00, NULL, NULL, '2025-05-08 05:17:21', '2025-05-08 05:18:19'),
+	(4, 4, NULL, 'RSV-000004', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pendiente', 'stripe', NULL, 89.99, 269.97, NULL, NULL, '2025-05-10 04:09:05', '2025-05-10 04:09:05'),
+	(5, 4, NULL, 'RSV-000005', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pendiente', 'stripe', NULL, 89.99, 269.97, NULL, NULL, '2025-05-10 04:31:32', '2025-05-10 04:31:32'),
+	(6, 4, NULL, 'RSV-000006', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pendiente', 'stripe', NULL, 89.99, 269.97, NULL, NULL, '2025-05-10 04:35:17', '2025-05-10 04:35:17'),
+	(7, 4, NULL, 'RSV-000007', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pagado', 'stripe', 'cs_test_a1st0ltA1o7hnlwqTeMmBq9cOlwID3kKV74YObgyDLRhYmtR0eGj9KmpVd', 89.99, 269.97, NULL, NULL, '2025-05-10 04:41:35', '2025-05-10 04:43:07'),
+	(8, 8, NULL, 'RSV-000008', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-17', 'pagado', 'stripe', 'cs_test_a1rrFDsdhmaqQq6o3rxqD68fWwIkHqjHKZFrawUJUnIKmYgpzwDlworVXz', 1300.00, 6500.00, NULL, NULL, '2025-05-13 12:36:21', '2025-05-13 12:37:56'),
+	(9, 8, NULL, 'RSV-000009', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 6, '2025-05-17', 'pendiente', 'stripe', 'cs_test_a1eGxr9qhVLBJFRaSIWWr56HDZGEekUExBUAPKX9Is3qzWmsFtR2cqfh8J', 1300.00, 7800.00, NULL, NULL, '2025-05-13 12:49:12', '2025-05-13 12:49:13'),
+	(10, 8, NULL, 'RSV-000010', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-16', 'pendiente', 'stripe', NULL, 206.50, NULL, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', '2025-05-13 13:58:27', '2025-05-13 13:58:27'),
+	(11, 8, NULL, 'RSV-000011', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-16', 'pagado', 'stripe', 'cs_test_a1lv6CnhftzmhVzyNn5I90FHjC29B5J1SD7UvSrqp0SVCBLOXCB6TxqWkk', 206.50, 826.00, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', '2025-05-13 14:15:22', '2025-05-13 14:16:19'),
+	(12, 7, NULL, 'RSV-000012', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-24', 'pagado', 'stripe', 'cs_test_a1fOvi74q2qvEkkpCpwY548WGdopsUbV38gDPDesn2XVEDR9VUivvLDqNP', 210.00, 840.00, 'Hotel Real Zací, Anillo Periférico de Valladolid, Valladolid, Yucatán, 97784, México', '', '2025-05-13 14:19:34', '2025-05-13 14:20:27'),
+	(13, 7, NULL, 'RSV-000013', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 5, '2025-05-17', 'pagado', 'stripe', 'cs_test_a1FVzSc0jKyUnW43SImOLPXhkzHvHFznlx3JelBhIUvcZ4ALDLOYuW3qrN', 192.00, 960.00, 'Hotel Riu Palace Mexico, Ha Mz3 Lt4, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', '2025-05-13 16:02:35', '2025-05-13 16:05:18'),
+	(14, 5, NULL, 'RSV-000014', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-23', 'pendiente', 'transferencia', 'cs_test_a11miyZvaTp1tnKlnEMWvmAy5yLBzvoj9dH9sRm9vS7PzJrQL3PbxarMEb', 129.50, 647.50, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', NULL, '2025-05-14 01:46:06', '2025-05-14 01:46:06'),
+	(15, 5, NULL, 'RSV-000015', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-24', 'pendiente', 'efectivo', NULL, 129.50, 647.50, 'Hotel Riu Palace Mexico, Ha Mz3 Lt4, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', NULL, '2025-05-14 02:22:43', '2025-05-14 02:22:43'),
+	(16, 4, NULL, 'RSV-000016', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 2, '2025-05-23', 'pagado', 'stripe', 'cs_test_a1xfaQW35hOaQvY0bxHxrMtccusNEik9tDSqKxifsKsOF4v632SFNdwitV', 1500.00, 3000.00, 'Riu Latino, Boulevard Costa Mujeres, Costa Mujeres, Isla Mujeres, Quintana Roo, 77440, México', NULL, '2025-05-14 03:04:57', '2025-05-14 03:05:28'),
+	(17, 7, NULL, 'RSV-000017', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-22', 'pendiente', 'efectivo', NULL, 211.90, 1059.50, 'lkdsfh kdhf isfhsofiahdsaofidshfpoads', '', '2025-05-14 03:38:57', '2025-05-14 03:38:57'),
+	(18, 4, NULL, 'RSV-000018', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 3, '2025-05-24', 'pendiente', 'efectivo', NULL, 1500.00, 4500.00, 'Hotel Riu Palace Peninsula, Km 5,5 Lote 6-C, Boulevard Kukulcán, Distrito 8, Cancún, Benito Juárez, Quintana Roo, 77500, México', NULL, '2025-05-14 04:49:57', '2025-05-14 04:49:57');
 
 -- Volcando estructura para tabla tours.tarifas_transporte
 CREATE TABLE IF NOT EXISTS `tarifas_transporte` (
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `tours` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tours: ~8 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tours: ~9 rows (aproximadamente)
 INSERT INTO `tours` (`id`, `nombre`, `descripcion`, `lugar_salida`, `lugar_destino`, `duracion`, `tipo`, `modalidad`, `idioma`, `precio`, `cupo_maximo`, `disponible`, `imagen_destacada`, `fecha_inicio`, `fecha_fin`, `publicado`, `created_at`, `updated_at`) VALUES
 	(1, 'Tour a Chichén Itzá', 'Explora una de las siete maravillas del mundo moderno con guía profesional, comida incluida y visita a un cenote.', 'Cancún', 'Chichén Itzá', 10, 'aventura', 'grupo', 'es', 1450.00, 40, 1, '/images/chichenitza.jpeg', '2025-06-01', '2025-12-31', 1, '2025-05-08 03:58:46', '2025-05-10 21:19:45'),
 	(2, 'Aventura en Xcaret', 'Disfruta un día completo en el parque Xcaret con actividades acuáticas, cultura mexicana y espectáculo nocturno.', 'Cancún, Playa del Carmen, Tulum', 'Xcaret', 12, 'aventura', 'grupo', 'es', 129.50, 50, 1, '/images/xcaret.jpg', '2025-06-01', '2025-12-31', 1, '2025-05-08 03:58:46', '2025-05-22 13:38:46'),
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `tour_detalles` (
   CONSTRAINT `tour_detalles_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_detalles: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_detalles: ~5 rows (aproximadamente)
 INSERT INTO `tour_detalles` (`id`, `tour_id`, `duracion`, `lenguaje`, `incluye`, `no_incluye`, `porque_hacerlo`, `que_esperar`, `recomendaciones`) VALUES
 	(1, 4, '6 horas', 'Español, Inglés', 'Transporte, guía certificado, entradas', 'Comidas, propinas', 'Es una experiencia única para conocer la historia maya', 'Explora ruinas, nada en un cenote y disfruta del paisaje', 'Llega 15 minutos antes, lleva bloqueador biodegradable y ropa cómoda'),
 	(2, 7, '8 horas', 'Español', 'Transporte privado, guía especializado, entradas a Chichén Itzá', 'Alimentos y bebidas, propinas', 'Conocer una de las nuevas maravillas del mundo, aprender sobre la historia y la cultura maya.', 'Esperarás un recorrido cómodo y educativo, con tiempo suficiente para explorar cada zona arqueológica.', 'Llevar protector solar, agua, ropa cómoda y zapato cerrado.'),
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `tour_fechas_disponibles` (
   CONSTRAINT `tour_fechas_disponibles_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_fechas_disponibles: ~8 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_fechas_disponibles: ~9 rows (aproximadamente)
 INSERT INTO `tour_fechas_disponibles` (`id`, `tour_id`, `fecha`, `cupo_maximo`) VALUES
 	(2, 4, '2025-05-21', 15),
 	(3, 7, '2025-06-15', 20),
@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `tour_imagenes` (
   CONSTRAINT `tour_imagenes_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_imagenes: ~23 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_imagenes: ~24 rows (aproximadamente)
 INSERT INTO `tour_imagenes` (`id`, `tour_id`, `url_imagen`, `descripcion`, `orden`) VALUES
 	(3, 4, '/images/default-tour.jpg', 'Imagen de prueba', 1),
 	(6, 7, '/images/chichenitza.jpeg', 'Vista panorámica del tour', 1),
@@ -248,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `tour_itinerario` (
   CONSTRAINT `tour_itinerario_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_itinerario: ~14 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_itinerario: ~16 rows (aproximadamente)
 INSERT INTO `tour_itinerario` (`id`, `tour_id`, `paso_numero`, `descripcion`, `hora_aprox`) VALUES
 	(1, 4, 1, 'Recogida en el punto de encuentro', '08:00:00'),
 	(2, 4, 2, 'Llegada al sitio arqueológico', '09:30:00'),
@@ -277,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `tour_politicas_cancelacion` (
   CONSTRAINT `tour_politicas_cancelacion_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_politicas_cancelacion: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_politicas_cancelacion: ~5 rows (aproximadamente)
 INSERT INTO `tour_politicas_cancelacion` (`id`, `tour_id`, `politicas`) VALUES
 	(1, 4, 'Cancelación gratuita hasta 24 horas antes del tour. No hay reembolsos después de ese periodo. dddd'),
 	(2, 7, 'Cancelación sin cargo hasta 48 horas antes del inicio del tour. Después de ese tiempo, se cobrará un 30% del valor total del tour.'),
@@ -301,7 +301,7 @@ CREATE TABLE IF NOT EXISTS `tour_precios_privados` (
   CONSTRAINT `tour_precios_privados_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_precios_privados: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_precios_privados: ~5 rows (aproximadamente)
 INSERT INTO `tour_precios_privados` (`id`, `tour_id`, `personas_max`, `precio_base`, `incremento_pct`, `aplica_desde`, `activo`, `created_at`, `updated_at`) VALUES
 	(1, 7, 10, 650.00, 21.00, 2, 1, '2025-05-11 20:46:16', '2025-05-14 03:21:19'),
 	(2, 8, 10, 590.00, 20.00, 2, 1, '2025-05-11 20:46:48', '2025-05-11 20:46:48'),
@@ -321,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `tour_puntos_encuentro` (
   CONSTRAINT `tour_puntos_encuentro_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_puntos_encuentro: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_puntos_encuentro: ~5 rows (aproximadamente)
 INSERT INTO `tour_puntos_encuentro` (`id`, `tour_id`, `direccion`, `coordenadas`, `hora`) VALUES
 	(2, 3, 'Calle 80 MZ26 LT2 ED1 DP402', '21.1952787,-86.8236295', '08:00:00'),
 	(3, 3, 'Calle 80 MZ26 LT2 ED1 DP402', '21.1952787,-86.8236295', '09:00:00'),
@@ -340,7 +340,7 @@ CREATE TABLE IF NOT EXISTS `tour_recomendaciones` (
   CONSTRAINT `tour_recomendaciones_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_recomendaciones: ~36 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_recomendaciones: ~37 rows (aproximadamente)
 INSERT INTO `tour_recomendaciones` (`id`, `tour_id`, `momento`, `recomendacion`) VALUES
 	(1, 4, 'antes', 'Descansa bien la noche anterior'),
 	(2, 4, 'durante', 'Hidrátate constantemente'),

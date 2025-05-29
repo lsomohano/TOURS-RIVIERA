@@ -132,8 +132,25 @@ const ReservaModel = {
       [reservaId]
     );
     return rows; // Retorna directamente el arreglo de filas
-  } 
+  }, 
 
+  getByToken: (token) => {
+    return db.promise().query('SELECT * FROM reservaciones WHERE token_pago = ?', [token]);
+  },
+
+  marcarComoPagada: (token) => {
+    return db.promise().query(
+      'UPDATE reservaciones SET estado = "pagado", updated_at = NOW() WHERE token_pago = ?',
+      [token]
+    );
+  },
+  crear: (data) => {
+    const campos = Object.keys(data).join(',');
+    const placeholders = Object.keys(data).map(() => '?').join(',');
+    const valores = Object.values(data);
+
+    return db.promise().query(`INSERT INTO reservaciones (${campos}) VALUES (${placeholders})`, valores);
+  }
 };
 
 module.exports = ReservaModel;

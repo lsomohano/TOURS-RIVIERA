@@ -1,6 +1,7 @@
 const ReservaModel = require('../models/reservasModel');
 const TourModel = require('../models/TourModel');
 
+
 // GET: Página para reservar un tour
 exports.getReserva = async (req, res) => {
   const tourId = req.params.id;
@@ -234,3 +235,56 @@ exports.getInstruccionesPago = async (req, res) => {
     res.status(500).send('Ocurrió un error al mostrar las instrucciones de pago');
   }
 };
+
+exports.getInstruccionesPagoToken = async (req, res) => {
+    const token = req.params.token;
+
+    const [rows] = await ReservaModel.getByToken(token);
+    if (!rows.length) {
+      return res.status(404).send('Reservación no encontrada');
+    }
+
+    const reserva = rows[0];
+    const [tourRows] = await TourModel.getById(reserva.tour_id);
+    const tour = tourRows[0];
+
+    res.render('/pago_token', { reserva, tour });
+};
+
+exports.mostrarPagoConStripe = async (req, res) => {
+  const token = req.params.token;
+  const [rows] = await ReservaModel.getByToken(token);
+  if (!rows.length) {
+    return res.status(404).send('Reservación no encontrada');
+  }
+
+  const reserva = rows[0];
+
+  // Ya tiene sesión de Stripe
+  if (reserva.stripe_session_id) {
+    const session = await req.app.locals.stripe.checkout.sessions.retrieve(reserva.stripe_session_id);
+    return res.redirect(303, session.url);
+  }
+
+  const stripeAmount = Math.round(Number(reserva.total_pagado) * 100);
+  const session = await req.app.locals.stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: [{
+      price_data: {
+        currency: 'mxn',
+        product_data: {
+          name: `Reserva Tour #${reserva.id}`,
+        },
+        unit_amount: stripeAmount,
+      },
+      quantity: 1,
+    }],
+    mode: 'payment',
+    success_url: `${process.env.DOMAIN}/reservar_success?session_id={CHECKOUT_SESSION_ID}&reservaId=${reserva.id}`,
+    cancel_url: `${process.env.DOMAIN}/reservar_cancel?reservaId=${reserva.id}`,
+  });
+
+  await ReservaModel.actualizarStripeSessionId(reserva.id, session.id);
+
+  return res.redirect(303, session.url);
+}
