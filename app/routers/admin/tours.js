@@ -29,4 +29,7 @@ router.post('/:id/politicas', requireAdmin, tourController.guardarPoliticas);
 
 router.post('/:id/precio-privado', requireAdmin, tourController.guardarPrecioPrivado);
 
+router.post('/fechas/:tourId/agregar', requireAdmin, tourController.agregarFecha);
+router.post('/fechas/:id/eliminar', requireAdmin, tourController.eliminarFecha);
+
 module.exports = router;

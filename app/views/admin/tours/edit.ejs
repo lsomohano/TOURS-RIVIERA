@@ -1,4 +1,4 @@
-<%- include('../../partials/titles', { title: 'Editar tour', botones: botones }) %>
+<%- include('../../partials/titles', { title: title, botones: botones }) %>
 <%- include('../../partials/messages') %>
 
 <section class="content">
@@ -29,6 +29,9 @@
         <li class="nav-item">
           <a class="nav-link" id="precio_privado-tab" data-toggle="tab" href="#precio_privado" role="tab" aria-controls="precio_privado" aria-selected="false">Precio Privado</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" id="fechas-tab" data-toggle="tab" href="#fechas" role="tab" aria-controls="fechas" aria-selected="false">Fechas disponibles</a>
+        </li>
       </ul>
       <div class="tab-content mt-3" id="myTabContent">
         <div class="tab-pane fade show active" id="tour" role="tabpanel" aria-labelledby="tour-tab">
@@ -54,6 +57,9 @@
         </div>
         <div class="tab-pane fade" id="precio_privado" role="tabpanel" aria-labelledby="precio_privado-tab">
           <%- include('../../partials/tour/form_precio_privado') %>
+        </div>
+        <div class="tab-pane fade" id="fechas" role="tabpanel" aria-labelledby="fechas-tab">
+          <%- include('../../partials/tour/form_fechas') %>
         </div>
       </div>
     </div>

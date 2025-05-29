@@ -1,0 +1,41 @@
+<h5>Fechas disponibles</h5>
+
+<form action="/admin/tours/fechas/<%= tour.id %>/agregar" method="POST" class="mb-3">
+  <div class="form-row">
+    <div class="col-md-5">
+      <input type="date" name="fecha" class="form-control" required>
+    </div>
+    <div class="col-md-5">
+      <input type="number" name="cupo_maximo" class="form-control" placeholder="Cupo máximo" min="1">
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary btn-block">Agregar</button>
+    </div>
+  </div>
+  <input type="hidden" name="tab" value="#fechas">
+</form>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Cupo Máximo</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% fechas.forEach(f => { %>
+      <tr>
+        <td><%= new Date(f.fecha).toISOString().split('T')[0] %></td>
+        <td><%= f.cupo_maximo %></td>
+        <td>
+          <form action="/admin/tours/fechas/<%= f.id %>/eliminar" method="POST" class="d-inline">
+            <input type="hidden" name="tour_id" value="<%= tour.id %>">
+            <input type="hidden" name="tab" value="#fechas">
+            <button class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar esta fecha?')">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

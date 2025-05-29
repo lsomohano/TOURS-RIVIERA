@@ -7,6 +7,7 @@ const recomendacionesModel = require("../../models/TourRecomendacionesModel");
 const PuntoEncuentro = require('../../models/TourPuntoEncuentroModel');
 const TourPoliticas = require('../../models/TourPoliticasCancelacionModel');
 const PrecioPrivado = require('../../models/TourPrecioPrivadoModel');
+const FechasModel = require('../../models/TourfechasModel');
 const path = require('path');
 const fs = require("fs");
 
@@ -98,6 +99,7 @@ exports.crear = async (req, res) => {
   }
 };
 
+//Edición del tour
 exports.editForm = async (req, res) => {
   try {
     const { id } = req.params;
@@ -110,6 +112,7 @@ exports.editForm = async (req, res) => {
     const politicas = await TourPoliticas.obtenerPorTour(id);
     const precioPrivado = await PrecioPrivado.obtenerPorTour(id);
     const PreciosPrivadosCalculados = await PrecioPrivado.getPreciosPrivadosCalculados(id);
+    const [fechas] = await FechasModel.getFechasByTourId(id);
 
     if (!tour) {
       return res.status(404).send('Tour no encontrado');
@@ -125,8 +128,9 @@ exports.editForm = async (req, res) => {
         politicas,
         precioPrivado,
         PreciosPrivadosCalculados,
+        fechas,
         layout: 'layouts/admin',
-        title: 'Admin | Editar Tour',
+        title: `Editar Tour - ${tour.nombre}`,
         botones: []
     });
   } catch (error) {
@@ -168,6 +172,7 @@ exports.update = async (req, res) => {
   }
 };
 
+//Agregar los detalles del tour.
 exports.guardarDetalles = async (req, res) => {
   const tourId = req.params.id;
   const data = req.body;
@@ -188,6 +193,7 @@ exports.guardarDetalles = async (req, res) => {
   }
 };
 
+//Gestión de Itinerario del tour
 exports.crearPasoItinerario = async (req, res) => {
   const tourId = req.params.id;
   const paso = req.body;
@@ -229,6 +235,7 @@ exports.eliminarPasoItinerario = async (req, res) => {
   }
 };
 
+//Modulo de galeria.
 exports.subirImagen = async (req, res) => {
   try {
     const { descripcion } = req.body;
@@ -265,6 +272,7 @@ exports.eliminarImagen = async (req, res) => {
   }
 };
 
+//Modulos de recomendaciones.
 exports.guardarRecomendacion = async (req, res) => {
   const { id } = req.params;
   const { momento, recomendacion } = req.body;
@@ -316,6 +324,7 @@ exports.eliminar = async (req, res) => {
   }
 };
 
+//Crear policas de privacidad.
 exports.guardarPoliticas = async (req, res) => {
   const { id } = req.params;
   const { politicas } = req.body;
@@ -347,4 +356,31 @@ exports.guardarPrecioPrivado = async (req, res) => {
     console.error('Error al guardar el precio privado:', error);
     res.status(500).send('Error interno al guardar el precio privado.');
   }
+};
+
+//Agregar fechas disponibles.
+exports.agregarFecha = async (req, res) => {
+    const { fecha, cupo_maximo, tab } = req.body;
+    const { tourId } = req.params;
+
+    try {
+      await FechasModel.agregarFecha(tourId, fecha, cupo_maximo);
+      res.redirect(`/admin/tours/${tourId}/edit${tab || '#fechas'}`);
+    } catch (error) {
+      console.error('Error al agregar fecha:', error);
+      res.redirect('back');
+    }
+};
+
+exports.eliminarFecha = async (req, res) => {
+    const { id } = req.params;
+    const { tour_id, tab } = req.body;
+
+    try {
+      await FechasModel.eliminarFecha(id);
+      res.redirect(`/admin/tours/${tour_id}/edit${tab || '#fechas'}`);
+    } catch (error) {
+      console.error('Error al eliminar fecha:', error);
+      res.redirect('back');
+    }
 };

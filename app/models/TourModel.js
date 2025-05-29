@@ -98,47 +98,48 @@ const TourModel = {
     limit = Math.max(1, parseInt(limit)); // Si limit es menor que 1, lo ajustamos a 1
     const offset = (page - 1) * limit;
 
-    let where = 'WHERE idioma = ?';
+    // Agregamos el filtro por idioma y publicado = 1
+    let where = 'WHERE idioma = ? AND publicado = 1';
     const params = [idioma];
 
     // Filtro por nombre
     if (filters.nombre) {
-        where += ' AND nombre LIKE ?';
-        params.push(`%${filters.nombre}%`);
+      where += ' AND nombre LIKE ?';
+      params.push(`%${filters.nombre}%`);
     }
 
     // Filtro por precio
     if (filters.precio) {
-        if (filters.precio === '1') {
-            where += ' AND precio < ?';
-            params.push(500);
-        } else if (filters.precio === '2') {
-            where += ' AND precio BETWEEN ? AND ?';
-            params.push(500, 1000);
-        } else if (filters.precio === '3') {
-            where += ' AND precio > ?';
-            params.push(1000);
-        }
+      if (filters.precio === '1') {
+        where += ' AND precio < ?';
+        params.push(500);
+      } else if (filters.precio === '2') {
+        where += ' AND precio BETWEEN ? AND ?';
+        params.push(500, 1000);
+      } else if (filters.precio === '3') {
+        where += ' AND precio > ?';
+        params.push(1000);
+      }
     }
 
     // Filtro por duración
     if (filters.duracion) {
-        if (filters.duracion === 'corto') {
-            where += ' AND duracion BETWEEN ? AND ?';
-            params.push(1, 3);
-        } else if (filters.duracion === 'medio') {
-            where += ' AND duracion BETWEEN ? AND ?';
-            params.push(4, 8);
-        } else if (filters.duracion === 'largo') {
-            where += ' AND duracion > ?';
-            params.push(8);
-        }
+      if (filters.duracion === 'corto') {
+        where += ' AND duracion BETWEEN ? AND ?';
+        params.push(1, 3);
+      } else if (filters.duracion === 'medio') {
+        where += ' AND duracion BETWEEN ? AND ?';
+        params.push(4, 8);
+      } else if (filters.duracion === 'largo') {
+        where += ' AND duracion > ?';
+        params.push(8);
+      }
     }
 
     // Filtro por tipo
     if (filters.tipo) {
-        where += ' AND tipo = ?';
-        params.push(filters.tipo);
+      where += ' AND tipo = ?';
+      params.push(filters.tipo);
     }
 
     // Filtro por modalidad
@@ -151,11 +152,10 @@ const TourModel = {
     const query = `SELECT * FROM tours ${where} ORDER BY nombre ASC LIMIT ? OFFSET ?`;
     params.push(limit, offset);
 
-    // Depuración de la consulta SQL generada
-    console.log('SQL Query:', query);  // Imprime la consulta
-    console.log('Params:', params);    // Imprime los parámetros
+    // Depuración
+    console.log('SQL Query:', query);
+    console.log('Params:', params);
 
-    // Ejecutar la consulta
     return db.promise().query(query, params);
   },
 

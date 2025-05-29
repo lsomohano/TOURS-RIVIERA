@@ -18,7 +18,7 @@
         <td><%= paso.hora_aprox ? paso.hora_aprox.substring(0, 5) : '' %></td>
         <td><%= paso.descripcion %></td>
         <td>
-          <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalEditarPaso<%= paso.id %>">Editar</button>
+          <!--<button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalEditarPaso<%= paso.id %>">Editar</button>-->
           <form action="/admin/tours/itinerario/<%= paso.id %>/delete" method="POST" class="d-inline">
             <input type="hidden" name="tour_id" value="<%= tour.id %>">
             <button class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este paso?')">Eliminar</button>
@@ -27,7 +27,7 @@
       </tr>
 
       <!-- Modal Editar -->
-      <div class="modal fade" id="modalEditarPaso<%= paso.id %>" tabindex="-1" role="dialog" aria-labelledby="editarPaso<%= paso.id %>Label" aria-hidden="true">
+      <!--<div class="modal fade" id="modalEditarPaso<%= paso.id %>" tabindex="-1" role="dialog" aria-labelledby="editarPaso<%= paso.id %>Label" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <form action="/admin/tours/itinerario/<%= paso.id %>/update" method="POST" class="modal-content">
             <div class="modal-header">
@@ -56,7 +56,7 @@
             </div>
           </form>
         </div>
-      </div>
+      </div>-->
     <% }) %>
   </tbody>
 </table>
