@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.reservas: ~18 rows (aproximadamente)
+-- Volcando datos para la tabla tours.reservas: ~13 rows (aproximadamente)
 INSERT INTO `reservas` (`id`, `tour_id`, `usuario_id`, `reserva_codigo`, `nombre_cliente`, `email`, `telefono`, `cantidad_personas`, `fecha_reserva`, `estado`, `metodo_pago`, `stripe_session_id`, `costo_unitario`, `total_pagado`, `punto_encuentro`, `peticiones_especiales`, `created_at`, `updated_at`) VALUES
 	(1, 1, NULL, NULL, 'Leonel Somohano Carmona', NULL, NULL, 2, '2025-05-10', 'pagado', 'stripe', 'cs_test_a1G6nVT9NDX0wTPZrg1wbgaoguYHloIR8DtSJrGykyRU0W76xdeiap5oja', NULL, NULL, NULL, NULL, '2025-05-08 04:34:55', '2025-05-08 04:35:42'),
 	(2, 2, NULL, NULL, 'Leonel Somohano Carmona', NULL, NULL, 3, '2025-05-16', 'pagado', 'stripe', 'cs_test_a1JQoDFCpRVrqmMztES2iKBMhVlWXsaU73on3npB1Phb6mEqPWOlkenelV', 129.50, 388.50, NULL, NULL, '2025-05-08 04:58:15', '2025-05-08 04:58:59'),
@@ -136,18 +136,19 @@ CREATE TABLE IF NOT EXISTS `tours` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla tours.tours: ~8 rows (aproximadamente)
 INSERT INTO `tours` (`id`, `nombre`, `descripcion`, `lugar_salida`, `lugar_destino`, `duracion`, `tipo`, `modalidad`, `idioma`, `precio`, `cupo_maximo`, `disponible`, `imagen_destacada`, `fecha_inicio`, `fecha_fin`, `publicado`, `created_at`, `updated_at`) VALUES
 	(1, 'Tour a Chichén Itzá', 'Explora una de las siete maravillas del mundo moderno con guía profesional, comida incluida y visita a un cenote.', 'Cancún', 'Chichén Itzá', 10, 'aventura', 'grupo', 'es', 1450.00, 40, 1, '/images/chichenitza.jpeg', '2025-06-01', '2025-12-31', 1, '2025-05-08 03:58:46', '2025-05-10 21:19:45'),
-	(2, 'Aventura en Xcaret', 'Disfruta un día completo en el parque Xcaret con actividades acuáticas, cultura mexicana y espectáculo nocturno.', 'Playa del Carmen', 'Xcaret', 12, 'aventura', 'grupo', 'es', 129.50, 50, 1, '/images/xcaret.jpg', '2025-06-01', '2025-12-31', 1, '2025-05-08 03:58:46', '2025-05-10 21:19:36'),
-	(3, 'Tour de Cenotes Secretos', 'Nada en tres impresionantes cenotes ocultos en la selva maya. Incluye transporte y refrigerios.', 'Tulum', 'Ruta de los Cenotes', 6, 'relajacion', 'grupo', 'es', 850.00, 20, 1, '/images/cenotes.jpg', '2025-06-15', '2025-12-15', 1, '2025-05-08 03:58:46', '2025-05-10 21:19:50'),
+	(2, 'Aventura en Xcaret', 'Disfruta un día completo en el parque Xcaret con actividades acuáticas, cultura mexicana y espectáculo nocturno.', 'Cancún, Playa del Carmen, Tulum', 'Xcaret', 12, 'aventura', 'grupo', 'es', 129.50, 50, 1, '/images/xcaret.jpg', '2025-06-01', '2025-12-31', 1, '2025-05-08 03:58:46', '2025-05-22 13:38:46'),
+	(3, 'Tour de Cenotes Secretos', 'Nada en tres impresionantes cenotes ocultos en la selva maya. Incluye transporte y refrigerios.', 'Tulum', 'Ruta de los Cenotes', 6, 'relajacion', 'grupo', 'es', 850.00, 20, 1, '/uploads/imagen_destacada-1748105928885-664054336.jpg', '2025-06-15', '2025-12-15', 0, '2025-05-08 03:58:46', '2025-05-24 16:58:48'),
 	(4, 'Chichén Itzá Tour', 'Explore one of the New Seven Wonders of the World with a professional guide, lunch included, and a cenote visit.', 'Cancun', 'Chichén Itzá', 10, 'aventura', 'grupo', 'en', 1500.00, 40, 1, '/images/chichenitza.jpeg', '2025-06-01', '2025-12-31', 1, '2025-05-08 03:59:19', '2025-05-10 21:19:48'),
 	(5, 'Xcaret Adventure', 'Enjoy a full day at Xcaret Park with water activities, Mexican culture, and a night show.', 'Playa del Carmen', 'Xcaret', 12, 'aventura', 'grupo', 'en', 129.50, 50, 1, '/images/xcaret.jpg', '2025-06-01', '2025-12-31', 1, '2025-05-08 03:59:19', '2025-05-10 21:19:39'),
-	(6, 'Secret Cenotes Tour', 'Swim in three stunning hidden cenotes in the Mayan jungle. Includes transportation and snacks.', 'Tulum', 'Cenote Route', 6, 'relajacion', 'grupo', 'en', 850.00, 20, 1, '/images/cenotes.jpg', '2025-06-15', '2025-12-15', 1, '2025-05-08 03:59:19', '2025-05-10 21:19:53'),
-	(7, 'Tour Privado a Chichén Itzá', 'Experiencia exclusiva para visitar Chichén Itzá con guía privado y transporte cómodo.', 'Hotel del cliente', 'Chichén Itzá', 8, 'cultural', 'privado', 'en', 1200.00, 6, 1, '/images/chichenitza.jpeg', '2025-06-01', '2025-12-31', 1, '2025-05-10 21:52:24', '2025-05-10 22:06:54'),
-	(8, 'Aventura Privada en Cenotes', 'Nada en cenotes escondidos con un guía privado y horario flexible.', 'Playa del Carmen', 'Ruta de los Cenotes', 6, 'aventura', 'privado', 'en', 1300.00, 4, 1, '/images/cenotes.jpg', '2025-06-01', '2025-12-31', 1, '2025-05-10 21:52:24', '2025-05-10 22:07:05');
+	(6, 'Secret Cenotes Tour', 'Swim in three stunning hidden cenotes in the Mayan jungle. Includes transportation and snacks.', 'Tulum', 'Cenote Route', 6, 'relajacion', 'grupo', 'en', 850.00, 20, 1, '/uploads/imagen_destacada-1748319236687-897403475.jpg', '2025-06-15', '2025-12-15', 1, '2025-05-08 03:59:19', '2025-05-27 04:13:56'),
+	(7, 'Tour Privado a Chichén Itzá', 'Experiencia exclusiva para visitar Chichén Itzá con guía privado y transporte cómodo.', 'Hotel del cliente', 'Chichén Itzá', 8, 'cultural', 'privado', 'es', 1200.00, 6, 1, '/images/chichenitza.jpeg', '2025-06-01', '2025-12-31', 1, '2025-05-10 21:52:24', '2025-05-27 04:05:54'),
+	(8, 'Aventura Privada en Cenotes', 'Nada en cenotes escondidos con un guía privado y horario flexible.', 'Playa del Carmen', 'Ruta de los Cenotes', 6, 'aventura', 'privado', 'es', 1300.00, 4, 1, '/uploads/imagen_destacada-1748318849957-842832297.jpg', '2025-06-01', '2025-12-31', 1, '2025-05-10 21:52:24', '2025-05-27 04:07:29'),
+	(9, 'Motos acuaticas Laguana', 'Motos acuaticas Laguana', 'Cancún', 'Cancún', 2, 'aventura', 'privado', 'es', 1500.00, 2, 1, '/uploads/imagen_destacada-1747920529189-254728545.jpg', '2025-05-19', '2025-05-29', 0, '2025-05-22 04:17:47', '2025-05-22 13:28:49');
 
 -- Volcando estructura para tabla tours.tour_detalles
 CREATE TABLE IF NOT EXISTS `tour_detalles` (
@@ -163,13 +164,15 @@ CREATE TABLE IF NOT EXISTS `tour_detalles` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_detalles_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla tours.tour_detalles: ~3 rows (aproximadamente)
 INSERT INTO `tour_detalles` (`id`, `tour_id`, `duracion`, `lenguaje`, `incluye`, `no_incluye`, `porque_hacerlo`, `que_esperar`, `recomendaciones`) VALUES
 	(1, 4, '6 horas', 'Español, Inglés', 'Transporte, guía certificado, entradas', 'Comidas, propinas', 'Es una experiencia única para conocer la historia maya', 'Explora ruinas, nada en un cenote y disfruta del paisaje', 'Llega 15 minutos antes, lleva bloqueador biodegradable y ropa cómoda'),
 	(2, 7, '8 horas', 'Español', 'Transporte privado, guía especializado, entradas a Chichén Itzá', 'Alimentos y bebidas, propinas', 'Conocer una de las nuevas maravillas del mundo, aprender sobre la historia y la cultura maya.', 'Esperarás un recorrido cómodo y educativo, con tiempo suficiente para explorar cada zona arqueológica.', 'Llevar protector solar, agua, ropa cómoda y zapato cerrado.'),
-	(3, 7, '6 horas', 'Español', 'Transporte privado, guía especializado, entrada a los cenotes', 'Alimentos y bebidas, propinas', 'Disfrutarás de la belleza natural de los cenotes, con la posibilidad de nadar en aguas cristalinas.', 'Esperarás un día de aventura, con un recorrido que incluye varias paradas en cenotes únicos.', 'Llevar traje de baño, toalla, protector solar, y sandalias o zapatos acuáticos.');
+	(3, 7, '6 horas', 'Español', 'Transporte privado, guía especializado, entrada a los cenotes', 'Alimentos y bebidas, propinas', 'Disfrutarás de la belleza natural de los cenotes, con la posibilidad de nadar en aguas cristalinas.', 'Esperarás un día de aventura, con un recorrido que incluye varias paradas en cenotes únicos.', 'Llevar traje de baño, toalla, protector solar, y sandalias o zapatos acuáticos.'),
+	(4, 3, '12hrs', 'Ingles, Español', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>'),
+	(5, 6, '12hrs', 'Ingles, Español', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>');
 
 -- Volcando estructura para tabla tours.tour_fechas_disponibles
 CREATE TABLE IF NOT EXISTS `tour_fechas_disponibles` (
@@ -180,16 +183,19 @@ CREATE TABLE IF NOT EXISTS `tour_fechas_disponibles` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_fechas_disponibles_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_fechas_disponibles: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_fechas_disponibles: ~8 rows (aproximadamente)
 INSERT INTO `tour_fechas_disponibles` (`id`, `tour_id`, `fecha`, `cupo_maximo`) VALUES
-	(1, 4, '2025-05-20', 20),
 	(2, 4, '2025-05-21', 15),
 	(3, 7, '2025-06-15', 20),
 	(4, 7, '2025-06-20', 15),
 	(5, 8, '2025-06-18', 25),
-	(6, 8, '2025-06-25', 30);
+	(6, 8, '2025-06-25', 30),
+	(7, 4, '2025-05-27', 10),
+	(8, 4, '2025-05-28', 10),
+	(9, 4, '2025-05-29', 5),
+	(10, 6, '2025-05-31', 8);
 
 -- Volcando estructura para tabla tours.tour_imagenes
 CREATE TABLE IF NOT EXISTS `tour_imagenes` (
@@ -201,15 +207,11 @@ CREATE TABLE IF NOT EXISTS `tour_imagenes` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_imagenes_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_imagenes: ~17 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_imagenes: ~23 rows (aproximadamente)
 INSERT INTO `tour_imagenes` (`id`, `tour_id`, `url_imagen`, `descripcion`, `orden`) VALUES
-	(1, 4, '/images/chichen.jpg', 'Vista general del sitio arqueológico', 3),
-	(2, 4, '/images/cenotes.jpg', 'Cenote para nadar', 2),
 	(3, 4, '/images/default-tour.jpg', 'Imagen de prueba', 1),
-	(4, 4, '/images/piramides.jpg', 'Imagen de prueba', 4),
-	(5, 4, '/images/cenotes.jpg', 'Imagende prueba', 5),
 	(6, 7, '/images/chichenitza.jpeg', 'Vista panorámica del tour', 1),
 	(7, 7, '/images/cenotes.jpg', 'Aventura en el bosque tropical', 2),
 	(8, 7, '/images/parques.jpg', 'Descanso en la playa', 3),
@@ -221,7 +223,18 @@ INSERT INTO `tour_imagenes` (`id`, `tour_id`, `url_imagen`, `descripcion`, `orde
 	(14, 8, '/images/piramides.jpg', 'Paseo en bote por el río', 3),
 	(15, 8, '/images/cenotes.jpg', 'Visita a una comunidad local', 4),
 	(16, 8, '/images/xcaret.jpg', 'Rappel en las cascadas', 5),
-	(17, 2, '/images/tour8_imagen6.jpg', 'Caminata nocturna por la selva', 6);
+	(17, 2, '/images/tour8_imagen6.jpg', 'Caminata nocturna por la selva', 6),
+	(18, 3, '/uploads/imagen-1748187997481-392520228.jpg', '', 0),
+	(20, 3, '/uploads/imagen-1748190162699-755511509.jpg', '', 0),
+	(22, 4, '/uploads/imagen-1748312037419-267851687.jpg', '', 0),
+	(23, 4, '/uploads/imagen-1748312055004-150134338.jpg', '', 0),
+	(24, 4, '/uploads/imagen-1748312076293-576623671.jpg', '', 0),
+	(25, 4, '/uploads/imagen-1748318657224-403322008.jpg', '', 0),
+	(26, 6, '/uploads/imagen-1748319371415-914908488.jpg', '', 0),
+	(27, 6, '/uploads/imagen-1748319380003-389993003.jpg', '', 0),
+	(28, 6, '/uploads/imagen-1748319387091-760280048.jpg', '', 0),
+	(29, 6, '/uploads/imagen-1748319396210-221965504.jpg', '', 0),
+	(30, 6, '/uploads/imagen-1748319435381-282716596.jpg', '', 0);
 
 -- Volcando estructura para tabla tours.tour_itinerario
 CREATE TABLE IF NOT EXISTS `tour_itinerario` (
@@ -233,9 +246,9 @@ CREATE TABLE IF NOT EXISTS `tour_itinerario` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_itinerario_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_itinerario: ~10 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_itinerario: ~14 rows (aproximadamente)
 INSERT INTO `tour_itinerario` (`id`, `tour_id`, `paso_numero`, `descripcion`, `hora_aprox`) VALUES
 	(1, 4, 1, 'Recogida en el punto de encuentro', '08:00:00'),
 	(2, 4, 2, 'Llegada al sitio arqueológico', '09:30:00'),
@@ -246,7 +259,13 @@ INSERT INTO `tour_itinerario` (`id`, `tour_id`, `paso_numero`, `descripcion`, `h
 	(7, 7, 3, 'Almuerzo en un sitio con vista panorámica, comida tradicional local.', '12:00:00'),
 	(8, 8, 1, 'Encuentro en el punto de salida y breve explicación del itinerario.', '07:30:00'),
 	(9, 8, 2, 'Recorrido en bote por el cañón y observación de la fauna local.', '10:00:00'),
-	(10, 8, 3, 'Rappel en la cascada, con instrucciones de seguridad antes de la actividad.', '13:00:00');
+	(10, 8, 3, 'Rappel en la cascada, con instrucciones de seguridad antes de la actividad.', '13:00:00'),
+	(11, 3, 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ', '08:00:00'),
+	(13, 3, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '08:30:00'),
+	(15, 3, 3, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', '09:00:00'),
+	(16, 4, 5, 'Almuerzo - Comidad buffette', '14:00:00'),
+	(17, 6, 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '08:00:00'),
+	(18, 6, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '08:30:00');
 
 -- Volcando estructura para tabla tours.tour_politicas_cancelacion
 CREATE TABLE IF NOT EXISTS `tour_politicas_cancelacion` (
@@ -256,13 +275,15 @@ CREATE TABLE IF NOT EXISTS `tour_politicas_cancelacion` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_politicas_cancelacion_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla tours.tour_politicas_cancelacion: ~3 rows (aproximadamente)
 INSERT INTO `tour_politicas_cancelacion` (`id`, `tour_id`, `politicas`) VALUES
-	(1, 4, 'Cancelación gratuita hasta 24 horas antes del tour. No hay reembolsos después de ese periodo.'),
+	(1, 4, 'Cancelación gratuita hasta 24 horas antes del tour. No hay reembolsos después de ese periodo. dddd'),
 	(2, 7, 'Cancelación sin cargo hasta 48 horas antes del inicio del tour. Después de ese tiempo, se cobrará un 30% del valor total del tour.'),
-	(3, 8, 'Cancelación gratuita hasta 72 horas antes del tour. Si se cancela con menos de 72 horas, se retendrá un 50% del precio total.');
+	(3, 8, 'Cancelación gratuita hasta 72 horas antes del tour. Si se cancela con menos de 72 horas, se retendrá un 50% del precio total.'),
+	(4, 3, 'Prueba, There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc. '),
+	(5, 6, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.');
 
 -- Volcando estructura para tabla tours.tour_precios_privados
 CREATE TABLE IF NOT EXISTS `tour_precios_privados` (
@@ -278,12 +299,15 @@ CREATE TABLE IF NOT EXISTS `tour_precios_privados` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_precios_privados_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla tours.tour_precios_privados: ~2 rows (aproximadamente)
 INSERT INTO `tour_precios_privados` (`id`, `tour_id`, `personas_max`, `precio_base`, `incremento_pct`, `aplica_desde`, `activo`, `created_at`, `updated_at`) VALUES
 	(1, 7, 10, 650.00, 21.00, 2, 1, '2025-05-11 20:46:16', '2025-05-14 03:21:19'),
-	(2, 8, 10, 590.00, 20.00, 2, 1, '2025-05-11 20:46:48', '2025-05-11 20:46:48');
+	(2, 8, 10, 590.00, 20.00, 2, 1, '2025-05-11 20:46:48', '2025-05-11 20:46:48'),
+	(3, 3, 10, 600.00, 25.00, 2, 1, '2025-05-25 20:28:01', '2025-05-25 20:42:46'),
+	(4, 4, 10, 600.00, 25.00, 2, 1, '2025-05-27 01:29:41', '2025-05-27 01:29:41'),
+	(5, 6, 8, 700.00, 25.00, 2, 1, '2025-05-27 04:18:39', '2025-05-27 04:18:39');
 
 -- Volcando estructura para tabla tours.tour_puntos_encuentro
 CREATE TABLE IF NOT EXISTS `tour_puntos_encuentro` (
@@ -295,11 +319,15 @@ CREATE TABLE IF NOT EXISTS `tour_puntos_encuentro` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_puntos_encuentro_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_puntos_encuentro: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_puntos_encuentro: ~3 rows (aproximadamente)
 INSERT INTO `tour_puntos_encuentro` (`id`, `tour_id`, `direccion`, `coordenadas`, `hora`) VALUES
-	(1, 4, 'Malecon las maericas', '21.14635398059483, -86.82137411140395', '08:00:00');
+	(2, 3, 'Calle 80 MZ26 LT2 ED1 DP402', '21.1952787,-86.8236295', '08:00:00'),
+	(3, 3, 'Calle 80 MZ26 LT2 ED1 DP402', '21.1952787,-86.8236295', '09:00:00'),
+	(4, 4, 'Malecon las Americas', '21.14635398059483, -86.82137411140395', '08:00:00'),
+	(5, 8, 'Malecon las Americas', '21.14635398059483, -86.82137411140395', '09:00:00'),
+	(6, 6, 'Malecon las Americas', '21.14635398059483, -86.82137411140395', '08:00:00');
 
 -- Volcando estructura para tabla tours.tour_recomendaciones
 CREATE TABLE IF NOT EXISTS `tour_recomendaciones` (
@@ -310,9 +338,9 @@ CREATE TABLE IF NOT EXISTS `tour_recomendaciones` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_recomendaciones_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_recomendaciones: ~25 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_recomendaciones: ~36 rows (aproximadamente)
 INSERT INTO `tour_recomendaciones` (`id`, `tour_id`, `momento`, `recomendacion`) VALUES
 	(1, 4, 'antes', 'Descansa bien la noche anterior'),
 	(2, 4, 'durante', 'Hidrátate constantemente'),
@@ -338,7 +366,19 @@ INSERT INTO `tour_recomendaciones` (`id`, `tour_id`, `momento`, `recomendacion`)
 	(22, 8, 'durante', 'Si tienes alguna pregunta o inquietud, no dudes en preguntar al guía.'),
 	(23, 8, 'despues', '¡No olvides tomar una foto grupal al final del recorrido!'),
 	(24, 8, 'despues', 'Te agradecemos por tu participación, esperamos que hayas disfrutado el tour.'),
-	(25, 8, 'despues', 'Si te gustó la experiencia, compártela con tus amigos y familiares.');
+	(25, 8, 'despues', 'Si te gustó la experiencia, compártela con tus amigos y familiares.'),
+	(26, 3, 'antes', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '),
+	(27, 3, 'durante', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '),
+	(28, 3, 'despues', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '),
+	(29, 3, 'antes', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '),
+	(30, 3, 'durante', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '),
+	(31, 4, 'antes', 'vamos a agregar una  de prueba para eliminar,'),
+	(32, 6, 'antes', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'),
+	(33, 6, 'antes', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'),
+	(34, 6, 'durante', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'),
+	(35, 6, 'antes', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'),
+	(36, 6, 'despues', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'),
+	(37, 6, 'despues', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.');
 
 -- Volcando estructura para tabla tours.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
@@ -350,7 +390,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `creado_en` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla tours.usuarios: ~1 rows (aproximadamente)
 INSERT INTO `usuarios` (`id`, `nombre`, `email`, `password`, `rol`, `creado_en`) VALUES
