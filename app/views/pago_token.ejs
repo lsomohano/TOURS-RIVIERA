@@ -3,7 +3,7 @@
 <p>Cliente: <%= reserva.nombre_cliente %></p>
 <p>Fecha: <%= reserva.fecha_reserva.toISOString().split('T')[0] %></p>
 <p>Personas: <%= reserva.cantidad_personas %></p>
-<p>Total: $<%= reserva.total_pagado.toFixed(2) %></p>
+<p>Total: $<%= Number(reserva.total_pagado).toFixed(2) %></p>
 
 <form action="/reservar/pagar/<%= reserva.token_pago %>" method="POST">
   <button type="submit" class="btn btn-success">Pagar ahora</button>

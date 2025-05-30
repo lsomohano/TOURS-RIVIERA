@@ -248,7 +248,7 @@ exports.getInstruccionesPagoToken = async (req, res) => {
     const [tourRows] = await TourModel.getById(reserva.tour_id);
     const tour = tourRows[0];
 
-    res.render('/pago_token', { reserva, tour });
+    res.render('pago_token', { reserva, tour });
 };
 
 exports.mostrarPagoConStripe = async (req, res) => {

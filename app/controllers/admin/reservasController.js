@@ -1,7 +1,9 @@
 const bcrypt = require('bcrypt');
 //const db = require('../../db'); // ajusta según la ubicación
+const crypto = require('crypto');
 const reservasModel = require('../../models/reservasModel');
 const TourModel = require('../../models/TourModel');
+
 
 exports.listarReservas = async (req, res) => {
   try {
@@ -55,7 +57,7 @@ exports.crearReservacion = async (req, res) => {
       token_pago,
     });
 
-    const linkPago = `${process.env.BASE_URL}/reservar/pago_token/${token_pago}`;
+    const linkPago = `${process.env.DOMAIN}/reservar/pagar/${token_pago}`;
     req.flash('success', `Reservación creada. Link de pago: ${linkPago}`);
     res.redirect('/admin/reservas');
 };

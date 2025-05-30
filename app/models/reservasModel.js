@@ -135,12 +135,12 @@ const ReservaModel = {
   }, 
 
   getByToken: (token) => {
-    return db.promise().query('SELECT * FROM reservaciones WHERE token_pago = ?', [token]);
+    return db.promise().query('SELECT * FROM reservas WHERE token_pago = ?', [token]);
   },
 
   marcarComoPagada: (token) => {
     return db.promise().query(
-      'UPDATE reservaciones SET estado = "pagado", updated_at = NOW() WHERE token_pago = ?',
+      'UPDATE reservas SET estado = "pagado", updated_at = NOW() WHERE token_pago = ?',
       [token]
     );
   },
@@ -149,7 +149,7 @@ const ReservaModel = {
     const placeholders = Object.keys(data).map(() => '?').join(',');
     const valores = Object.values(data);
 
-    return db.promise().query(`INSERT INTO reservaciones (${campos}) VALUES (${placeholders})`, valores);
+    return db.promise().query(`INSERT INTO reservas (${campos}) VALUES (${placeholders})`, valores);
   }
 };
 

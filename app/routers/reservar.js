@@ -9,5 +9,6 @@ router.get('/reservar_cancel', reservarController.reservaCancel);
 router.get('/reservar_instrucciones', reservarController.getInstruccionesPago);
 
 // Mostrar formulario de pago
-router.get('/pagar/:token', reservarController.getInstruccionesPagoToken);
+router.get('/reservar/pagar/:token', reservarController.getInstruccionesPagoToken);
+router.post('/reservar/pagar/:token', reservarController.mostrarPagoConStripe);
 module.exports = router;
