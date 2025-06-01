@@ -1,5 +1,5 @@
 // Mostrar el formulario
-const TransporteModel = require('../models/TransporteModel');
+const TransporteModel = require('../models/TransportacionModel');
 
 exports.formulario = async (req, res) => {
   try {

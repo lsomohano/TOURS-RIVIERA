@@ -9,7 +9,7 @@
   }
 
  .hero {
-  background-image: url('/images/hero.png'); /* O usa la variable dinámica */
+  background-image: url('/images/hero.jpeg'); /* O usa la variable dinámica */
   background-size: cover;
   background-position: center;
   min-height: 400px;

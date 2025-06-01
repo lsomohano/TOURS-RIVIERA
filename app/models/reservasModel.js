@@ -71,6 +71,10 @@ const ReservaModel = {
     );
   },
 
+  actualizarReserva: (id, data) => {
+    return db.promise().query('UPDATE reservas SET ? WHERE id = ?', [data, id]);
+  },
+
   actualizarStripeSessionId: (reservaId, sessionId) => {
     return db.promise().query(
       'UPDATE reservas SET stripe_session_id = ? WHERE id = ?',
@@ -144,6 +148,7 @@ const ReservaModel = {
       [token]
     );
   },
+  
   crear: (data) => {
     const campos = Object.keys(data).join(',');
     const placeholders = Object.keys(data).map(() => '?').join(',');

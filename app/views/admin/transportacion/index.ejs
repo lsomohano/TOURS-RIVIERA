@@ -1,0 +1,52 @@
+<%- include('../../partials/titles', { title: title }) %>
+<section class="content">
+  <div class="card">
+    <!--<div class="card-header">
+      <a href="/admin/transportacion/new" class="btn btn-primary"><i class="fas fa-plus"></i> Nueva Reserva</a>
+    </div>-->
+    <div class="card-body">
+      <div class="table-responsive">
+        <table id="tabla-reservas" class="table table-hover table-striped text-nowrap">
+          <tr>
+            <th>Cliente</th>
+            <th>Hotel</th>
+            <th>Zona</th>
+            <th>Tipo</th>
+            <th>Fecha llegada</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% reservas.forEach(r => { %>
+            <tr>
+              <td><%= r.nombre_cliente %></td>
+              <td><%= r.hotel_destino %></td>
+              <td><%= r.zona_nombre %></td>
+              <td><%= r.tipo_servicio_nombre %></td>
+              <td><%= r.fecha_llegada.toISOString().split('T')[0] %></td>
+              <td>
+                <a href="/admin/transportacion/<%= r.id %>/edit" class="btn btn-sm btn-warning">Editar</a>
+                <form method="POST" action="/admin/transportacion/<%= r.id %>/delete" style="display:inline;">
+                  <button class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar?')">Eliminar</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  $(document).ready(function () {
+    $('#tabla-reservas').DataTable({
+      responsive: true,
+      autoWidth: false,
+      order: [[0, 'desc']], // Ordenar por la primera columna en orden descendente
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json'
+      }
+    });
+  });
+</script>

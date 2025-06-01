@@ -7,6 +7,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('express-flash');
 const methodOverride = require('method-override');
+const nodemailer = require('nodemailer');
+
 const app = express();
 
 app.use(expressLayouts);
@@ -48,6 +50,15 @@ app.use((req, res, next) => {
   }
   //res.locals.locale = req.getLocale(); // 👈 para usar en EJS
   next();
+});
+
+// ⚙️ Configurar nodemailer 
+app.locals.transporter = nodemailer.createTransport({
+  service: 'gmail', // o tu proveedor (puede ser 'outlook', 'yahoo', etc.)
+  auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS
+  }
 });
 
 app.use((req, res, next) => {

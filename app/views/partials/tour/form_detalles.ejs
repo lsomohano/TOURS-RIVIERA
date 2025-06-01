@@ -17,11 +17,11 @@
           </div>
           <div class="form-group">
             <label for="incluye">Incluye</label>
-            <textarea class="form-control summernote" name="incluye" id="incluye"><%= detalles?.incluye || '' %></textarea>
+            <textarea class="form-control summernote" name="incluye" id="incluye" rows="6"><%= detalles?.incluye || '' %></textarea>
           </div>
           <div class="form-group">
             <label for="no_incluye">No incluye</label>
-            <textarea class="form-control summernote" name="no_incluye" id="no_incluye"><%= detalles?.no_incluye || '' %></textarea>
+            <textarea class="form-control summernote" name="no_incluye" id="no_incluye" rows="6"><%= detalles?.no_incluye || '' %></textarea>
           </div>
         </div>
 
@@ -29,15 +29,15 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="porque_hacerlo">¿Por qué hacerlo?</label>
-            <textarea class="form-control summernote" name="porque_hacerlo" id="porque_hacerlo"><%= detalles?.porque_hacerlo || '' %></textarea>
+            <textarea class="form-control summernote" name="porque_hacerlo" id="porque_hacerlo" rows="6"><%= detalles?.porque_hacerlo || '' %></textarea>
           </div>
           <div class="form-group">
             <label for="que_esperar">¿Qué esperar?</label>
-            <textarea class="form-control summernote" name="que_esperar" id="que_esperar"><%= detalles?.que_esperar || '' %></textarea>
+            <textarea class="form-control summernote" name="que_esperar" id="que_esperar" rows="6"><%= detalles?.que_esperar || '' %></textarea>
           </div>
           <div class="form-group">
             <label for="recomendaciones">Recomendaciones</label>
-            <textarea class="form-control summernote" name="recomendaciones" id="recomendaciones"><%= detalles?.recomendaciones || '' %></textarea>
+            <textarea class="form-control summernote" name="recomendaciones" id="recomendaciones" rows="6"><%= detalles?.recomendaciones || '' %></textarea>
           </div>
         </div>
       </div>
@@ -49,8 +49,11 @@
 
 <script>
   $(function () {
-    $('.summernote').summernote({
+    $('.summernote_').summernote({
       height: 150,
+      valid_styles: {
+          '*': 'text-align' // solo permites ciertos estilos
+      },
       toolbar: [
         ['style', ['bold', 'italic', 'underline']],
         ['para', ['ul', 'ol', 'paragraph']],

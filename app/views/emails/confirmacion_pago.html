@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmación de Pago</title>
+   <style>
+    body { font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; color: #333; }
+    .container { background-color: #fff; max-width: 600px; margin: auto; border-radius: 8px; padding: 30px; border: 1px solid #ccc; }
+    .header { text-align: center; color: #27ae60; }
+    .details { margin-top: 20px; }
+    .footer { margin-top: 30px; font-size: 0.9em; color: #888; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>¡Pago Confirmado!</h1>
+    <p>Hola {{nombre_cliente}},</p>
+
+    <p>Hemos recibido el pago de tu reserva con éxito. Aquí están los detalles:</p>
+
+    <div class="datos">
+      <p><strong>Código de reserva:</strong> {{reserva_codigo}}</p>
+      <p><strong>Tour:</strong> {{nombre_tour}}</p>
+      <p><strong>Fecha:</strong> {{fecha_reserva}}</p>
+      <p><strong>Personas:</strong> {{cantidad_personas}}</p>
+    </div>
+
+    <p>Gracias por confiar en nosotros. Nos vemos pronto en tu aventura por la Riviera Maya 🌴☀️.</p>
+
+    <div class="footer">
+      Riviera Maya Tours<br>
+      contacto@toursriviera.com | +52 1 998 000 0000
+    </div>
+  </div>
+</body>
+</html>

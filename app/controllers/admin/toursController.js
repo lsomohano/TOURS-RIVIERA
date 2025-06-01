@@ -34,7 +34,9 @@ exports.createForm = async (req, res) => {
   res.render('admin/tours/new',{
         layout: 'layouts/admin',
         title: 'Admin | Crear Nuevo Tour',
-        botones: []
+        botones: [
+          { href: '/admin/tours', class: 'btn-secondary', text: 'Regresar', icon: 'fas fa-arrow-left' }
+        ]
   });
 };
 
@@ -131,7 +133,9 @@ exports.editForm = async (req, res) => {
         fechas,
         layout: 'layouts/admin',
         title: `Editar Tour - ${tour.nombre}`,
-        botones: []
+        botones: [
+          { href: '/admin/tours', class: 'btn-secondary', text: 'Regresar', icon: 'fas fa-arrow-left' }
+        ]
     });
   } catch (error) {
     console.error('Error al cargar el tour para editar:', error);

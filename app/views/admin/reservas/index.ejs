@@ -47,9 +47,9 @@
                             <td><%= reserva.total_pagado %></td>
                             <td>
                             <a href="/admin/reservas/<%= reserva.id %>/edit" class="btn btn-sm btn-primary">Editar</a>
-                            <form action="/admin/reservas/<%= reserva.id %>/delete" method="POST" style="display:inline;">
+                            <!--<form action="/admin/reservas/<%= reserva.id %>/delete" method="POST" style="display:inline;">
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta reserva?')">Eliminar</button>
-                            </form>
+                            </form>-->
                             </td>
                         </tr>
                         <% }) %>
@@ -61,8 +61,8 @@
         <!-- /.card-footer-->
     </div>
     <!-- /.card -->
-    </section>
-    <!-- /.content -->
+</section>
+<!-- /.content -->
 <script>
   $(document).ready(function () {
     $('#tabla-reservas').DataTable({

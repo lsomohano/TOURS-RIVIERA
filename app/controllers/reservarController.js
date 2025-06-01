@@ -1,6 +1,10 @@
 const ReservaModel = require('../models/reservasModel');
 const TourModel = require('../models/TourModel');
 
+const { enviarCorreoConfirmacionPago } = require('../services/email');
+const { enviarCorreoConfirmacionReserva } = require('../services/email');
+const fs = require('fs');
+const path = require('path');
 
 // GET: Página para reservar un tour
 exports.getReserva = async (req, res) => {
@@ -101,6 +105,24 @@ exports.postReserva = async (req, res) => {
       estado_pago,
     });
 
+    const transporter = req.app.locals.transporter;
+
+    // Enviar correo de confirmación
+    await enviarCorreoConfirmacionReserva({
+      transporter,
+      nombre: nombre_cliente,
+      email,
+      telefono,
+      fecha_reserva,
+      cantidad,
+      modalidad,
+      metodo_pago,
+      punto_encuentro,
+      peticiones_especiales,
+      total: totalCalculado,
+      reserva_codigo: reservaCodigo
+    });
+
     const reservaId = result.insertId;
 
     // 🔁 Si pago es con tarjeta, crear sesión Stripe
@@ -145,7 +167,6 @@ exports.postReserva = async (req, res) => {
 exports.reservaSuccess = async (req, res) => {
   const { session_id, reservaId } = req.query;
 
-  // Validación de parámetros
   if (!session_id || !reservaId) {
     return res.status(400).send('Faltan parámetros necesarios');
   }
@@ -164,8 +185,14 @@ exports.reservaSuccess = async (req, res) => {
       return res.status(404).send('Reserva no encontrada');
     }
 
+    const reserva = reservas[0];
+
+    // 📧 Enviar correo de confirmación de pago
+    const transporter = req.app.locals.transporter;
+    await enviarCorreoConfirmacionPago(transporter, reserva, reserva.tour_nombre); // suponiendo que 'reserva.tour' viene unido
+
     res.render('reservar_success', {
-      reserva: reservas[0],
+      reserva,
       locale: req.getLocale(),
       currentUrl: req.originalUrl
     });
@@ -175,6 +202,7 @@ exports.reservaSuccess = async (req, res) => {
     res.status(500).send('Error al confirmar la reserva');
   }
 };
+
 
 // GET: Cancelación
 exports.reservaCancel = async (req, res) => {
@@ -237,18 +265,31 @@ exports.getInstruccionesPago = async (req, res) => {
 };
 
 exports.getInstruccionesPagoToken = async (req, res) => {
-    const token = req.params.token;
+  const token = req.params.token;
 
-    const [rows] = await ReservaModel.getByToken(token);
-    if (!rows.length) {
-      return res.status(404).send('Reservación no encontrada');
-    }
+  const [rows] = await ReservaModel.getByToken(token);
+  if (!rows.length) {
+    return res.status(404).send('Reservación no encontrada');
+  }
 
-    const reserva = rows[0];
-    const [tourRows] = await TourModel.getById(reserva.tour_id);
-    const tour = tourRows[0];
+  const reserva = rows[0];
 
-    res.render('pago_token', { reserva, tour });
+  // Validar fecha de vencimiento
+  const ahora = new Date();
+  const fechaVencimiento = new Date(reserva.fecha_vencimiento);
+
+  if (ahora > fechaVencimiento) {
+    return res.status(410).render('pago_expirado', {
+      nombre: reserva.nombre_cliente,
+      emailContacto: 'contacto@rivieratours.com',
+      telefonoContacto: '+52 1 984 123 4567'
+    });
+  }
+
+  const [tourRows] = await TourModel.getById(reserva.tour_id);
+  const tour = tourRows[0];
+
+  res.render('pago_token', { reserva, tour });
 };
 
 exports.mostrarPagoConStripe = async (req, res) => {
