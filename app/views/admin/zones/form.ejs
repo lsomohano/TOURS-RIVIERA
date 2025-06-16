@@ -1,0 +1,17 @@
+<%- include('../../partials/titles', { title: title, botones: botones }) %>
+<%- include('../../partials/messages') %>
+
+<section class="content">
+  <div class="card">
+    <div class="card-body">
+      <form action="/admin/zones/save" method="POST">
+        <% if (zone) { %><input type="hidden" name="id" value="<%= zone.id %>"><% } %>
+        <div class="form-group">
+          <label>Nombre de la zona</label>
+          <input type="text" name="name" class="form-control" value="<%= zone?.name||'' %>" required>
+        </div>
+        <button class="btn btn-success">Guardar</button>
+      </form>
+    </div>
+  </div>
+</section>

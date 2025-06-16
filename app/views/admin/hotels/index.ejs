@@ -1,0 +1,64 @@
+<%- include('../../partials/titles', { title: title, botones: botones }) %>
+<%- include('../../partials/messages') %>
+
+<form method="POST" action="/admin/hotels/import" onsubmit="return confirm('¿Deseas importar hoteles desde OpenStreetMap?')">
+  <button class="btn btn-success mb-3">
+    <i class="fas fa-cloud-download-alt"></i> Importar Hoteles
+  </button>
+</form>
+<form method="POST" action="/admin/hotels/importArea" onsubmit="return confirm('¿Deseas importar hoteles desde OpenStreetMap?')">
+  <button class="btn btn-success mb-3">
+    <i class="fas fa-cloud-download-alt"></i> Importar Hoteles importArea
+  </button>
+</form>
+
+<section class="content">
+  <div class="card">
+    <div class="card-body">
+      <table id="hotelsTable" class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Zona</th>
+            <th>Latitud</th>
+            <th>Longitud</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% hotels.forEach(hotel => { %>
+            <tr>
+              <td><%= hotel.name %></td>
+              <td><%= hotel.zone %></td>
+              <td><%= hotel.latitude %></td>
+              <td><%= hotel.longitude %></td>
+              <td>
+                <a href="/admin/hotels/<%= hotel.id %>/edit" class="btn btn-sm btn-warning">Editar</a>
+                <a href="/admin/hotels/<%= hotel.id %>/delete" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este hotel?')">Eliminar</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Inicialización de DataTables -->
+<script>
+  $(document).ready(function() {
+    $('#hotelsTable').DataTable({
+      // Opciones recomendadas:
+      paging: true,
+      lengthChange: true,
+      searching: true,
+      ordering:  true,
+      info:      true,
+      autoWidth: false,
+      // lenguaje en español (opcional)
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
+      }
+    });
+  });
+</script>

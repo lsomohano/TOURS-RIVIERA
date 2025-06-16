@@ -1,0 +1,24 @@
+<%- include('../../partials/titles', { title: title, botones: botones }) %>
+<%- include('../../partials/messages') %>
+
+<section class="content">
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-bordered">
+        <thead><tr><th>Zona</th><th>Acciones</th></tr></thead>
+        <tbody>
+          <% zones.forEach(z => { %>
+            <tr>
+              <td><%= z.name %></td>
+              <td>
+                <a href="/admin/zones/<%= z.id %>/edit" class="btn btn-sm btn-warning">Editar</a>
+                <a href="/admin/zones/<%= z.id %>/delete" class="btn btn-sm btn-danger"
+                   onclick="return confirm('¿Eliminar zona?')">Eliminar</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

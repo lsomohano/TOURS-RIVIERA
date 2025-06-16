@@ -14,7 +14,6 @@ exports.listarReservas = async (req, res) => {
         layout: 'layouts/admin',
         title: 'Admin | Reservaciones',
         botones: [
-          
           {href: '/admin/reservas/new', class: 'btn-primary', text: 'Nueva Reserva', icon: 'fas fa-plus' }
         ]
     });

@@ -41,12 +41,188 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Volcando estructura para tabla tours.hotels
+CREATE TABLE IF NOT EXISTS `hotels` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `latitude` decimal(10,7) NOT NULL,
+  `longitude` decimal(10,7) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `zone_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_hotels_zones` (`zone_id`),
+  CONSTRAINT `fk_hotels_zones` FOREIGN KEY (`zone_id`) REFERENCES `zones` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla tours.hotels: ~159 rows (aproximadamente)
+INSERT INTO `hotels` (`id`, `name`, `latitude`, `longitude`, `created_at`, `zone_id`) VALUES
+	(1, 'Melody Maker Cancun', 21.1128230, -86.7599040, '2025-06-14 22:01:55', 3),
+	(2, 'Hotel Kavia Plus Cancun', 21.1605084, -86.8286232, '2025-06-14 22:01:55', 3),
+	(3, 'Selina Hotel Cancun Lagoon Zona Hotelera', 21.1341645, -86.7494873, '2025-06-14 22:01:55', 3),
+	(4, 'Hotel Riu Cancun', 21.1380282, -86.7487755, '2025-06-14 22:01:55', 3),
+	(5, 'Hotel Krystal Cancún', 21.1343014, -86.7446827, '2025-06-14 22:01:55', 3),
+	(6, 'Kempinski Hotel Cancún', 21.0932322, -86.7682271, '2025-06-14 22:01:55', 3),
+	(7, 'Hotel NYX Cancun', 21.1142721, -86.7586579, '2025-06-14 22:01:55', 3),
+	(8, 'Omni Cancun Hotel & Villas', 21.0748861, -86.7758040, '2025-06-14 22:01:55', 3),
+	(9, 'Hard Rock Hotel Cancun', 21.0894363, -86.7699219, '2025-06-14 22:01:55', 3),
+	(10, 'SLS Cancun Hotel & Residences', 21.1669201, -86.8041045, '2025-06-14 22:01:55', 3),
+	(11, 'Royal Resort The Royal Cancun', 21.1441010, -86.7839096, '2025-06-14 22:01:55', 3),
+	(12, 'Hilton Cancun Mar Caribe All-Inclusive Resort', 21.0717298, -86.7768739, '2025-06-14 22:01:55', 3),
+	(13, 'Iberostar Selection Coral Cancún', 21.0675339, -86.7784243, '2025-06-14 22:01:55', 3),
+	(14, 'INTERCONTINENTAL PRESIDENTE CANCUN RESORT', 21.1357875, -86.7544262, '2025-06-14 22:01:55', 3),
+	(15, 'Now Emerald Cancun', 21.0538088, -86.7819167, '2025-06-14 22:01:55', 3),
+	(16, 'Occidental Costa Cancún', 21.1450655, -86.7891542, '2025-06-14 22:01:55', 3),
+	(17, 'Seadust Cancun Family Resort', 21.0687965, -86.7779629, '2025-06-14 22:01:55', 3),
+	(18, 'Iberostar Selection Cancun', 21.0673847, -86.7780992, '2025-06-14 22:01:55', 3),
+	(19, 'Krystal Urban Cancún & Beach Club', 21.1502519, -86.8195293, '2025-06-14 22:01:55', 3),
+	(20, 'La Quinta by Wyndham Cancún', 21.1519368, -86.8242552, '2025-06-14 22:01:55', 3),
+	(21, 'Ambiance Suites Cancún', 21.1510050, -86.8252975, '2025-06-14 22:01:55', 3),
+	(22, 'Cancun International Suites', 21.1606746, -86.8281608, '2025-06-14 22:01:55', 3),
+	(23, 'La Villa du Golf à Cancún', 21.1315522, -86.7590136, '2025-06-14 22:01:55', 3),
+	(24, 'Mex Hoteles Cancún', 21.1627688, -86.8246600, '2025-06-14 22:01:55', 3),
+	(25, 'Selina Hostel Cancun', 21.1631505, -86.8262359, '2025-06-14 22:01:56', 3),
+	(26, 'GAMMA Cancun Centro', 21.1611645, -86.8250484, '2025-06-14 22:01:56', 3),
+	(27, 'Hostel Mundo Joven Cancun', 21.1648280, -86.8281531, '2025-06-14 22:01:56', 3),
+	(28, 'Ibis Cancun Centro', 21.1436005, -86.8250955, '2025-06-14 22:01:56', 3),
+	(29, 'Cancun Allen', 21.1643314, -86.8303614, '2025-06-14 22:01:56', 3),
+	(30, 'Fiesta Inn Cancún Las Américas', 21.1465682, -86.8219114, '2025-06-14 22:01:56', 3),
+	(31, 'GR Solaris Cancun', 21.0550820, -86.7816620, '2025-06-14 22:01:56', 3),
+	(32, 'Cancun Clipper Club', 21.1344859, -86.7497372, '2025-06-14 22:01:56', 3),
+	(33, 'Tulipanes Cancun', 21.0811596, -86.8448611, '2025-06-14 22:01:56', 3),
+	(34, 'Spring Cancún', 20.9480113, -89.5580252, '2025-06-14 22:01:56', 3),
+	(35, 'Hive Cancún', 21.0957143, -86.8672383, '2025-06-14 22:01:56', 3),
+	(36, 'Comfort Inn Cancun', 21.0443233, -86.8499517, '2025-06-14 22:01:56', 3),
+	(37, 'All Ritmo Cancún Resort', 21.2018121, -86.8054093, '2025-06-14 22:01:56', 3),
+	(38, 'Marriott Courtyard Cancun Airport', 21.0500846, -86.8507659, '2025-06-14 22:01:56', 3),
+	(39, 'Paradisus Cancún', 21.0836112, -86.7720585, '2025-06-14 22:01:56', 3),
+	(40, 'Hyatt Ziva Cancun', 21.1358966, -86.7415084, '2025-06-14 22:01:56', 3),
+	(41, 'Emporio Cancun', 21.0732025, -86.7764466, '2025-06-14 22:01:56', 3),
+	(42, 'Marriott Cancun Resort', 21.0861662, -86.7713399, '2025-06-14 22:01:56', 3),
+	(43, 'Krystal Altitude Cancún', 21.1346671, -86.7427695, '2025-06-14 22:01:56', 3),
+	(44, 'Westin Resort Cancun', 21.0393718, -86.7821657, '2025-06-14 22:01:56', 3),
+	(45, 'JW Marriott Cancun Resort', 21.0874481, -86.7708391, '2025-06-14 22:01:56', 3),
+	(46, 'Gran Oasis Cancun', 21.0778211, -86.7747174, '2025-06-14 22:01:56', 3),
+	(47, 'Royal Solaris Cancun', 21.0495678, -86.7824479, '2025-06-14 22:01:56', 3),
+	(48, 'Club Regina Cancun', 21.0403875, -86.7822999, '2025-06-14 22:01:56', 3),
+	(49, 'Bell Air Cancun', 21.0467442, -86.7827151, '2025-06-14 22:01:56', 3),
+	(50, 'Secrets The Vine Cancún', 21.0912949, -86.7692586, '2025-06-14 22:01:56', 3),
+	(51, 'One Cancún Centro hotel', 21.1350809, -86.8281718, '2025-06-14 22:01:57', 3),
+	(52, 'Dreams Vista Cancún Golf & Spa Resort', 21.1773953, -86.8072928, '2025-06-14 22:01:57', 3),
+	(53, 'Cancun Bay Resort', 21.1495220, -86.7932494, '2025-06-14 22:01:57', 3),
+	(54, 'Temptation Resort Spa Cancun', 21.1484808, -86.7922146, '2025-06-14 22:01:57', 3),
+	(55, 'Hilton Cancun', 20.9532088, -86.8362585, '2025-06-14 22:01:57', 3),
+	(56, 'Dreams Riviera Cancun Resort & Spa', 20.8719893, -86.8674122, '2025-06-14 22:01:57', 3),
+	(57, 'Breathless Riviera Cancun Resort', 20.9017547, -86.8505483, '2025-06-14 22:01:57', 3),
+	(58, 'Secrets Riviera Cancun Resort', 20.9004542, -86.8515166, '2025-06-14 22:01:57', 3),
+	(59, 'Oleo Cancun Playa', 21.0456333, -86.7827814, '2025-06-14 22:01:57', 3),
+	(60, 'Selina Hotel Cancun Lagoon Zona Hotelera', 21.1341645, -86.7494873, '2025-06-14 22:02:13', 1),
+	(61, 'Grand Decameron Los Cabos', 23.0408952, -109.7024842, '2025-06-14 22:02:13', 1),
+	(62, 'Playa del Carmen Hotel by H&A', 20.6253911, -87.0768048, '2025-06-14 22:02:30', 2),
+	(63, 'Residence Inn by Marriott Playa del Carmen', 20.6140514, -87.0978369, '2025-06-14 22:02:30', 2),
+	(64, 'Paradisus Playa del Carmen La Perla', 20.6471538, -87.0567122, '2025-06-14 22:02:30', 2),
+	(65, 'Villa Flamingos Playa Del Carmen', 20.6549353, -87.0931948, '2025-06-14 22:02:30', 2),
+	(66, 'Hostal Kin Hostel Playa Del Carmen', 20.6199564, -87.0937774, '2025-06-14 22:02:31', 2),
+	(67, 'aloft Playa del Carmen', 20.6347362, -87.0682647, '2025-06-14 22:02:31', 2),
+	(68, 'The Yucatan Playa del Carmen All-Inclusive Resort', 20.6329340, -87.0673638, '2025-06-14 22:02:31', 2),
+	(69, 'Hostel Tropico 20º Playa del Carmen', 20.6258087, -87.0797212, '2025-06-14 22:02:31', 2),
+	(70, 'HM Playa del Carmen', 20.6315136, -87.0715711, '2025-06-14 22:02:31', 2),
+	(71, 'Holiday Inn Express & Suites Playa del Carmen', 20.6305526, -87.0715870, '2025-06-14 22:02:31', 2),
+	(72, 'Hilton Playa del Carmen', 20.6296862, -87.0682891, '2025-06-14 22:02:31', 2),
+	(73, 'Paradisus Playa del Carmen La Esmeralda', 20.6495021, -87.0544618, '2025-06-14 22:02:31', 2),
+	(74, 'Grand Hyatt Playa del Carmen', 20.6306073, -87.0673581, '2025-06-14 22:02:31', 2),
+	(75, 'Panama Jack Resorts Gran Porto Playa del Carmen', 20.6287765, -87.0685509, '2025-06-14 22:02:31', 2),
+	(76, 'Cocos Cabañas Playa del Carmen Adults Only', 20.6643339, -87.0321169, '2025-06-14 22:02:31', 2),
+	(77, 'Playa del Carmen Transportation | Airport Hotel Shuttle', 20.6521799, -87.0740411, '2025-06-14 22:02:31', 2),
+	(78, 'Hotel Playa Maya', 20.6251202, -87.0723297, '2025-06-14 22:02:31', 2),
+	(79, 'PLAYA 38 HOTEL BOUTIQUE', 20.6387062, -87.0695609, '2025-06-14 22:02:31', 2),
+	(80, 'Hotel Playa Plaza', 20.6330692, -87.0734030, '2025-06-14 22:02:31', 2),
+	(81, 'Soho Playa Hotel', 20.6319215, -87.0695431, '2025-06-14 22:02:31', 2),
+	(82, 'Porto Playa Condo Hotel', 20.6289999, -87.0700117, '2025-06-14 22:02:31', 2),
+	(83, 'Balam Playa Hôtel', 20.6241566, -87.0765102, '2025-06-14 22:02:31', 2),
+	(84, 'Viceroy Riviera Maya', 20.6634792, -87.0320300, '2025-06-14 22:02:31', 2),
+	(85, 'Hotel Riu Playacar', 20.6082438, -87.0905538, '2025-06-14 22:02:47', 6),
+	(86, 'Hotel Riu Yucatan', 20.6051592, -87.0922350, '2025-06-14 22:02:47', 6),
+	(87, 'Sandos Playacar', 20.6056198, -87.0979890, '2025-06-14 22:02:47', 6),
+	(88, 'Royal Hideaway Playacar', 20.6087814, -87.0887121, '2025-06-14 22:02:47', 6),
+	(89, 'Occidental Allegro Playacar', 20.6095069, -87.0872386, '2025-06-14 22:02:47', 6),
+	(90, 'Playacar Palace', 20.6201522, -87.0765331, '2025-06-14 22:02:47', 6),
+	(91, 'Hotel Crucero Tulum', 20.2192730, -87.4364599, '2025-06-14 22:03:03', 7),
+	(92, 'SACBE Tulum Hotel Boutique', 20.2106113, -87.4601483, '2025-06-14 22:03:03', 7),
+	(93, 'Hotel PANACEA TULUM', 20.1993740, -87.4766105, '2025-06-14 22:03:03', 7),
+	(94, 'Hip Hotel Tulum', 20.1427995, -87.4604409, '2025-06-14 22:03:03', 7),
+	(95, 'Hotel Shibari Tulum', 20.1551180, -87.4578128, '2025-06-14 22:03:03', 7),
+	(96, 'Elements Tulum Boutique Hotel', 20.2124748, -87.4534793, '2025-06-14 22:03:03', 7),
+	(97, 'Hotel Central Station Tulum', 20.2106390, -87.4651592, '2025-06-14 22:03:03', 7),
+	(98, 'Ophelia Tulum Hotel', 20.2054425, -87.4561242, '2025-06-14 22:03:03', 7),
+	(99, 'Catalonia Royal Tulum', 20.4782870, -87.2596925, '2025-06-14 22:03:04', 7),
+	(100, 'Aloft Tulum', 20.2054382, -87.4509876, '2025-06-14 22:03:04', 7),
+	(101, 'Wish Tulum', 20.2103258, -87.4525195, '2025-06-14 22:03:04', 7),
+	(102, 'Amena Tulum', 20.1949852, -87.4672929, '2025-06-14 22:03:04', 7),
+	(103, 'Náay Tulum Curamoria Collection', 20.1986838, -87.4620378, '2025-06-14 22:03:04', 7),
+	(104, 'Mi casa Tulum', 20.2044735, -87.5053426, '2025-06-14 22:03:04', 7),
+	(105, 'App Tulum', 20.1998401, -87.4563465, '2025-06-14 22:03:04', 7),
+	(106, 'Bliss Tulum', 20.2117317, -87.4565078, '2025-06-14 22:03:04', 7),
+	(107, 'Humble Bumble Tulum', 20.2205399, -87.4366068, '2025-06-14 22:03:04', 7),
+	(108, 'JOY Tulum', 20.2085743, -87.4776734, '2025-06-14 22:03:04', 7),
+	(109, 'kanan tulum', 20.1503182, -87.4578496, '2025-06-14 22:03:04', 7),
+	(110, 'Selina Tulum', 20.1552297, -87.4569867, '2025-06-14 22:03:04', 7),
+	(111, 'Ahau Tulum', 20.1520378, -87.4575743, '2025-06-14 22:03:04', 7),
+	(112, 'Cenotes Casa Tortuga Tulum', 20.2824026, -87.3902633, '2025-06-14 22:03:04', 7),
+	(113, 'Castillo Tulum', 20.2096320, -87.4608998, '2025-06-14 22:03:04', 7),
+	(114, 'Maison Tulum', 20.2122779, -87.4640955, '2025-06-14 22:03:04', 7),
+	(115, 'The Panoramic Tulum By Xperience Hotels', 20.1985475, -87.4753869, '2025-06-14 22:03:04', 7),
+	(116, 'Secrets Tulum', 20.1978666, -87.4545334, '2025-06-14 22:03:04', 7),
+	(117, 'alojamientos LOSANTOS in Tulum', 20.1963475, -87.4555091, '2025-06-14 22:03:04', 7),
+	(118, 'Aldea Xaan Ha Tulum', 20.2138239, -87.4785774, '2025-06-14 22:03:05', 7),
+	(119, 'botanica tulum', 20.2147147, -87.4553058, '2025-06-14 22:03:05', 7),
+	(120, 'Sueños Tulum', 20.1417562, -87.4606255, '2025-06-14 22:03:05', 7),
+	(121, 'Bruna Tulum', 20.2112672, -87.4527602, '2025-06-14 22:03:05', 7),
+	(122, 'Grand Oasis Tulum', 20.3754941, -87.3254303, '2025-06-14 22:03:05', 7),
+	(123, 'Mayan Monkey Tulum', 20.2050424, -87.4504259, '2025-06-14 22:03:05', 7),
+	(124, 'Motto by Hilton Tulum', 20.2035533, -87.4503018, '2025-06-14 22:03:05', 7),
+	(125, 'Maui Hostels Tulum', 20.2020500, -87.4705489, '2025-06-14 22:03:05', 7),
+	(126, 'Loto Tulum', 20.2021921, -87.4753955, '2025-06-14 22:03:05', 7),
+	(127, 'Esplendor by Wyndham Tulum Nook', 20.1743718, -87.4585485, '2025-06-14 22:03:05', 7),
+	(128, 'mimosa tulum', 20.2141128, -87.4557514, '2025-06-14 22:03:05', 7),
+	(129, 'Meteora Stay & Coffeehouse Tulum', 20.2090695, -87.4568681, '2025-06-14 22:03:05', 7),
+	(130, 'Tubo Tulum', 20.2079424, -87.4512434, '2025-06-14 22:03:05', 7),
+	(131, 'Kin Tulum Jungle Deluxe', 20.2043672, -87.4836147, '2025-06-14 22:03:05', 7),
+	(132, 'Santuario Tulum', 20.3491437, -87.3631556, '2025-06-14 22:03:05', 7),
+	(133, 'Green Tulum', 20.2067289, -87.4749015, '2025-06-14 22:03:05', 7),
+	(134, 'Zereno Tulum', 20.2020208, -87.4652501, '2025-06-14 22:03:05', 7),
+	(135, 'Lumina at LOSANTOS in Tulum', 20.1964581, -87.4538632, '2025-06-14 22:03:05', 7),
+	(136, 'Gran Bahia Principe Tulum', 20.3680800, -87.3315250, '2025-06-14 22:03:06', 7),
+	(137, 'Conrad Tulum Riviera Maya', 20.3582784, -87.3375665, '2025-06-14 22:03:06', 7),
+	(138, 'Hilton Tulum Riviera Maya All-Inclusive Resort', 20.3532087, -87.3366009, '2025-06-14 22:03:06', 7),
+	(139, 'Dreams Tulum Resort & spa', 20.2544233, -87.4035904, '2025-06-14 22:03:06', 7),
+	(140, 'Esperanza Playa', 20.2011704, -87.4341175, '2025-06-14 22:03:06', 7),
+	(141, 'Playa Caribe', 20.4055157, -87.3090994, '2025-06-14 22:03:06', 7),
+	(142, 'Condo Playa Blanca', 20.4048458, -87.3093982, '2025-06-14 22:03:06', 7),
+	(143, 'Papaya Playa Project', 20.1826447, -87.4447993, '2025-06-14 22:03:06', 7),
+	(144, 'Cerveceria Tulum Hotel Boutique & Beer Spa', 20.2320808, -87.4237726, '2025-06-14 22:03:06', 7),
+	(145, 'Del Sol Beachfront Condos and Hotel', 20.4038755, -87.3095985, '2025-06-14 22:03:06', 7),
+	(146, 'ESDUMA LA PERLA HOTEL ISLA MUJERES', 21.2585941, -86.7464248, '2025-06-14 22:03:23', 9),
+	(147, 'Isla Mujeres Palace Hotel', 21.2185005, -86.7288315, '2025-06-14 22:03:23', 9),
+	(148, 'Ocean Drive Hotel Isla Mujeres', 21.2582106, -86.7475564, '2025-06-14 22:03:23', 9),
+	(149, 'WorldMark Isla Mujeres', 21.2364055, -86.7379783, '2025-06-14 22:03:23', 9),
+	(150, 'Selina Isla Mujeres', 21.2584654, -86.7478880, '2025-06-14 22:03:23', 9),
+	(151, 'Mayan Monkey Isla Mujeres', 21.2162022, -86.7255150, '2025-06-14 22:03:23', 9),
+	(152, 'Grand Palladium Costa Mujeres Resort & Spa', 21.2667543, -86.8165490, '2025-06-14 22:03:23', 9),
+	(153, 'Hotel Atelier Playa Mujeres', 21.2533848, -86.8118013, '2025-06-14 22:03:23', 9),
+	(154, 'The Beloved Hotel Playa Mujeres', 21.2413215, -86.8051829, '2025-06-14 22:03:23', 9),
+	(155, 'Playa la Media Luna Hotel', 21.2606585, -86.7481063, '2025-06-14 22:03:23', 9),
+	(156, 'Hotel Riu Palace Costa Mujeres', 21.3015307, -86.8143725, '2025-06-14 22:03:40', 4),
+	(157, 'Grand Palladium Costa Mujeres Resort & Spa', 21.2667543, -86.8165490, '2025-06-14 22:03:40', 4),
+	(158, 'Hotel Atelier Playa Mujeres', 21.2533848, -86.8118013, '2025-06-14 22:03:40', 4),
+	(160, 'Fiesta Americana Villas Cancun', 21.1388563, -86.7511603, '2025-06-15 00:14:42', 3);
+
 -- Volcando estructura para tabla tours.reservas
 CREATE TABLE IF NOT EXISTS `reservas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tour_id` int(11) NOT NULL,
   `usuario_id` int(11) DEFAULT NULL,
   `reserva_codigo` varchar(50) DEFAULT NULL,
+  `token_pago` varchar(255) DEFAULT NULL,
   `nombre_cliente` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `telefono` varchar(255) DEFAULT NULL,
@@ -59,6 +235,7 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   `total_pagado` decimal(20,2) DEFAULT NULL,
   `punto_encuentro` text,
   `peticiones_especiales` text,
+  `fecha_vencimiento` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -66,28 +243,80 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   KEY `usuario_id` (`usuario_id`),
   CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`),
   CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.reservas: ~18 rows (aproximadamente)
-INSERT INTO `reservas` (`id`, `tour_id`, `usuario_id`, `reserva_codigo`, `token_pago`, `nombre_cliente`, `email`, `telefono`, `cantidad_personas`, `fecha_reserva`, `estado`, `metodo_pago`, `stripe_session_id`, `costo_unitario`, `total_pagado`, `punto_encuentro`, `peticiones_especiales`, `created_at`, `updated_at`) VALUES
-	(1, 1, NULL, NULL, NULL, 'Leonel Somohano Carmona', NULL, NULL, 2, '2025-05-10', 'pagado', 'stripe', 'cs_test_a1G6nVT9NDX0wTPZrg1wbgaoguYHloIR8DtSJrGykyRU0W76xdeiap5oja', NULL, NULL, NULL, NULL, '2025-05-08 04:34:55', '2025-05-08 04:35:42'),
-	(2, 2, NULL, NULL, NULL, 'Leonel Somohano Carmona', NULL, NULL, 3, '2025-05-16', 'pagado', 'stripe', 'cs_test_a1JQoDFCpRVrqmMztES2iKBMhVlWXsaU73on3npB1Phb6mEqPWOlkenelV', 129.50, 388.50, NULL, NULL, '2025-05-08 04:58:15', '2025-05-08 04:58:59'),
-	(3, 3, NULL, 'RSV-000003', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 4, '2025-05-23', 'pagado', 'stripe', 'cs_test_a15HJshdumG9DAf5ZRbvhIjNR2mdtGUH6HYK5Omm5q7otXTwfSCeWN9aEU', 75.00, 300.00, NULL, NULL, '2025-05-08 05:17:21', '2025-05-08 05:18:19'),
-	(4, 4, NULL, 'RSV-000004', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pendiente', 'stripe', NULL, 89.99, 269.97, NULL, NULL, '2025-05-10 04:09:05', '2025-05-10 04:09:05'),
-	(5, 4, NULL, 'RSV-000005', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pendiente', 'stripe', NULL, 89.99, 269.97, NULL, NULL, '2025-05-10 04:31:32', '2025-05-10 04:31:32'),
-	(6, 4, NULL, 'RSV-000006', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pendiente', 'stripe', NULL, 89.99, 269.97, NULL, NULL, '2025-05-10 04:35:17', '2025-05-10 04:35:17'),
-	(7, 4, NULL, 'RSV-000007', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pagado', 'stripe', 'cs_test_a1st0ltA1o7hnlwqTeMmBq9cOlwID3kKV74YObgyDLRhYmtR0eGj9KmpVd', 89.99, 269.97, NULL, NULL, '2025-05-10 04:41:35', '2025-05-10 04:43:07'),
-	(8, 8, NULL, 'RSV-000008', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-17', 'pagado', 'stripe', 'cs_test_a1rrFDsdhmaqQq6o3rxqD68fWwIkHqjHKZFrawUJUnIKmYgpzwDlworVXz', 1300.00, 6500.00, NULL, NULL, '2025-05-13 12:36:21', '2025-05-13 12:37:56'),
-	(9, 8, NULL, 'RSV-000009', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 6, '2025-05-17', 'pendiente', 'stripe', 'cs_test_a1eGxr9qhVLBJFRaSIWWr56HDZGEekUExBUAPKX9Is3qzWmsFtR2cqfh8J', 1300.00, 7800.00, NULL, NULL, '2025-05-13 12:49:12', '2025-05-13 12:49:13'),
-	(10, 8, NULL, 'RSV-000010', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-16', 'pendiente', 'stripe', NULL, 206.50, NULL, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', '2025-05-13 13:58:27', '2025-05-13 13:58:27'),
-	(11, 8, NULL, 'RSV-000011', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-16', 'pagado', 'stripe', 'cs_test_a1lv6CnhftzmhVzyNn5I90FHjC29B5J1SD7UvSrqp0SVCBLOXCB6TxqWkk', 206.50, 826.00, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', '2025-05-13 14:15:22', '2025-05-13 14:16:19'),
-	(12, 7, NULL, 'RSV-000012', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-24', 'pagado', 'stripe', 'cs_test_a1fOvi74q2qvEkkpCpwY548WGdopsUbV38gDPDesn2XVEDR9VUivvLDqNP', 210.00, 840.00, 'Hotel Real Zací, Anillo Periférico de Valladolid, Valladolid, Yucatán, 97784, México', '', '2025-05-13 14:19:34', '2025-05-13 14:20:27'),
-	(13, 7, NULL, 'RSV-000013', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 5, '2025-05-17', 'pagado', 'stripe', 'cs_test_a1FVzSc0jKyUnW43SImOLPXhkzHvHFznlx3JelBhIUvcZ4ALDLOYuW3qrN', 192.00, 960.00, 'Hotel Riu Palace Mexico, Ha Mz3 Lt4, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', '2025-05-13 16:02:35', '2025-05-13 16:05:18'),
-	(14, 5, NULL, 'RSV-000014', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-23', 'pendiente', 'transferencia', 'cs_test_a11miyZvaTp1tnKlnEMWvmAy5yLBzvoj9dH9sRm9vS7PzJrQL3PbxarMEb', 129.50, 647.50, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', NULL, '2025-05-14 01:46:06', '2025-05-14 01:46:06'),
-	(15, 5, NULL, 'RSV-000015', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-24', 'pendiente', 'efectivo', NULL, 129.50, 647.50, 'Hotel Riu Palace Mexico, Ha Mz3 Lt4, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', NULL, '2025-05-14 02:22:43', '2025-05-14 02:22:43'),
-	(16, 4, NULL, 'RSV-000016', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 2, '2025-05-23', 'pagado', 'stripe', 'cs_test_a1xfaQW35hOaQvY0bxHxrMtccusNEik9tDSqKxifsKsOF4v632SFNdwitV', 1500.00, 3000.00, 'Riu Latino, Boulevard Costa Mujeres, Costa Mujeres, Isla Mujeres, Quintana Roo, 77440, México', NULL, '2025-05-14 03:04:57', '2025-05-14 03:05:28'),
-	(17, 7, NULL, 'RSV-000017', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-22', 'pendiente', 'efectivo', NULL, 211.90, 1059.50, 'lkdsfh kdhf isfhsofiahdsaofidshfpoads', '', '2025-05-14 03:38:57', '2025-05-14 03:38:57'),
-	(18, 4, NULL, 'RSV-000018', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 3, '2025-05-24', 'pendiente', 'efectivo', NULL, 1500.00, 4500.00, 'Hotel Riu Palace Peninsula, Km 5,5 Lote 6-C, Boulevard Kukulcán, Distrito 8, Cancún, Benito Juárez, Quintana Roo, 77500, México', NULL, '2025-05-14 04:49:57', '2025-05-14 04:49:57');
+-- Volcando datos para la tabla tours.reservas: ~21 rows (aproximadamente)
+INSERT INTO `reservas` (`id`, `tour_id`, `usuario_id`, `reserva_codigo`, `token_pago`, `nombre_cliente`, `email`, `telefono`, `cantidad_personas`, `fecha_reserva`, `estado`, `metodo_pago`, `stripe_session_id`, `costo_unitario`, `total_pagado`, `punto_encuentro`, `peticiones_especiales`, `fecha_vencimiento`, `created_at`, `updated_at`) VALUES
+	(1, 1, NULL, NULL, NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 2, '2025-05-10', 'cancelado', 'stripe', 'cs_test_a1G6nVT9NDX0wTPZrg1wbgaoguYHloIR8DtSJrGykyRU0W76xdeiap5oja', NULL, NULL, '', '', NULL, '2025-05-08 04:34:55', '2025-05-31 23:03:45'),
+	(2, 2, NULL, NULL, NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-16', 'cancelado', 'stripe', 'cs_test_a1JQoDFCpRVrqmMztES2iKBMhVlWXsaU73on3npB1Phb6mEqPWOlkenelV', 129.50, 388.50, '', '', NULL, '2025-05-08 04:58:15', '2025-05-31 23:35:03'),
+	(3, 3, NULL, 'RSV-000003', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 4, '2025-05-23', 'cancelado', 'stripe', 'cs_test_a15HJshdumG9DAf5ZRbvhIjNR2mdtGUH6HYK5Omm5q7otXTwfSCeWN9aEU', 75.00, 300.00, '', '', NULL, '2025-05-08 05:17:21', '2025-05-31 23:37:20'),
+	(4, 4, NULL, 'RSV-000004', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'cancelado', 'stripe', NULL, 89.99, 269.97, '', '', NULL, '2025-05-10 04:09:05', '2025-06-01 00:18:56'),
+	(5, 4, NULL, 'RSV-000005', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pendiente', 'stripe', NULL, 89.99, 269.97, NULL, NULL, NULL, '2025-05-10 04:31:32', '2025-05-10 04:31:32'),
+	(6, 4, NULL, 'RSV-000006', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pendiente', 'stripe', NULL, 89.99, 269.97, NULL, NULL, NULL, '2025-05-10 04:35:17', '2025-05-10 04:35:17'),
+	(7, 4, NULL, 'RSV-000007', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-22', 'pagado', 'stripe', 'cs_test_a1st0ltA1o7hnlwqTeMmBq9cOlwID3kKV74YObgyDLRhYmtR0eGj9KmpVd', 89.99, 269.97, NULL, NULL, NULL, '2025-05-10 04:41:35', '2025-05-10 04:43:07'),
+	(8, 8, NULL, 'RSV-000008', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-17', 'pagado', 'stripe', 'cs_test_a1rrFDsdhmaqQq6o3rxqD68fWwIkHqjHKZFrawUJUnIKmYgpzwDlworVXz', 1300.00, 6500.00, NULL, NULL, NULL, '2025-05-13 12:36:21', '2025-05-13 12:37:56'),
+	(9, 8, NULL, 'RSV-000009', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 6, '2025-05-17', 'pendiente', 'stripe', 'cs_test_a1eGxr9qhVLBJFRaSIWWr56HDZGEekUExBUAPKX9Is3qzWmsFtR2cqfh8J', 1300.00, 7800.00, NULL, NULL, NULL, '2025-05-13 12:49:12', '2025-05-13 12:49:13'),
+	(10, 8, NULL, 'RSV-000010', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-16', 'pendiente', 'stripe', NULL, 206.50, NULL, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', NULL, '2025-05-13 13:58:27', '2025-05-13 13:58:27'),
+	(11, 8, NULL, 'RSV-000011', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-16', 'pagado', 'stripe', 'cs_test_a1lv6CnhftzmhVzyNn5I90FHjC29B5J1SD7UvSrqp0SVCBLOXCB6TxqWkk', 206.50, 826.00, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', NULL, '2025-05-13 14:15:22', '2025-05-13 14:16:19'),
+	(12, 7, NULL, 'RSV-000012', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 4, '2025-05-24', 'pagado', 'stripe', 'cs_test_a1fOvi74q2qvEkkpCpwY548WGdopsUbV38gDPDesn2XVEDR9VUivvLDqNP', 210.00, 840.00, 'Hotel Real Zací, Anillo Periférico de Valladolid, Valladolid, Yucatán, 97784, México', '', NULL, '2025-05-13 14:19:34', '2025-05-13 14:20:27'),
+	(13, 7, NULL, 'RSV-000013', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 5, '2025-05-17', 'pagado', 'stripe', 'cs_test_a1FVzSc0jKyUnW43SImOLPXhkzHvHFznlx3JelBhIUvcZ4ALDLOYuW3qrN', 192.00, 960.00, 'Hotel Riu Palace Mexico, Ha Mz3 Lt4, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', NULL, '2025-05-13 16:02:35', '2025-05-13 16:05:18'),
+	(14, 5, NULL, 'RSV-000014', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-23', 'pendiente', 'transferencia', 'cs_test_a11miyZvaTp1tnKlnEMWvmAy5yLBzvoj9dH9sRm9vS7PzJrQL3PbxarMEb', 129.50, 647.50, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', NULL, '2025-05-14 01:46:06', '2025-06-01 00:11:39'),
+	(15, 5, NULL, 'RSV-000015', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-24', 'pendiente', 'efectivo', NULL, 129.50, 647.50, 'Hotel Riu Palace Mexico, Ha Mz3 Lt4, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', NULL, NULL, '2025-05-14 02:22:43', '2025-05-14 02:22:43'),
+	(16, 4, NULL, 'RSV-000016', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 2, '2025-05-23', 'pagado', 'stripe', 'cs_test_a1xfaQW35hOaQvY0bxHxrMtccusNEik9tDSqKxifsKsOF4v632SFNdwitV', 1500.00, 3000.00, 'Riu Latino, Boulevard Costa Mujeres, Costa Mujeres, Isla Mujeres, Quintana Roo, 77440, México', NULL, NULL, '2025-05-14 03:04:57', '2025-05-14 03:05:28'),
+	(17, 7, NULL, 'RSV-000017', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 5, '2025-05-22', 'pendiente', 'efectivo', NULL, 211.90, 1059.50, 'lkdsfh kdhf isfhsofiahdsaofidshfpoads', '', NULL, '2025-05-14 03:38:57', '2025-05-14 03:38:57'),
+	(18, 4, NULL, 'RSV-000018', NULL, 'Leonel Somohano Carmona', 'lsomohano@avasa.com.mx', '9982140871', 3, '2025-05-24', 'pendiente', 'efectivo', NULL, 1500.00, 4500.00, 'Hotel Riu Palace Peninsula, Km 5,5 Lote 6-C, Boulevard Kukulcán, Distrito 8, Cancún, Benito Juárez, Quintana Roo, 77500, México', NULL, NULL, '2025-05-14 04:49:57', '2025-05-14 04:49:57'),
+	(19, 5, NULL, NULL, '7f94b1a8da0a773336dffb54a1a86b08', 'Leonel Somohano Carmona', 'lsomohano20@gmail.com', '9982140871', 2, '2025-06-01', 'cancelado', 'stripe', 'cs_test_a1poXLvC5eh9iITIlCkihiHhfAJev5Z8cOsVAWCnjPyUYxKGLkmpGX1tP6', 500.00, 1000.00, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', 'ninguna', NULL, '2025-05-30 13:29:46', '2025-05-31 16:19:10'),
+	(20, 6, NULL, NULL, 'd0a1ec697618978cc618c2218c4421d3', 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 3, '2025-05-31', 'pagado', 'stripe', 'cs_test_a1B6wChvXssYp9wxK3X6YTANVvYoYjhUAC1hPAxEqKGinHuWlp44DrYFIq', 600.00, 1800.00, 'Hotel Riu Palace Riviera Maya, 9 Y 10 Lote 1 Fase II, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', 'ok', NULL, '2025-05-30 13:57:57', '2025-05-31 15:49:09'),
+	(21, 9, NULL, NULL, 'b00e26fa9e726040b46ce28c2725b489', 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 1, '2025-06-01', 'pagado', 'stripe', 'cs_test_a1aA44zzQRFMR6sgp61RcYYpcP84it1zUPRDtoxxb7pmoDBHcRKQmeBx98', 1600.00, 1600.00, 'Playa Las Perlas, Distrito 8, Cancún, Benito Juárez, Quintana Roo, México', '', NULL, '2025-06-01 00:28:47', '2025-06-01 00:30:07'),
+	(22, 1, NULL, NULL, 'c64f91d81a98e4b9b421ab50171b116e', 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 1, '2025-06-04', 'pendiente', 'stripe', NULL, 1600.00, 1600.00, 'Hotel Riu Yucatan, Condominio Playacar, Avenida Paseo Xaman-Ha, Playacar Fase 2, Playa del Carmen, Quintana Roo, 77710, México', '', '2025-05-02 00:53:20', '2025-06-01 00:53:20', '2025-06-01 01:18:30'),
+	(23, 2, NULL, 'RSV-000023', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 2, '2025-05-24', 'pagado', 'stripe', 'cs_test_a1ztec3xHdLC3zOuffJsUDXC4s3Ts2b4j30oE6ANq0DQHPPPflvDjJZlIh', 129.50, 259.00, 'Fiesta Inn Cancún Las Américas, Avenida Bonampak, Supermanzana 6, Distrito 1, Cancún, Benito Juárez, Quintana Roo, 77500, México', NULL, NULL, '2025-06-01 02:48:11', '2025-06-01 02:48:54'),
+	(24, 5, NULL, 'RSV-000024', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 2, '2025-06-08', 'pagado', 'stripe', 'cs_test_a1zXoqhIGBKMxqRF5kQyrB3Y3BshWV8GQspEKrpEX7H5x5WQLPOU5UQqWB', 129.50, 259.00, 'All Ritmo Cancún Resort, Avenida José López Portillo, Distrito 3, Cancún, Benito Juárez, Quintana Roo, 77520, México', NULL, NULL, '2025-06-01 03:25:26', '2025-06-01 03:26:07'),
+	(25, 6, NULL, 'RSV-000025', NULL, 'Leonel Somohano Carmona', 'lsomohano20@hotmail.com', '9982140871', 2, '2025-05-30', 'pagado', 'stripe', 'cs_test_a1DyyQqVTuilIcAA9oeOUje6LutSH3SyepHGJraqbC0LEYToqFyJs0GKQc', 850.00, 1700.00, 'Hyatt Zilara Cancun, Boulevard Kukulcán, Distrito 8, Cancún, Benito Juárez, Quintana Roo, 77500, México', NULL, NULL, '2025-06-01 03:33:41', '2025-06-01 03:40:04');
+
+-- Volcando estructura para tabla tours.reservas_transportacion
+CREATE TABLE IF NOT EXISTS `reservas_transportacion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_cliente` varchar(100) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `fecha_llegada` date DEFAULT NULL,
+  `hora_llegada` time DEFAULT NULL,
+  `numero_vuelo_llegada` varchar(50) DEFAULT NULL,
+  `hotel_destino` varchar(150) DEFAULT NULL,
+  `zona_id` int(11) NOT NULL,
+  `tipo_servicio_id` int(11) NOT NULL,
+  `solo_ida` tinyint(1) NOT NULL DEFAULT '1',
+  `fecha_regreso` date DEFAULT NULL,
+  `hora_regreso` time DEFAULT NULL,
+  `numero_vuelo_regreso` varchar(50) DEFAULT NULL,
+  `pasajeros` int(11) DEFAULT '1',
+  `total` decimal(10,2) NOT NULL,
+  `estado` varchar(50) DEFAULT 'pendiente',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `zona_id` (`zona_id`),
+  KEY `tipo_servicio_id` (`tipo_servicio_id`),
+  CONSTRAINT `reservas_transportacion_ibfk_1` FOREIGN KEY (`zona_id`) REFERENCES `zonas_transportacion` (`id`),
+  CONSTRAINT `reservas_transportacion_ibfk_2` FOREIGN KEY (`tipo_servicio_id`) REFERENCES `tipos_servicio_transportacion` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla tours.reservas_transportacion: ~0 rows (aproximadamente)
+
+-- Volcando estructura para tabla tours.tarifas_transportacion
+CREATE TABLE IF NOT EXISTS `tarifas_transportacion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `zona_id` int(11) NOT NULL,
+  `tipo_servicio_id` int(11) NOT NULL,
+  `solo_ida` decimal(10,2) NOT NULL,
+  `redondo` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `zona_id` (`zona_id`),
+  KEY `tipo_servicio_id` (`tipo_servicio_id`),
+  CONSTRAINT `tarifas_transportacion_ibfk_1` FOREIGN KEY (`zona_id`) REFERENCES `zonas_transportacion` (`id`),
+  CONSTRAINT `tarifas_transportacion_ibfk_2` FOREIGN KEY (`tipo_servicio_id`) REFERENCES `tipos_servicio_transportacion` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla tours.tarifas_transportacion: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla tours.tarifas_transporte
 CREATE TABLE IF NOT EXISTS `tarifas_transporte` (
@@ -115,6 +344,16 @@ INSERT INTO `tarifas_transporte` (`id`, `origen`, `destino`, `tipo_servicio`, `p
 	(9, 'Aeropuerto', 'Tulum', 'privado', 100.00, 4, 1, '2025-05-13 21:46:01'),
 	(10, 'Aeropuerto', 'Tulum', 'privado_redondo', 180.00, 4, 1, '2025-05-13 21:46:01');
 
+-- Volcando estructura para tabla tours.tipos_servicio_transportacion
+CREATE TABLE IF NOT EXISTS `tipos_servicio_transportacion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  `descripcion` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla tours.tipos_servicio_transportacion: ~0 rows (aproximadamente)
+
 -- Volcando estructura para tabla tours.tours
 CREATE TABLE IF NOT EXISTS `tours` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -138,7 +377,7 @@ CREATE TABLE IF NOT EXISTS `tours` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tours: ~9 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tours: ~8 rows (aproximadamente)
 INSERT INTO `tours` (`id`, `nombre`, `descripcion`, `lugar_salida`, `lugar_destino`, `duracion`, `tipo`, `modalidad`, `idioma`, `precio`, `cupo_maximo`, `disponible`, `imagen_destacada`, `fecha_inicio`, `fecha_fin`, `publicado`, `created_at`, `updated_at`) VALUES
 	(1, 'Tour a Chichén Itzá', 'Explora una de las siete maravillas del mundo moderno con guía profesional, comida incluida y visita a un cenote.', 'Cancún', 'Chichén Itzá', 10, 'aventura', 'grupo', 'es', 1450.00, 40, 1, '/images/chichenitza.jpeg', '2025-06-01', '2025-12-31', 1, '2025-05-08 03:58:46', '2025-05-10 21:19:45'),
 	(2, 'Aventura en Xcaret', 'Disfruta un día completo en el parque Xcaret con actividades acuáticas, cultura mexicana y espectáculo nocturno.', 'Cancún, Playa del Carmen, Tulum', 'Xcaret', 12, 'aventura', 'grupo', 'es', 129.50, 50, 1, '/images/xcaret.jpg', '2025-06-01', '2025-12-31', 1, '2025-05-08 03:58:46', '2025-05-22 13:38:46'),
@@ -148,7 +387,7 @@ INSERT INTO `tours` (`id`, `nombre`, `descripcion`, `lugar_salida`, `lugar_desti
 	(6, 'Secret Cenotes Tour', 'Swim in three stunning hidden cenotes in the Mayan jungle. Includes transportation and snacks.', 'Tulum', 'Cenote Route', 6, 'relajacion', 'grupo', 'en', 850.00, 20, 1, '/uploads/imagen_destacada-1748319236687-897403475.jpg', '2025-06-15', '2025-12-15', 1, '2025-05-08 03:59:19', '2025-05-27 04:13:56'),
 	(7, 'Tour Privado a Chichén Itzá', 'Experiencia exclusiva para visitar Chichén Itzá con guía privado y transporte cómodo.', 'Hotel del cliente', 'Chichén Itzá', 8, 'cultural', 'privado', 'es', 1200.00, 6, 1, '/images/chichenitza.jpeg', '2025-06-01', '2025-12-31', 1, '2025-05-10 21:52:24', '2025-05-27 04:05:54'),
 	(8, 'Aventura Privada en Cenotes', 'Nada en cenotes escondidos con un guía privado y horario flexible.', 'Playa del Carmen', 'Ruta de los Cenotes', 6, 'aventura', 'privado', 'es', 1300.00, 4, 1, '/uploads/imagen_destacada-1748318849957-842832297.jpg', '2025-06-01', '2025-12-31', 1, '2025-05-10 21:52:24', '2025-05-27 04:07:29'),
-	(9, 'Motos acuaticas Laguana', 'Motos acuaticas Laguana', 'Cancún', 'Cancún', 2, 'aventura', 'privado', 'es', 1500.00, 2, 1, '/uploads/imagen_destacada-1747920529189-254728545.jpg', '2025-05-19', '2025-05-29', 0, '2025-05-22 04:17:47', '2025-05-22 13:28:49');
+	(9, 'Jet Ski Adventure at Nichupté Lagoon – Cancún', 'Feel the adrenaline rush as you ride a jet ski across the crystal-clear waters of the stunning Nichupté Lagoon! This experience is perfect for thrill-seekers and nature lovers alike, right in the heart of Cancún.\r\n\r\nExplore the mangrove-lined channels, speed across calm waters, and enjoy breathtaking views that combine the wild side of the lagoon with the modern skyline of the Hotel Zone. Whether solo or with a partner, it’s an unforgettable ride.', 'Cancún', 'Cancún', 1, 'aventura', 'privado', 'en', 1500.00, 2, 1, '/uploads/imagen_destacada-1748722897173-51029250.jpg', '2025-05-19', '2025-05-29', 0, '2025-05-22 04:17:47', '2025-05-31 20:21:37');
 
 -- Volcando estructura para tabla tours.tour_detalles
 CREATE TABLE IF NOT EXISTS `tour_detalles` (
@@ -164,15 +403,16 @@ CREATE TABLE IF NOT EXISTS `tour_detalles` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_detalles_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_detalles: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_detalles: ~3 rows (aproximadamente)
 INSERT INTO `tour_detalles` (`id`, `tour_id`, `duracion`, `lenguaje`, `incluye`, `no_incluye`, `porque_hacerlo`, `que_esperar`, `recomendaciones`) VALUES
 	(1, 4, '6 horas', 'Español, Inglés', 'Transporte, guía certificado, entradas', 'Comidas, propinas', 'Es una experiencia única para conocer la historia maya', 'Explora ruinas, nada en un cenote y disfruta del paisaje', 'Llega 15 minutos antes, lleva bloqueador biodegradable y ropa cómoda'),
 	(2, 7, '8 horas', 'Español', 'Transporte privado, guía especializado, entradas a Chichén Itzá', 'Alimentos y bebidas, propinas', 'Conocer una de las nuevas maravillas del mundo, aprender sobre la historia y la cultura maya.', 'Esperarás un recorrido cómodo y educativo, con tiempo suficiente para explorar cada zona arqueológica.', 'Llevar protector solar, agua, ropa cómoda y zapato cerrado.'),
 	(3, 7, '6 horas', 'Español', 'Transporte privado, guía especializado, entrada a los cenotes', 'Alimentos y bebidas, propinas', 'Disfrutarás de la belleza natural de los cenotes, con la posibilidad de nadar en aguas cristalinas.', 'Esperarás un día de aventura, con un recorrido que incluye varias paradas en cenotes únicos.', 'Llevar traje de baño, toalla, protector solar, y sandalias o zapatos acuáticos.'),
 	(4, 3, '12hrs', 'Ingles, Español', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>'),
-	(5, 6, '12hrs', 'Ingles, Español', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>');
+	(5, 6, '12hrs', 'Ingles, Español', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>', '<p><strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>'),
+	(6, 9, '1hr', 'Ingles, Español', 'Jet ski for 1 or 2 people (depending on the option chosen).\r\nSafety briefing and equipment (life jacket).\r\nProfessional guide and support throughout the activity.\r\nFree time to ride and take photos.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.');
 
 -- Volcando estructura para tabla tours.tour_fechas_disponibles
 CREATE TABLE IF NOT EXISTS `tour_fechas_disponibles` (
@@ -183,9 +423,9 @@ CREATE TABLE IF NOT EXISTS `tour_fechas_disponibles` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_fechas_disponibles_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_fechas_disponibles: ~9 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_fechas_disponibles: ~8 rows (aproximadamente)
 INSERT INTO `tour_fechas_disponibles` (`id`, `tour_id`, `fecha`, `cupo_maximo`) VALUES
 	(2, 4, '2025-05-21', 15),
 	(3, 7, '2025-06-15', 20),
@@ -195,7 +435,8 @@ INSERT INTO `tour_fechas_disponibles` (`id`, `tour_id`, `fecha`, `cupo_maximo`) 
 	(7, 4, '2025-05-27', 10),
 	(8, 4, '2025-05-28', 10),
 	(9, 4, '2025-05-29', 5),
-	(10, 6, '2025-05-31', 8);
+	(10, 6, '2025-05-31', 8),
+	(11, 9, '2025-06-01', 2);
 
 -- Volcando estructura para tabla tours.tour_imagenes
 CREATE TABLE IF NOT EXISTS `tour_imagenes` (
@@ -207,9 +448,9 @@ CREATE TABLE IF NOT EXISTS `tour_imagenes` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_imagenes_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_imagenes: ~24 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_imagenes: ~28 rows (aproximadamente)
 INSERT INTO `tour_imagenes` (`id`, `tour_id`, `url_imagen`, `descripcion`, `orden`) VALUES
 	(3, 4, '/images/default-tour.jpg', 'Imagen de prueba', 1),
 	(6, 7, '/images/chichenitza.jpeg', 'Vista panorámica del tour', 1),
@@ -234,7 +475,12 @@ INSERT INTO `tour_imagenes` (`id`, `tour_id`, `url_imagen`, `descripcion`, `orde
 	(27, 6, '/uploads/imagen-1748319380003-389993003.jpg', '', 0),
 	(28, 6, '/uploads/imagen-1748319387091-760280048.jpg', '', 0),
 	(29, 6, '/uploads/imagen-1748319396210-221965504.jpg', '', 0),
-	(30, 6, '/uploads/imagen-1748319435381-282716596.jpg', '', 0);
+	(30, 6, '/uploads/imagen-1748319435381-282716596.jpg', '', 0),
+	(31, 9, '/uploads/imagen-1748721521644-826728957.jpg', '', 0),
+	(32, 9, '/uploads/imagen-1748721540862-164085336.jpg', '', 0),
+	(33, 9, '/uploads/imagen-1748721548707-82520953.jpg', '', 0),
+	(34, 9, '/uploads/imagen-1748721592596-550310934.webp', '', 0),
+	(35, 9, '/uploads/imagen-1748721604910-881923731.webp', '', 0);
 
 -- Volcando estructura para tabla tours.tour_itinerario
 CREATE TABLE IF NOT EXISTS `tour_itinerario` (
@@ -246,9 +492,9 @@ CREATE TABLE IF NOT EXISTS `tour_itinerario` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_itinerario_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_itinerario: ~16 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_itinerario: ~19 rows (aproximadamente)
 INSERT INTO `tour_itinerario` (`id`, `tour_id`, `paso_numero`, `descripcion`, `hora_aprox`) VALUES
 	(1, 4, 1, 'Recogida en el punto de encuentro', '08:00:00'),
 	(2, 4, 2, 'Llegada al sitio arqueológico', '09:30:00'),
@@ -265,7 +511,10 @@ INSERT INTO `tour_itinerario` (`id`, `tour_id`, `paso_numero`, `descripcion`, `h
 	(15, 3, 3, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', '09:00:00'),
 	(16, 4, 5, 'Almuerzo - Comidad buffette', '14:00:00'),
 	(17, 6, 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '08:00:00'),
-	(18, 6, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '08:30:00');
+	(18, 6, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '08:30:00'),
+	(22, 9, 1, 'Check-in and instructions', '08:00:00'),
+	(23, 9, 2, 'Beginning of the tour', '08:30:00'),
+	(24, 9, 3, 'Drop-off at the same location', '10:00:00');
 
 -- Volcando estructura para tabla tours.tour_politicas_cancelacion
 CREATE TABLE IF NOT EXISTS `tour_politicas_cancelacion` (
@@ -275,15 +524,16 @@ CREATE TABLE IF NOT EXISTS `tour_politicas_cancelacion` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_politicas_cancelacion_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_politicas_cancelacion: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_politicas_cancelacion: ~3 rows (aproximadamente)
 INSERT INTO `tour_politicas_cancelacion` (`id`, `tour_id`, `politicas`) VALUES
 	(1, 4, 'Cancelación gratuita hasta 24 horas antes del tour. No hay reembolsos después de ese periodo. dddd'),
 	(2, 7, 'Cancelación sin cargo hasta 48 horas antes del inicio del tour. Después de ese tiempo, se cobrará un 30% del valor total del tour.'),
 	(3, 8, 'Cancelación gratuita hasta 72 horas antes del tour. Si se cancela con menos de 72 horas, se retendrá un 50% del precio total.'),
 	(4, 3, 'Prueba, There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc. '),
-	(5, 6, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.');
+	(5, 6, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'),
+	(6, 9, 'We understand that plans can change, and we aim to be as flexible as possible. Please review our cancellation terms before booking:\r\n\r\nFree cancellation up to 24 hours before the start of the activity.\r\n\r\nCancellations made less than 24 hours before the scheduled time will incur a 50% cancellation fee.\r\n\r\nNo-shows or cancellations within 4 hours of the activity will be charged 100% of the total amount.\r\n\r\nIn case of bad weather or safety concerns, the tour may be rescheduled or fully refunded.\r\n\r\nChanges to your reservation are subject to availability and must be requested at least 24 hours in advance.\r\n\r\nTo cancel or reschedule, please contact us at:');
 
 -- Volcando estructura para tabla tours.tour_precios_privados
 CREATE TABLE IF NOT EXISTS `tour_precios_privados` (
@@ -299,15 +549,16 @@ CREATE TABLE IF NOT EXISTS `tour_precios_privados` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_precios_privados_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_precios_privados: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_precios_privados: ~2 rows (aproximadamente)
 INSERT INTO `tour_precios_privados` (`id`, `tour_id`, `personas_max`, `precio_base`, `incremento_pct`, `aplica_desde`, `activo`, `created_at`, `updated_at`) VALUES
 	(1, 7, 10, 650.00, 21.00, 2, 1, '2025-05-11 20:46:16', '2025-05-14 03:21:19'),
 	(2, 8, 10, 590.00, 20.00, 2, 1, '2025-05-11 20:46:48', '2025-05-11 20:46:48'),
 	(3, 3, 10, 600.00, 25.00, 2, 1, '2025-05-25 20:28:01', '2025-05-25 20:42:46'),
 	(4, 4, 10, 600.00, 25.00, 2, 1, '2025-05-27 01:29:41', '2025-05-27 01:29:41'),
-	(5, 6, 8, 700.00, 25.00, 2, 1, '2025-05-27 04:18:39', '2025-05-27 04:18:39');
+	(5, 6, 8, 700.00, 25.00, 2, 1, '2025-05-27 04:18:39', '2025-05-27 04:18:39'),
+	(6, 9, 2, 1600.00, 25.00, 2, 1, '2025-05-31 20:01:15', '2025-05-31 20:01:15');
 
 -- Volcando estructura para tabla tours.tour_puntos_encuentro
 CREATE TABLE IF NOT EXISTS `tour_puntos_encuentro` (
@@ -319,15 +570,16 @@ CREATE TABLE IF NOT EXISTS `tour_puntos_encuentro` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_puntos_encuentro_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_puntos_encuentro: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_puntos_encuentro: ~3 rows (aproximadamente)
 INSERT INTO `tour_puntos_encuentro` (`id`, `tour_id`, `direccion`, `coordenadas`, `hora`) VALUES
 	(2, 3, 'Calle 80 MZ26 LT2 ED1 DP402', '21.1952787,-86.8236295', '08:00:00'),
 	(3, 3, 'Calle 80 MZ26 LT2 ED1 DP402', '21.1952787,-86.8236295', '09:00:00'),
 	(4, 4, 'Malecon las Americas', '21.14635398059483, -86.82137411140395', '08:00:00'),
 	(5, 8, 'Malecon las Americas', '21.14635398059483, -86.82137411140395', '09:00:00'),
-	(6, 6, 'Malecon las Americas', '21.14635398059483, -86.82137411140395', '08:00:00');
+	(6, 6, 'Malecon las Americas', '21.14635398059483, -86.82137411140395', '08:00:00'),
+	(7, 9, 'Playa Las Perlas, Blvd. Kukulcan km. 2.0, Kukulcan Boulevard, Zona Hotelera, 77500 Cancún, Q.R.', '21.1569919,-86.8010237', '08:00:00');
 
 -- Volcando estructura para tabla tours.tour_recomendaciones
 CREATE TABLE IF NOT EXISTS `tour_recomendaciones` (
@@ -338,9 +590,9 @@ CREATE TABLE IF NOT EXISTS `tour_recomendaciones` (
   PRIMARY KEY (`id`),
   KEY `tour_id` (`tour_id`),
   CONSTRAINT `tour_recomendaciones_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tours.tour_recomendaciones: ~37 rows (aproximadamente)
+-- Volcando datos para la tabla tours.tour_recomendaciones: ~36 rows (aproximadamente)
 INSERT INTO `tour_recomendaciones` (`id`, `tour_id`, `momento`, `recomendacion`) VALUES
 	(1, 4, 'antes', 'Descansa bien la noche anterior'),
 	(2, 4, 'durante', 'Hidrátate constantemente'),
@@ -378,7 +630,11 @@ INSERT INTO `tour_recomendaciones` (`id`, `tour_id`, `momento`, `recomendacion`)
 	(34, 6, 'durante', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'),
 	(35, 6, 'antes', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'),
 	(36, 6, 'despues', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'),
-	(37, 6, 'despues', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.');
+	(37, 6, 'despues', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'),
+	(38, 9, 'antes', 'Bring swimsuit, towel, and biodegradable sunscreen'),
+	(39, 9, 'durante', 'Not allowed under the influence of alcohol or drugs'),
+	(40, 9, 'antes', 'Minimum age to drive: 18 years'),
+	(41, 9, 'antes', 'Passengers from 10 years old (check restrictions)');
 
 -- Volcando estructura para tabla tours.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
@@ -395,6 +651,27 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 -- Volcando datos para la tabla tours.usuarios: ~1 rows (aproximadamente)
 INSERT INTO `usuarios` (`id`, `nombre`, `email`, `password`, `rol`, `creado_en`) VALUES
 	(1, 'Admin Pruebas Mod', 'admin@demo.com', '$2b$10$zN2P6iRWtnLwX6.2iKU6eeQpRz0UIJTK/MCToh9hq5aj0U7OxiFSS', 'admin', '2025-05-16 12:50:03');
+
+-- Volcando estructura para tabla tours.zones
+CREATE TABLE IF NOT EXISTS `zones` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla tours.zones: ~9 rows (aproximadamente)
+INSERT INTO `zones` (`id`, `name`, `created_at`) VALUES
+	(1, 'Cancun Zona Hotelera', '2025-06-15 00:44:04'),
+	(2, 'Playa del Carmen', '2025-06-15 00:44:22'),
+	(3, 'Cancun', '2025-06-15 00:44:51'),
+	(4, 'Costa Mujeres', '2025-06-15 00:45:02'),
+	(5, 'Puerto Morelos', '2025-06-15 00:45:47'),
+	(6, 'Playacar', '2025-06-15 00:46:02'),
+	(7, 'Tulum', '2025-06-15 00:47:52'),
+	(8, 'Tulum Zona Hotelera', '2025-06-15 00:48:13'),
+	(9, 'Isla Mujeres', '2025-06-16 08:37:06');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

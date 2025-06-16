@@ -9,5 +9,7 @@ router.use('/admin/usuarios', require('./admin/usuarios'));
 router.use('/admin/reservas', require('./admin/reservas'));
 router.use('/admin/tours', require('./admin/tours'));
 router.use('/admin/transportacion', require('./admin/transportacion'));
+router.use('/admin/hotels', require('./admin/hotels'));
+router.use('/admin/zones', require('./admin/zones'));
 
 module.exports = router;
