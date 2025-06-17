@@ -2,17 +2,6 @@ require('dotenv').config();
 const axios = require('axios');
 const mysql = require('mysql2/promise');
 
-const ZONAS = [
-   { zona: 'Cancun', ciudad: 'Cancún' },
-   { zona: 'Zona Hotelera', ciudad: 'Zona Hotelera' },
-   { zona: 'Playa del Carmen', ciudad: 'Playa del Carmen' },
-   { zona: 'Playacar', ciudad: 'Playacar' },
-   { zona: 'Tulum', ciudad: 'Tulum' },
-   { zona: 'Isla Mujeres', ciudad: 'Isla Mujeres' },
-   { zona: 'Costa Mujeres', ciudad: 'Costa Mujeres' },
-   { zona: 'Puerto Morelos', ciudad: 'Puerto Morelos'}
- ];
-
 const LIMITE_POR_QUERY = 50;
 const VARIACIONES_BUSQUEDA = [
   'hotel', 'hotel centro', 'hotel zona hotelera', 'hotel resort', 'hotel playa',
@@ -22,7 +11,6 @@ const VARIACIONES_BUSQUEDA = [
   'resort hotel', 'luxury resort'
 ];
 
-// Normalizador básico de nombres
 function normalizeName(str) {
   return str
     .normalize("NFD")
@@ -67,12 +55,18 @@ async function importHotels() {
     database: process.env.DB_NAME
   });
 
+  // ✅ Obtenemos las zonas del catálogo
+  const [zonas] = await conn.query('SELECT id, name FROM zones');
+
   let success = 0;
   const clavesNombreZona = new Set();
 
-  for (const { zona, ciudad } of ZONAS) {
-    console.log(`⏳ Importando hoteles en ${ciudad}...`);
-    const hoteles = await fetchHotelsPorVariaciones(ciudad);
+  for (const zona of zonas) {
+    const { id: zone_id, name: zonaName, ciudad } = zona;
+    const ciudadBusqueda = ciudad || zonaName;
+
+    console.log(`⏳ Importando hoteles en ${ciudadBusqueda}...`);
+    const hoteles = await fetchHotelsPorVariaciones(ciudadBusqueda);
 
     for (const h of hoteles) {
       const nameRaw = h.display_name.split(',')[0].trim();
@@ -80,18 +74,18 @@ async function importHotels() {
       const lat = parseFloat(h.lat);
       const lng = parseFloat(h.lon);
 
-      const clave = `${normalizeName(name)}|${zona.toLowerCase()}`;
+      const clave = `${normalizeName(name)}|${zonaName.toLowerCase()}`;
       if (clavesNombreZona.has(clave)) {
-        continue; // ya lo insertamos
+        continue;
       }
       clavesNombreZona.add(clave);
 
       try {
         await conn.execute(`
-          INSERT INTO hotels (name, zone, latitude, longitude)
+          INSERT INTO hotels (name, zone_id, latitude, longitude)
           VALUES (?, ?, ?, ?)
           ON DUPLICATE KEY UPDATE latitude = VALUES(latitude), longitude = VALUES(longitude)
-        `, [name, zona, lat, lng]);
+        `, [name, zone_id, lat, lng]);
         success++;
         console.log(`✅ Insertado: ${name}`);
       } catch (err) {

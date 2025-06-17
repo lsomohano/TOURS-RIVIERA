@@ -14,7 +14,7 @@ const Hotel = {
   async create({ name, zone_id, latitude, longitude }) {
     const [result] = await db.promise().query(
       'INSERT INTO hotels (name, zone_id, latitude, longitude) VALUES (?, ?, ?, ?)',
-      [name, zone, latitude, longitude]
+      [name, zone_id, latitude, longitude]
     );
     return result.insertId;
   },
@@ -22,7 +22,7 @@ const Hotel = {
   async update(id, { name, zone_id, latitude, longitude }) {
     await db.promise().query(
       'UPDATE hotels SET name = ?, zone_id = ?, latitude = ?, longitude = ? WHERE id = ?',
-      [name, zone, latitude, longitude, id]
+      [name, zone_id, latitude, longitude, id]
     );
   },
 

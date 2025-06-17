@@ -11,45 +11,85 @@ const importHotelsByArea = require('../../utils/importHotelsByArea');
 
 
 exports.list = async (req, res) => {
-  const hotels = await Hotel.findAll();
-  
-  res.render('admin/hotels/index', { 
-        hotels,
-        
-        layout: 'layouts/admin',
-        title: 'Admin | Hoteless',
-        botones: [
-          
-          {href: '/admin/hotels/new', class: 'btn-primary', text: 'Nuevo Hotel', icon: 'fas fa-plus' }
-        ]
-  });
+  try {
+    const hotels = await Hotel.findAll();
+
+    res.render('admin/hotels/index', { 
+      hotels,
+      layout: 'layouts/admin',
+      title: 'Admin | Hoteles',
+      botones: [
+        { href: '/admin/hotels/new', class: 'btn-primary', text: 'Nuevo Hotel', icon: 'fas fa-plus' }
+      ]
+    });
+  } catch (error) {
+    console.error('❌ Error al obtener hoteles:', error);
+
+    // Puedes mostrar una vista de error o redirigir con un mensaje
+    res.render('admin/hotels/index', {
+      hotels: [],
+      layout: 'layouts/admin',
+      title: 'Admin | Hoteles',
+      error: 'Ocurrió un error al cargar los hoteles.',
+      botones: [
+        { href: '/admin/hotels/new', class: 'btn-primary', text: 'Nuevo Hotel', icon: 'fas fa-plus' }
+      ]
+    });
+  }
 };
+
 
 exports.showForm = async (req, res) => {
-  const id = req.params.id;
-  const hotel = id ? await Hotel.findById(id) : null;
-  const zones = await Zone.findAll();
-  res.render('admin/hotels/create', { 
-        hotel,
-        zonas: zones,
-        layout: 'layouts/admin',
-        title: 'Admin | Hoteless',
-        botones: [
-            { href: '/admin/hotels', class: 'btn-secondary', text: 'Regresar', icon: 'fas fa-arrow-left' }
-        ]
-  });
+  try {
+    const id = req.params.id;
+    const hotel = id ? await Hotel.findById(id) : null;
+    const zones = await Zone.findAll();
+
+    res.render('admin/hotels/create', { 
+      hotel,
+      zonas: zones,
+      layout: 'layouts/admin',
+      title: 'Admin | Hoteles',
+      botones: [
+        { href: '/admin/hotels', class: 'btn-secondary', text: 'Regresar', icon: 'fas fa-arrow-left' }
+      ]
+    });
+  } catch (error) {
+    console.error('❌ Error al cargar el formulario del hotel:', error);
+
+    // Redirige a la lista de hoteles con un mensaje de error en flash o query
+    res.redirect('/admin/hotels?error=No se pudo cargar el formulario');
+  }
 };
+
 
 exports.save = async (req, res) => {
-  const { id, name, zone, latitude, longitude } = req.body;
+  const { id, name, zone_id, latitude, longitude } = req.body;
 
-  if (id) {
-    await Hotel.update(id, { name, zone_id, latitude, longitude });
-  } else {
-    await Hotel.create({ name, zone_id, latitude, longitude });
+  try {
+    if (id) {
+      await Hotel.update(id, { name, zone_id, latitude, longitude });
+    } else {
+      await Hotel.create({ name, zone_id, latitude, longitude });
+    }
+    req.flash('success', '✅ Hotel guardado correctamente.');
+    res.redirect('/admin/hotels');
+  } catch (error) {
+    console.error('❌ Error al guardar el hotel:', error);
+
+    let message = '❌ Ocurrió un error al guardar el hotel.';
+
+    if (error.code === 'ER_DUP_ENTRY') {
+      message = `⚠️ Ya existe un hotel con ese nombre: "${name}".`;
+    }
+
+    req.flash('error', message);
+    res.redirect(req.get('referer') || '/admin/hotels');
   }
-  res.redirect('/admin/hotels');
 };
+
+
+
 
 exports.delete = async (req, res) => {
   await Hotel.delete(req.params.id);
