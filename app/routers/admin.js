@@ -11,5 +11,6 @@ router.use('/admin/tours', require('./admin/tours'));
 router.use('/admin/transportacion', require('./admin/transportacion'));
 router.use('/admin/hotels', require('./admin/hotels'));
 router.use('/admin/zones', require('./admin/zones'));
+router.use('/admin/transfer-rates', require('./admin/transfer-rates'));
 
 module.exports = router;

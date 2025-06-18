@@ -1,0 +1,54 @@
+
+<%- include('../../partials/titles', { title: title, botones: botones }) %>
+<%- include('../../partials/messages') %>
+  <!-- Main content -->
+  <section class="content">
+
+  <!-- Default box -->
+  <div class="card">
+       
+    <div class="card-body">
+      <form action="<%= action %>" method="POST">
+        <div class="form-group">
+            <label for="zone_id">Zona</label>
+            <select name="zone_id" id="zone_id" class="form-control" required>
+            <option value="">Seleccione una zona</option>
+            <% zones.forEach(zone => { %>
+                <option value="<%= zone.id %>" <%= rate.zone_id == zone.id ? 'selected' : '' %>><%= zone.name %></option>
+            <% }) %>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="vehicle_type_id">Tipo de Vehículo</label>
+            <select name="vehicle_type_id" id="vehicle_type_id" class="form-control" required>
+            <option value="">Seleccione un tipo</option>
+            <% vehicleTypes.forEach(type => { %>
+                <option value="<%= type.id %>" <%= rate.vehicle_type_id == type.id ? 'selected' : '' %>>
+                <%= type.name %> (<%= type.pax_min %>-<%= type.pax_max %> pax)
+                </option>
+            <% }) %>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="one_way_price">Precio Sencillo</label>
+            <input type="number" step="0.01" name="one_way_price" id="one_way_price" class="form-control" value="<%= rate.one_way_price || '' %>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="round_trip_price">Precio Redondo</label>
+            <input type="number" step="0.01" name="round_trip_price" id="round_trip_price" class="form-control" value="<%= rate.round_trip_price || '' %>" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="/admin/transfer-rates" class="btn btn-secondary">Cancelar</a>
+        </form>
+
+    </div>
+        
+    <!-- /.card-footer-->
+  </div>
+  <!-- /.card -->
+</section>
+<!-- /.content -->
