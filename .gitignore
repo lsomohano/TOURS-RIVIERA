@@ -69,6 +69,9 @@ app/public/*
 !app/public/adminlte/
 !app/public/adminlte/**
 
+!app/public/dorne-master/
+!app/public/dorne-master/**
+
 # Asegúrate de seguir ignorando imágenes
 app/public/images/
 

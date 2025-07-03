@@ -1,16 +1,19 @@
 {
 	"app": {
 		"title": "Riviera Maya Tours",
-		"welcome": "Welcome to our tour agency",
-		"explore": "Explore our tours",
+		"welcome": "Explore the Riviera Maya",
+		"explore": "Find the best adventure, culture, and nature experiences.",
 		"title2": "Discover the Riviera Maya with Us",
-        "line1": "Experience unforgettable moments in paradise destinations.",
-        "line2": "Explore our archaeological tours, culinary adventures, and relaxing beach escapes."
+		"line1": "Live unforgettable experiences in paradisiacal destinations.",
+		"line2": "Explore our options for archaeological tours, gastronomic adventures, and relaxing moments by the sea.",
+		"title-td": "Featured Transfers",
+		"title-ft": "Featured Tours",
+		"title-tc": "Testimonials"
 	},
 	"menu": {
 		"home": "Home",
 		"tours": "Tours",
-		"transportation": "Transportation",
+		"transportation": "Transfers",
 		"contact": "Contacts",
 		"spanish": "spanish",
 		"english": "english",
@@ -109,7 +112,7 @@
 		"desc": "Travel at your own pace with a personalized tour just for you and your group."
 	},
 	"transportation": {
-		"title": "Transportation",
+		"title": "Transfers",
 		"desc": "Comfortable and safe transfers from the airport to your hotel and back."
 	},
 	"payment": {

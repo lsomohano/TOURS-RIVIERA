@@ -1,105 +1,367 @@
-<section class="intro">
-  <h2><%= __('app.title2') %></h2>
-  <p>
-    <%= __('app.line1') %><br>
-    <%= __('app.line2') %>
-  </p>
-</section>
-
-<section class="our-services container py-4">
-  <h1 class="text-center fw-semibold mb-5"><%= __('our_services') %></h1>
-  <div class="row">
-    <!-- Tours en grupo -->
-    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-      <div class="px-4 text-center d-flex flex-column align-items-center">
-        <i class="bi bi-people display-1 mb-3 color-caribe icon-hover"></i>
-        <h5 class="fw-semibold"><%= __('group_tours.title') %></h5>
-        <p><%= __('group_tours.desc') %></p>
-        <a href="#" class="color-caribe text-decoration-none fw-semibold">
-          <%= __('learn_more') %>
-        </a>
-      </div>
-    </div>
-
-    <!-- Tours privados -->
-    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-      <div class="px-4 text-center d-flex flex-column align-items-center">
-        <i class="bi bi-person-check display-1 mb-3 color-caribe icon-hover"></i>
-        <h5 class="fw-semibold"><%= __('private_tours.title') %></h5>
-        <p><%= __('private_tours.desc') %></p>
-        <a href="#" class="color-caribe text-decoration-none fw-semibold">
-          <%= __('learn_more') %>
-        </a>
-      </div>
-    </div>
-
-    <!-- Transportación -->
-    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-      <div class="px-4 text-center d-flex flex-column align-items-center" >
-        <i class="bi bi-car-front display-1 mb-3 color-caribe icon-hover"></i>
-        <h5 class="fw-semibold"><%= __('transportation.title') %></h5>
-        <p><%= __('transportation.desc') %></p>
-        <a href="#" class="color-caribe text-decoration-none fw-semibold">
-          <%= __('learn_more') %>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section class="tours-section container py-4">
-  <h1 class="text-center fw-semibold mb-5"><%= __('menu.tours') %></h1>
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <% tours.forEach(tour => { %>
-      <div class="col">
-        <div class="card h-100 shadow-sm border-0">
-          <img src="<%= tour.imagen_destacada || '/images/default-tour.jpg' %>" class="card-img-top" alt="<%= tour.nombre %>">
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title"><%= tour.nombre %></h5>
-            <p class="card-text text-muted small"><%= tour.descripcion.substring(0, 100) %>...</p>
-            <p class="precio fw-bold text-success mt-auto">$<%= tour.precio %> MXN</p>
-          </div>
-          <div class="card-footer bg-white border-0 d-flex justify-content-between">
-            <a href="/tours/<%= tour.id %>" class="btn btn-outline-primary btn-sm">
-              <i class="bi bi-info-circle"></i> Ver detalles
-            </a>
-            <a href="/reservar/<%= tour.id %>" class="btn btn-success btn-sm">
-              <i class="bi bi-calendar-check"></i> <%= __('Reservar') %>
-            </a>
-          </div>
+    <!-- ***** Catagory Area Start ***** -->
+    <section class="dorne-catagory-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="all-catagories">
+                        <div class="row justify-content-center text-center">
+                            <!-- Single Catagory Area -->
+                            <div class="col-12 col-sm-3 col-md3">
+                                <div class="single-catagory-area wow fadeInUpBig" data-wow-delay="0.2s">
+                                    <div class="catagory-content">
+                                        <img src="dorne-master/img/core-img/turismo.png" alt="" width="100" height="auto">
+                                        <a href="#">
+                                            <h6><%= __('private_tours.title') %></h6>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single Catagory Area -->
+                            <div class="col-12 col-sm-3 col-md3">
+                                <div class="single-catagory-area wow fadeInUpBig" data-wow-delay="0.2s">
+                                    <div class="catagory-content">
+                                        <img src="dorne-master/img/core-img/turismo.png" alt="" width="100" height="auto">
+                                        <a href="#">
+                                            <h6><%= __('group_tours.title') %></h6>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single Catagory Area -->
+                            <div class="col-12 col-sm-3 col-md3">
+                                <div class="single-catagory-area wow fadeInUpBig" data-wow-delay="0.4s">
+                                    <div class="catagory-content">
+                                        <img src="dorne-master/img/core-img/aeropuerto.png" alt="" width="100" height="auto">
+                                        <a href="#">
+                                            <h6><%= __('transportation.title') %></h6>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    <% }) %>
-  </div>
-</section>
+    </section>
+    <!-- ***** Catagory Area End ***** -->
 
-<section id="payment-methods" class="payment-section">
-  <h1 class="text-center fw-semibold mb-5"><%= __('payment.method.sectionTitle') %></h1>
+    <!-- ***** About Area Start ***** -->
+    <section class="dorne-about-area section-padding-0-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="about-content text-center">
+                        <h2><%= __('app.title2') %> <br><span>Dorne</span></h2>
+                        <p>
+                            <%= __('app.line1') %><br>
+                            <%= __('app.line2') %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** About Area End ***** -->
 
-  <div class="row">
-    <!-- Método Stripe -->
-    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-      <div class="px-4 text-center d-flex flex-column align-items-center">
-        <i class="fa-solid fa-credit-card display-1 mb-3 payments icon-hover"></i>
-        <h5 class="fw-semibold"><%= __('payment.method.stripe') %></h5>
-      </div>
+    <!-- ***** Editor Pick Area Start ***** -->
+    <section class="dorne-editors-pick-area bg-img bg-overlay-9 section-padding-100" style="background-image: url(dorne-master/img/bg-img/hero-2.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center">
+                        <span></span>
+                        <h4>Must-See Tours</h4>
+                        <p>Most Chosen</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="single-editors-pick-area wow fadeInUp" data-wow-delay="0.2s">
+                        <img src="dorne-master/img/bg-img/editor-1.jpg" alt="" id="imgLeft">
+                        <div class="editors-pick-info">
+                            <div class="places-total-destinations d-flex">
+                                <a href="#">New York</a>
+                                <a href="#">1643 Destinations</a>
+                            </div>
+                            <div class="add-more">
+                                <a href="#">+</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="single-editors-pick-area wow fadeInUp " data-wow-delay="0.4s">
+                        <img src="dorne-master/img/bg-img/editor-2.jpg" alt="" id="imgRight1">
+                        <div class="editors-pick-info">
+                            <div class="places-total-destinations d-flex">
+                                <a href="#">Barcelona</a>
+                                <a href="#">943 Destinations</a>
+                            </div>
+                            <div class="add-more">
+                                <a href="#">+</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-editors-pick-area wow fadeInUp " data-wow-delay="0.6s">
+                        <img src="dorne-master/img/bg-img/editor-3.jpg" alt="" id="imgRight2">
+                        <div class="editors-pick-info">
+                            <div class="places-total-destinations d-flex">
+                                <a href="#">paris</a>
+                                <a href="#">243 Destinations</a>
+                            </div>
+                            <div class="add-more">
+                                <a href="#">+</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+    <!-- ***** Editor Pick Area End ***** -->
+
+    <!-- ***** Features Destinations Area Start ***** -->
+    <section class="dorne-features-destinations-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading dark text-center">
+                        <span></span>
+                        <h4><%= __('app.title-td') %></h4>
+                        <p>Editor’s pick</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="features-slides owl-carousel">
+                        <!-- Single Features Area -->
+                        <% zones.forEach(zone => { %>
+                            <div class="single-features-area d-flex flex-column h-100">
+                                <img src="<%= zone.imagen || '/images/default-tour.jpg' %>" alt="" class="zone-img">
+                                <!-- Price -->
+                                <div class="price-start">
+                                    <p>FROM $<%= zone.desde %></p>
+                                </div>
+                                <div class="feature-content d-flex align-items-center justify-content-between">
+                                    <div class="feature-title">
+                                        <h5><%= zone.name %></h5>
+                                        
+                                    </div>
+                                    <div class="feature-favourite">
+                                        <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Features Destinations Area End ***** -->
+
+    <!-- ***** Features Restaurant Area Start ***** -->
+    <section class="dorne-features-restaurant-area bg-default">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center">
+                        <span></span>
+                        <h4><%= __('app.title-ft') %></h4>
+                        <p>Editor’s pick</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="features-slides owl-carousel">
+                    <% tours.forEach(tour => { %>
+                        <div class="single-features-area d-flex flex-column h-100">
+                        <!-- Imagen -->
+                        <img 
+                            src="<%= tour.imagen_destacada || '/images/default-tour.jpg' %>" 
+                            alt="<%= tour.nombre %>" 
+                            style="width: 100%; height: 200px; object-fit: cover;"
+                        >
+
+                        <!-- Contenido -->
+                        <div class="feature-content d-flex flex-column justify-content-between flex-grow-1 mt-2">
+                            <div class="feature-title mb-3">
+                            <h5><%= tour.nombre %></h5>
+                            <p><%= tour.descripcion.substring(0, 80) %>...</p>
+                            </div>
+
+                            <div class="mt-2">
+                                <a href="/tours/<%= tour.id %>" class="btn btn-outline-primary btn-sm w-100">
+                                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i> <%= __('Reservar') %>
+                                </a>
+                            </div>
+                        </div>
+
+                        </div>
+                    <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>-->
+    <!-- ***** Features Restaurant Area End ***** -->
+
+    <!-- ***** Features Events Area Start ***** -->
+    <section class="dorne-features-events-area bg-img bg-overlay-9 section-padding-100-50" style="background-image: url(dorne-master/img/bg-img/hero-3.jpg)">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center">
+                        <span></span>
+                        <h4><%= __('app.title-tc') %></h4>
+                        <p>Editor’s pick</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="single-feature-events-area d-sm-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s">
+                        <div class="feature-events-thumb">
+                            <img src="dorne-master/img/bg-img/event-1.jpg" alt="">
+                            <div class="date-map-area d-flex">
+                                <a href="#">26 Nov</a>
+                                <a href="#"><img src="dorne-master/img/core-img/map.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="feature-events-content">
+                            <h5>Jazz Concert</h5>
+                            <h6>Manhathan</h6>
+                            <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra...</p>
+                        </div>
+                        <div class="feature-events-details-btn">
+                            <a href="#">+</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="single-feature-events-area d-sm-flex align-items-center wow fadeInUpBig" data-wow-delay="0.3s">
+                        <div class="feature-events-thumb">
+                            <img src="dorne-master/img/bg-img/event-2.jpg" alt="">
+                            <div class="date-map-area d-flex">
+                                <a href="#">26 Nov</a>
+                                <a href="#"><img src="dorne-master/img/core-img/map.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="feature-events-content">
+                            <h5>DeeJay in the house</h5>
+                            <h6>Manhathan</h6>
+                            <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra...</p>
+                        </div>
+                        <div class="feature-events-details-btn">
+                            <a href="#">+</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="single-feature-events-area d-sm-flex align-items-center wow fadeInUpBig" data-wow-delay="0.4s">
+                        <div class="feature-events-thumb">
+                            <img src="dorne-master/img/bg-img/event-3.jpg" alt="">
+                            <div class="date-map-area d-flex">
+                                <a href="#">26 Nov</a>
+                                <a href="#"><img src="dorne-master/img/core-img/map.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="feature-events-content">
+                            <h5>Theatre Night outside</h5>
+                            <h6>Manhathan</h6>
+                            <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra...</p>
+                        </div>
+                        <div class="feature-events-details-btn">
+                            <a href="#">+</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="single-feature-events-area d-sm-flex align-items-center wow fadeInUpBig" data-wow-delay="0.5s">
+                        <div class="feature-events-thumb">
+                            <img src="dorne-master/img/bg-img/event-4.jpg" alt="">
+                            <div class="date-map-area d-flex">
+                                <a href="#">26 Nov</a>
+                                <a href="#"><img src="dorne-master/img/core-img/map.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="feature-events-content">
+                            <h5>Wine tasting</h5>
+                            <h6>Manhathan</h6>
+                            <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra...</p>
+                        </div>
+                        <div class="feature-events-details-btn">
+                            <a href="#">+</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="single-feature-events-area d-sm-flex align-items-center wow fadeInUpBig" data-wow-delay="0.6s">
+                        <div class="feature-events-thumb">
+                            <img src="dorne-master/img/bg-img/event-5.jpg" alt="">
+                            <div class="date-map-area d-flex">
+                                <a href="#">26 Nov</a>
+                                <a href="#"><img src="dorne-master/img/core-img/map.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="feature-events-content">
+                            <h5>New Moon Party</h5>
+                            <h6>Manhathan</h6>
+                            <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra...</p>
+                        </div>
+                        <div class="feature-events-details-btn">
+                            <a href="#">+</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="single-feature-events-area d-sm-flex align-items-center wow fadeInUpBig" data-wow-delay="0.7s">
+                        <div class="feature-events-thumb">
+                            <img src="dorne-master/img/bg-img/event-6.jpg" alt="">
+                            <div class="date-map-area d-flex">
+                                <a href="#">26 Nov</a>
+                                <a href="#"><img src="dorne-master/img/core-img/map.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="feature-events-content">
+                            <h5>Happy hour at pub</h5>
+                            <h6>Manhathan</h6>
+                            <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra...</p>
+                        </div>
+                        <div class="feature-events-details-btn">
+                            <a href="#">+</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Features Events Area End ***** -->
+
+    <!-- ***** Clients Area Start ***** -->
+    <div class="dorne-clients-area section-padding-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="clients-logo d-md-flex align-items-center justify-content-around">
+                        <img src="dorne-master/img/clients-img/1.png" alt="">
+                        <img src="dorne-master/img/clients-img/2.png" alt="">
+                        <img src="dorne-master/img/clients-img/3.png" alt="">
+                        <img src="dorne-master/img/clients-img/4.png" alt="">
+                        <img src="dorne-master/img/clients-img/5.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Método efectivo -->
-    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-      <div class="px-4 text-center d-flex flex-column align-items-center">
-        <i class="fa-solid fa-money-bill-wave display-1 mb-3 payments icon-hover"></i>
-        <h5 class="fw-semibold"><%= __('payment.method.cash') %></h5>
-      </div>
-    </div>
-
-    <!-- Método transferencia bancaria -->
-    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-      <div class="px-4 text-center d-flex flex-column align-items-center">
-        <i class="fa-solid fa-university display-1 mb-3 payments icon-hover"></i>
-        <h5 class="fw-semibold"><%= __('payment.method.transfer') %></h5>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- ***** Clients Area End ***** -->

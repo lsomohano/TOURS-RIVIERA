@@ -3,6 +3,7 @@ const db = require('../config/db');
 // GET: muestra la página con mensaje flash si existe
 exports.index = (req, res) => {
   res.render('contact', {
+    layout: 'layouts/dorne_paginas',
     locale: req.getLocale(),
     currentUrl: req.originalUrl,
     success: req.flash('success'),

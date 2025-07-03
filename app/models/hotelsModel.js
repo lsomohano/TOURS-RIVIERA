@@ -2,7 +2,14 @@ const db = require('../config/db'); // conexión MySQL
 
 const Hotel = {
   async findAll() {
-    const [rows] = await db.promise().query('SELECT * FROM hotels ORDER BY name');
+    const [rows] = await db.promise().query(`
+      SELECT 
+        hotels.*, 
+        zones.name AS zone_name
+      FROM hotels
+      INNER JOIN zones ON hotels.zone_id = zones.id
+      ORDER BY hotels.name
+    `);
     return rows;
   },
 

@@ -19,6 +19,10 @@ const Zone = {
   },
   async delete(id) {
     await db.promise().query('DELETE FROM zones WHERE id = ?', [id]);
+  },
+  async findTop() {
+    const [rows] = await db.promise().query('SELECT z.id, z.`name`, MIN(t.one_way_price) AS desde, z.imagen FROM zones z INNER JOIN transfer_rates t ON  t.zone_id = z.id GROUP BY z.id');
+    return rows;
   }
 };
 

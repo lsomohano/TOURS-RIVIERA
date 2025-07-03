@@ -1,159 +1,387 @@
 
-<div class="container py-5">
-  <div class="mb-5 text-center">
-    <!--<h1 class="display-4 fw-bold text-primary"><%= tour.nombre %></h1>-->
-    <p class="fs-3 text-muted">Precio desde: <strong>$<%= Number(tour.precio).toFixed(2) %></strong> por persona</p>
-  </div>
-  <div class="container py-5">
- <% if (imagenes.length > 0) { %>
-    <div class="row g-3">
-      <!-- Imagen principal -->
-      <div class="col-12 col-md-6">
-        <a href="<%= imagenes[0].url_imagen %>" data-bs-toggle="modal" data-bs-target="#modal0">
-          <img src="<%= imagenes[0].url_imagen %>" class="img-fluid rounded shadow w-100" style="object-fit: cover; height: 400px;">
-        </a>
-      </div>
 
-      <!-- Miniaturas -->
-      <div class="col-12 col-md-6">
-        <div class="row g-3">
-          <% imagenes.slice(1).forEach((img, i) => { %>
-            <div class="col-6">
-              <a href="<%= img.url_imagen %>" data-bs-toggle="modal" data-bs-target="#modal<%= i + 1 %>">
-                <img src="<%= img.url_imagen %>" class="img-fluid rounded shadow-sm" style="height: 192px; object-fit: cover; width: 100%;">
-              </a>
-            </div>
+<!-- ***** Single Listing Area Start ***** -->
+    <section class="dorne-single-listing-area section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Single Listing Content -->
+                <div class="col-12 col-lg-8">
+                    <div class="single-listing-content">
 
-            <!-- Modal por imagen -->
-            <div class="modal fade" id="modal<%= i + 1 %>" tabindex="-1" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content bg-dark border-0">
-                  <img src="<%= img.url_imagen %>" class="w-100 rounded">
+                        <div class="listing-title">
+                            <h4><%= tour.nombre %></h4>
+                            <h6>From <strong>$<%= Number(tour.precio).toFixed(2) %></strong> for person, Duración: <strong><%= detalles.duracion || 'No especificado' %></strong>, Lenguaje: <strong><%= detalles.lenguaje || 'No especificado' %></strong></h6>
+                        </div>
+
+                        <div class="single-listing-nav">
+                            <nav>
+                                <ul id="listingNav">
+                                    <li class="active"><a href="#overview">Overview</a></li>
+                                    <li><a href="#recomendaciones">Recomendaciones</a></li>
+                                    <li><a href="#galeria">Galeria</a></li>
+                                    <li><a href="#lomap">Punto de Encuentro</a></li>
+                                    <li><a href="#politicas">Politicas de Cancelación</a></li>
+                                    <li><a href="#review">Reviews</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <div class="overview-content mt-50" id="overview">
+                            <p><%= tour.descripcion %></p>
+                            <!-- Single Listing Menu -->
+                            <div class="single-listing-menu d-flex justify-content-between">
+                                <!-- Listing Menu Title -->
+                                <div class="listing-menu-title">
+                                    <h6>¿Por qué hacerlo?</h6>
+                                    <p><%= detalles.porque_hacerlo || 'No especificado' %></p>
+                                </div>
+                            </div>
+                            <!-- Single Listing Menu -->
+                            <div class="single-listing-menu d-flex justify-content-between">
+                                <!-- Listing Menu Title -->
+                                <div class="listing-menu-title">
+                                    <h6>¿Qué esperar?</h6>
+                                    <p><%= detalles.que_esperar || 'No especificado' %></p>
+                                </div>
+                            </div>
+                            <h4 class="mt-3">Incluye</h4>
+                            <div class="row mt-3">
+                              <% if (detalles.incluye) { %>
+                                <% detalles.incluye.split('\n').forEach(item => { %>
+                                  <div class="col-6">
+                                    <label class="custom-control custom-checkbox mb-3">
+                                      <input type="checkbox" class="custom-control-input" checked>
+                                      <span class="custom-control-indicator"></span>
+                                      <span class="custom-control-description"><%= item %></span>
+                                    </label>
+                                  </div>
+                                <% }) %>
+                              <% } else { %>
+                                <li>No especificado</li>
+                              <% } %>
+                            </div>
+                        </div>
+                  
+                        <div class="listing-menu-area mt-50" id="recomendaciones">
+                            <h4>Recomendaciones</h4>
+                            <% const momentost = { antes: 'Antes', durante: 'Durante', despues: 'Después' } %>
+                            <% for (const clave in momentost) { %>
+                              <!-- Single Listing Menu -->
+                              <div class="single-listing-menu d-flex justify-content-between">
+                                  <!-- Listing Menu Title -->
+                                  <div class="listing-menu-title">
+                                      <h6><%= momentost[clave] %></h6>
+                                      <div class="row mt-3">
+                                        <% recomendaciones.filter(r => r.momento === clave).forEach(r => { %>
+                                        <div class="col-12">
+                                          <label class="custom-control custom-checkbox mb-3">
+                                            <input type="checkbox" class="custom-control-input" checked>
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description"><%= r.recomendacion %></span>
+                                          </label>
+                                        </div>
+                                        <% }) %>
+                                      </div>
+                                  </div>
+                              </div>
+                              
+                            <% } %>
+                        </div>
+
+                        <div class="overview-content mt-40" id="galeria">
+                          <h4 class="mb-30">GALERÍA</h4>
+
+                          <% if (imagenes.length > 0) { %>
+                            <div class="row g-3 mb-4">
+                              <% imagenes.forEach((img, i) => { %>
+                                <div class="col-6 col-md-4 col-lg-3 mb-3">
+                                  <a href="#" data-bs-toggle="modal" data-bs-target="#galeriaModal" data-index="<%= i %>">
+                                    <img src="<%= img.url_imagen %>" class="img-fluid rounded shadow-sm w-100" style="height: 200px; object-fit: cover;">
+                                  </a>
+                                </div>
+                              <% }) %>
+                            </div>
+
+                            <!-- Modal de galería con flechas -->
+                            <div class="modal fade" id="galeriaModal" tabindex="-1" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content bg-dark border-0 position-relative">
+                                  <!-- Flecha izquierda -->
+                                  <button class="btn btn-dark position-absolute top-50 start-0 translate-middle-y z-1" id="prevImage" style="z-index:1051">
+                                    <i class="bi bi-chevron-left fs-3"></i>
+                                  </button>
+
+                                  <!-- Imagen -->
+                                  <img id="modal-img" src="" class="w-100 rounded" style="max-height: 80vh; object-fit: contain;">
+
+                                  <!-- Flecha derecha -->
+                                  <button class="btn btn-dark position-absolute top-50 end-0 translate-middle-y z-1" id="nextImage" style="z-index:1051">
+                                    <i class="bi bi-chevron-right fs-3"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          <% } else { %>
+                            <p class="text-muted">No hay imágenes disponibles.</p>
+                          <% } %>
+                        </div>
+
+                        <div class="location-on-map mt-30" id="lomap">
+                            <h4 class="mb-4">Punto de encuentro</h4>
+                            <p><%= punto?.direccion || 'No especificado' %></p>
+                            <% if (punto?.coordenadas) { %>
+                              <iframe 
+                                src="https://www.google.com/maps?q=<%= punto.coordenadas %>&output=embed" 
+                                width="100%" 
+                                height="250" 
+                                class="rounded border"
+                                allowfullscreen
+                              ></iframe>
+                            <% } %>
+                        </div>  
+
+                        <div class="overview-content mt-40" id="politicas">
+                          <h4 class="mb-3">POLÍTICAS DE CANCELACIÓN</h4>
+                          <p><%= politicas?.politicas || 'No especificado' %></p>
+                        </div>
+
+                        <div class="listing-reviews-area mt-100" id="review">
+                            <h4>reviews</h4>
+                            <div class="single-review-area">
+                                <div class="reviewer-meta d-flex align-items-center">
+                                    <img src="/dorne-master/img/clients-img/1.jpg" alt="">
+                                    <div class="reviewer-content">
+                                        <div class="review-title-ratings d-flex justify-content-between">
+                                            <h5>“The best Burger in town”</h5>
+                                            <div class="ratings">
+                                                <img src="/dorne-master/img/clients-img/star-fill.png" alt="">
+                                                <img src="/dorne-master/img/clients-img/star-fill.png" alt="">
+                                                <img src="/dorne-master/img/clients-img/star-fill.png" alt="">
+                                                <img src="/dorne-master/img/clients-img/star-fill.png" alt="">
+                                                <img src="/dorne-master/img/clients-img/star-fill.png" alt="">
+                                            </div>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac nibh sed mi ullamcorper rhoncus. Curabitur pulvinar vel augue sit amet vestibulum. Proin tempus lacus porta lorem blandit aliquam eget quis ipsum. Vivamus accumsan consequat ligula non volutpat.</p>
+                                    </div>
+                                </div>
+                                <div class="reviewer-name">
+                                    <h6>Christinne Smith</h6>
+                                    <p>12 November 2017</p>
+                                </div>
+                            </div>
+                            <div class="single-review-area">
+                                <div class="reviewer-meta d-flex align-items-center">
+                                    <img src="/dorne-master/img/clients-img/1.jpg" alt="">
+                                    <div class="reviewer-content">
+                                        <div class="review-title-ratings d-flex justify-content-between">
+                                            <h5>“Quality ingredients”</h5>
+                                            <div class="ratings">
+                                                <img src="dorne-master/img/clients-img/star-fill.png" alt="">
+                                                <img src="dorne-master/img/clients-img/star-fill.png" alt="">
+                                                <img src="dorne-master/img/clients-img/star-fill.png" alt="">
+                                                <img src="dorne-master/img/clients-img/star-fill.png" alt="">
+                                                <img src="dorne-master/img/clients-img/star-unfill.png" alt="">
+                                            </div>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac nibh sed mi ullamcorper rhoncus. Curabitur pulvinar vel augue sit amet vestibulum. Proin tempus lacus porta lorem blandit aliquam eget quis ipsum. Vivamus accumsan consequat ligula non volutpat.</p>
+                                    </div>
+                                </div>
+                                <div class="reviewer-name">
+                                    <h6>Michael Brown</h6>
+                                    <p>12 November 2017</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+
+                <!-- Listing Sidebar -->
+                <div class="col-12 col-md-8 col-lg-4">
+                    <div class="listing-sidebar">
+
+                        <!-- Listing Verify -->
+                        <!--<div class="listing-verify">
+                            <a href="#" class="btn dorne-btn w-100"><i class="fa fa-check pr-3"></i> Verified Listing</a>
+                        </div>-->
+
+                        <!-- Book A Table Widget -->
+                        <div class="book-a-table-widget mt-50">
+                            <h6>Book A Tour</h6>
+                            
+                            <form action="/reservar" method="POST">
+                                
+                              <input type="text" id="punto_encuentro" name="punto_encuentro" placeholder="<%= __('reservation.meetingPoint') || 'Punto de encuentro' %>" autocomplete="off" class="form-control">
+                              <ul id="sugerencias" class="list-group mt-2"></ul>
+                              
+                              <input type="text" id="nombre_cliente" name="nombre_cliente" placeholder="<%= __('reservation.name') %>" required class="form-control">
+                              <input type="email" id="email" name="email" placeholder="<%= __('reservation.email') %>" required class="form-control">
+                              <input type="text" id="telefono" name="telefono" placeholder="<%= __('reservation.phone') %>" required class="form-control">
+                              <input type="date" id="fecha_reserva" name="fecha_reserva" required class="form-control">
+                              <input type="number" id="cantidad_personas" name="cantidad_personas" placeholder="<%= __('reservation.numberOfPeople') %>" min="1" required class="form-control">
+                              <select id="metodo_pago" name="metodo_pago" required class="custom-select">
+                                <option value="stripe">Stripe</option>
+                                <option value="efectivo">Efectivo</option>
+                                <option value="transferencia">Transferencia</option>
+                              </select>  
+                              <% if (tour.modalidad === 'privado') { %>
+                                  <textarea id="peticiones_especiales" name="peticiones_especiales" rows="3" placeholder="Escribe aquí si necesitas algo especial..." class="form-control"></textarea>
+                              <% } %>
+                              <input type="hidden" name="modalidad" value="<%= tour.modalidad %>">
+                              
+                              <button type="submit" class="btn dorne-btn bg-white text-dark"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> <%= __('reservation.reserveButton') %></button>
+                            </form>
+                        </div>
+
+                      
+                        <!-- Opening Hours Widget -->
+                        
+                        <% if (tour.modalidad === 'privado') { %>
+                        <div class="opening-hours-widget mt-30 align-items-center">
+                            <h6>Precios de Tour Privado</h6>
+                            <ul class="opening-hours">
+                                <li>
+                                    <p>Personas</p>
+                                    <p>$ Por Persona</p>
+                                    <p>Total</p>
+                                </li>
+                                <% preciosPrivadosCalculados.forEach(p => { %>
+                                <li>
+                                    <p style="text-align: center;"><%= p.personas %></p>
+                                    <p style="text-align: center;">$<%= p.precio_por_persona.toFixed(2) %></p>
+                                    <p style="text-align: center;">$<%= p.precio_total.toFixed(2) %></p>
+                                </li>
+                                <% }) %>
+                                
+                            </ul>
+                        </div>
+                        <% } %>
+
+                        <!-- Author Widget -->
+                        <div class="author-widget mt-30 align-items-center">
+                            <h4 class="text-secondary mt-4 mb-3">Itinerario</h4>
+                            <% if (itinerario.length > 0) { %>
+                              <ol class="ps-3">
+                                <% itinerario.forEach(paso => { %>
+                                  <li class="mb-2"><strong><%= paso.hora_aprox %></strong>: <%= paso.descripcion %></li>
+                                <% }) %>
+                              </ol>
+                            <% } else { %>
+                              <p>No hay itinerario disponible.</p>
+                            <% } %>
+                        </div>
+
+                        
+
+                        <!-- Contact Form -->
+                        <div class="contact-form contact-form-widget mt-50">
+                            <h6>Contact Business</h6>
+                            <form action="#">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="text" name="name" class="form-control" placeholder="Your Name">
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="email" name="email" class="form-control" placeholder="Email Address">
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea name="message" class="form-control" id="Message" cols="30" rows="10" placeholder="Your Message"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn dorne-btn">Send</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-          <% }) %>
         </div>
-      </div>
-    </div>
+    </section>
+    <!-- ***** Single Listing Area End ***** -->
+<script>
+  const imagenes = <%- JSON.stringify(imagenes) %>; // Pasamos las URLs desde el servidor
+  let currentIndex = 0;
 
-    <!-- Modal para imagen principal -->
-    <div class="modal fade" id="modal0" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content bg-dark border-0">
-          <img src="<%= imagenes[0].url_imagen %>" class="w-100 rounded">
-        </div>
-      </div>
-    </div>
-  <% } %>
-</div>
-  <div class="row gy-5">
-    <div class="col-md-6">
-      <div class="bg-light rounded p-4 shadow-sm">
-        <% if (detalles) { %>
-          <h4 class="text-secondary mb-3">¿Por qué hacerlo?</h4>
-          <p><%= detalles.porque_hacerlo || 'No especificado' %></p>
+  const modalImg = document.getElementById('modal-img');
+  const modal = document.getElementById('galeriaModal');
 
-          <h4 class="text-secondary mt-4 mb-3">¿Qué esperar?</h4>
-          <p><%= detalles.que_esperar || 'No especificado' %></p>
+  // Mostrar imagen al abrir modal
+  modal.addEventListener('show.bs.modal', function (event) {
+    const trigger = event.relatedTarget;
+    currentIndex = parseInt(trigger.getAttribute('data-index'));
+    modalImg.src = imagenes[currentIndex].url_imagen;
+  });
 
-          <h4 class="text-secondary mt-4 mb-3">Incluye</h4>
-          <ul class="list-unstyled">
-            <% if (detalles.incluye) { %>
-              <% detalles.incluye.split('\n').forEach(item => { %>
-                <li class="mb-1"><i class="bi bi-check-circle text-success me-2"></i><%= item %></li>
-              <% }) %>
-            <% } else { %>
-              <li>No especificado</li>
-            <% } %>
-          </ul>
+  // Botones de navegación
+  document.getElementById('prevImage').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + imagenes.length) % imagenes.length;
+    modalImg.src = imagenes[currentIndex].url_imagen;
+  });
 
-          <h4 class="text-secondary mt-4 mb-3">Duración</h4>
-          <p><%= detalles.duracion || 'No especificado' %></p>
+  document.getElementById('nextImage').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % imagenes.length;
+    modalImg.src = imagenes[currentIndex].url_imagen;
+  });
+</script>
 
-          <h4 class="text-secondary mt-4 mb-3">Lenguaje</h4>
-          <p><%= detalles.lenguaje || 'No especificado' %></p>
-        <% } else { %>
-          <p>No hay detalles disponibles.</p>
-        <% } %>
-      </div>
-    </div>
+<script>
+  const input = document.getElementById('punto_encuentro');
+  const sugerencias = document.getElementById('sugerencias');
+  let timeoutId;
 
-    <div class="col-md-6">
-      <div class="bg-light rounded p-4 shadow-sm">
-       
-        <% if (tour.modalidad === 'privado') { %>
-          <h4 class="text-secondary mb-3">Precios por número de personas</h4>
-          <div class="table-responsive">
-            <table class="table table-bordered align-middle text-center">
-              <thead class="table-light">
-                <tr>
-                  <th># Personas</th>
-                  <th>Precio Total</th>
-                  <th>Precio por Persona</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% preciosPrivadosCalculados.forEach(p => { %>
-                  <tr>
-                    <td><%= p.personas %></td>
-                    <td>$<%= p.precio_total.toFixed(2) %></td>
-                    <td>$<%= p.precio_por_persona.toFixed(2) %></td>
-                  </tr>
-                <% }) %>
-              </tbody>
-            </table>
-          </div>
-        <% } else { %>
-          <h4 class="text-secondary mb-3">Punto de encuentro</h4>
-          <p><%= punto?.direccion || 'No especificado' %></p>
-          <% if (punto?.coordenadas) { %>
-            <iframe 
-              src="https://www.google.com/maps?q=<%= punto.coordenadas %>&output=embed" 
-              width="100%" 
-              height="250" 
-              class="rounded border" 
-              allowfullscreen
-            ></iframe>
-          <% } %>
-        <% } %>
+  input.addEventListener('input', () => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(fetchSugerencias, 400); // espera 400ms
+  });
 
-        <h4 class="text-secondary mt-4 mb-3">Itinerario</h4>
-        <% if (itinerario.length > 0) { %>
-          <ol class="ps-3">
-            <% itinerario.forEach(paso => { %>
-              <li class="mb-2"><strong><%= paso.hora_aprox %></strong>: <%= paso.descripcion %></li>
-            <% }) %>
-          </ol>
-        <% } else { %>
-          <p>No hay itinerario disponible.</p>
-        <% } %>
-      </div>
-    </div>
-  </div>
+  async function fetchSugerencias() {
+    const query = input.value.trim();
+    if (query.length < 3) {
+      sugerencias.innerHTML = '';
+      sugerencias.style.display = 'none';
+      return;
+    }
 
-  <div class="row mt-5 gy-4">
-    <% const momentos = { antes: 'Antes', durante: 'Durante', despues: 'Después' } %>
-    <% for (const clave in momentos) { %>
-      <div class="col-md-4">
-        <div class="bg-light rounded p-4 shadow-sm h-100">
-          <h4 class="text-secondary mb-3"><%= momentos[clave] %></h4>
-          <ul class="list-unstyled">
-            <% recomendaciones.filter(r => r.momento === clave).forEach(r => { %>
-              <li class="mb-2"><i class="bi bi-info-circle text-primary me-2"></i><%= r.recomendacion %></li>
-            <% }) %>
-          </ul>
-        </div>
-      </div>
-    <% } %>
-  </div>
+    const idiomaNavegador = navigator.language || 'es';
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&addressdetails=1&limit=5&viewbox=-88.3,21.8,-86.7,19.0&bounded=1`;
 
-  <div class="mt-5 bg-light rounded p-4 shadow-sm">
-    <h4 class="text-secondary mb-3">Políticas de cancelación</h4>
-    <p><%= politicas?.politicas || 'No especificado' %></p>
-  </div>
+    try {
+      const respuesta = await fetch(url, {
+        headers: {
+          'Accept-Language': idiomaNavegador
+        }
+      });
+      const lugares = await respuesta.json();
 
-  <div class="text-center mt-5">
-    <a href="/reservar/<%= tour.id %>" class="btn btn-lg btn-success px-5 py-3 shadow">Reservar ahora</a>
-  </div>
-</div>
+      sugerencias.innerHTML = '';
+      if (lugares.length > 0) {
+        lugares.forEach(lugar => {
+          const div = document.createElement('div');
+          div.textContent = lugar.display_name;
+          div.className = 'list-group-item list-group-item-action sugerencia-item';
+          div.style.cursor = 'pointer';
+          div.addEventListener('click', () => {
+            input.value = lugar.display_name;
+            sugerencias.innerHTML = '';
+            sugerencias.style.display = 'none';
+            console.log('Coordenadas:', lugar.lat, lugar.lon);
+          });
+          sugerencias.appendChild(div);
+        });
+        sugerencias.style.display = 'block';
+      } else {
+        sugerencias.style.display = 'none';
+      }
+    } catch (error) {
+      console.error('Error al obtener sugerencias:', error);
+      sugerencias.style.display = 'none';
+    }
+  }
+
+  document.addEventListener('click', (e) => {
+    if (!input.contains(e.target) && !sugerencias.contains(e.target)) {
+      sugerencias.style.display = 'none';
+    }
+  });
+</script>

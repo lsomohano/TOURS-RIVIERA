@@ -1,90 +1,50 @@
-<h1 class="text-center"><%= __('tours.title') %></h1>
-<section class="tours-section container py-5">
-  <!-- Filtros -->
-  <div class="filtro-tours mb-4">
-    <form class="d-flex flex-wrap gap-2 align-items-center" method="GET" action="/tours">
-      <div class="filtro-icono">
-        <i class="fas fa-sliders-h me-2"></i> <%= __('tours.filter_by') %>
-      </div>
-
-      <div class="d-flex align-items-center gap-2">
-        <i class="fas fa-search"></i>
-        <input type="text" class="form-control form-control-sm" placeholder="<%= __('tours.placeholder_name') %>" name="nombre" value="<%= req.query.nombre || '' %>" />
-      </div>
-
-      <div class="d-flex align-items-center gap-2">
-        <i class="fas fa-dollar-sign"></i>
-        <select class="form-select form-select-sm" name="precio">
-          <option value=""><%= __('tours.price_range') %></option>
-          <option value="1" <%= req.query.precio === '1' ? 'selected' : '' %>><%= __('tours.price_under_500') %></option>
-          <option value="2" <%= req.query.precio === '2' ? 'selected' : '' %>><%= __('tours.price_500_1000') %></option>
-          <option value="3" <%= req.query.precio === '3' ? 'selected' : '' %>><%= __('tours.price_over_1000') %></option>
-        </select>
-      </div>
-
-      <div class="d-flex align-items-center gap-2">
-        <i class="fas fa-clock"></i>
-        <select class="form-select form-select-sm" name="duracion">
-          <option value=""><%= __('tours.duration') %></option>
-          <option value="corto" <%= req.query.duracion === 'corto' ? 'selected' : '' %>><%= __('tours.duration_short') %></option>
-          <option value="medio" <%= req.query.duracion === 'medio' ? 'selected' : '' %>><%= __('tours.duration_medium') %></option>
-          <option value="largo" <%= req.query.duracion === 'largo' ? 'selected' : '' %>><%= __('tours.duration_long') %></option>
-        </select>
-      </div>
-
-      <div class="d-flex align-items-center gap-2">
-        <i class="fas fa-tag"></i>
-        <select class="form-select form-select-sm" name="tipo">
-          <option value=""><%= __('tours.trip_type') %></option>
-          <option value="aventura" <%= req.query.tipo === 'aventura' ? 'selected' : '' %>><%= __('tours.type_adventure') %></option>
-          <option value="relajacion" <%= req.query.tipo === 'relajacion' ? 'selected' : '' %>><%= __('tours.type_relaxation') %></option>
-          <option value="cultural" <%= req.query.tipo === 'cultural' ? 'selected' : '' %>><%= __('tours.type_cultural') %></option>
-        </select>
-      </div>
-
-      <div class="d-flex align-items-center gap-2">
-        <i class="fas fa-tag"></i>
-        <select class="form-select form-select-sm" name="modalidad">
-          <option value=""><%= __('tours.travel_mode') %></option>
-          <option value="grupo" <%= req.query.modalidad === 'grupo' ? 'selected' : '' %>><%= __('tours.mode_group') %></option>
-          <option value="privado" <%= req.query.modalidad === 'privado' ? 'selected' : '' %>><%= __('tours.mode_private') %></option>
-        </select>
-      </div>
-
-      <button type="submit" class="btn btn-outline-secondary btn-sm rounded-pill px-3 ms-auto">
-        <i class="fas fa-filter me-2"></i><%= __('tours.button_filter') %>
-      </button>
-    </form>
-  </div>
-
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <% tours.forEach(tour => { %>
-      <div class="col">
-        <div class="card h-100 shadow-sm border-0">
-          <img src="<%= tour.imagen_destacada || '/images/default-tour.jpg' %>" class="card-img-top" alt="<%= tour.nombre %>">
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title"><%= tour.nombre %></h5>
-            <p class="card-text text-muted small"><%= tour.descripcion.substring(0, 100) %>...</p>
-            <p class="precio fw-bold text-success mt-auto">$<%= tour.precio %> MXN</p>
-          </div>
-          <div class="card-footer bg-white border-0 d-flex justify-content-between">
-            <a href="/tours/<%= tour.id %>" class="btn btn-outline-primary btn-sm">
-              <i class="bi bi-info-circle"></i> Ver detalles
-            </a>
-            <a href="/reservar/<%= tour.id %>" class="btn btn-success btn-sm">
-              <i class="bi bi-calendar-check"></i> <%= __('Reservar') %>
-            </a>
-          </div>
+<!-- ***** Listing Destinations Area Start ***** -->
+<section class="dorne-listing-destinations-area section-padding-100-50">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-heading dark text-center">
+          <span></span>
+          <h4><%= __('tours.title') %></h4>
+          <p>Editor’s pick</p>
         </div>
       </div>
-    <% }) %>
+    </div>
+    <div class="row">        
+      <!-- Single Features Area -->
+      <% tours.forEach(tour => { %> 
+      <div class="col-12 col-sm-6 col-lg-4 mb-4">
+        <div class="single-features-area mb-10 d-flex flex-column h-100">
+          
+          <!-- Imagen -->
+          <img src="<%= tour.imagen_destacada || '/images/default-tour.jpg' %>" alt="" style="object-fit: cover; width: 100%; height: 200px;">
 
+          <!-- Precio -->
+          <div class="price-start mt-2">
+            <p>FROM $<%= tour.precio %></p>
+          </div>
+
+          <!-- Contenido + botón -->
+          <div class="feature-content flex-grow-1 justify-content-between">
+            <div class="feature-title mb-2">
+              <h5><%= tour.nombre %></h5>
+              <p><%= tour.descripcion.substring(0, 120) %>...</p>
+            </div>
+
+            <div class="mt-2">
+              <a href="/tours/<%= tour.id %>" class="btn btn-outline-primary btn-sm w-100">
+                <i class="fa fa-calendar-check-o" aria-hidden="true"></i> <%= __('Reservar') %>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <% }) %>
+    </div>
     <% const startItem = (page - 1) * limit + 1; %>
-<% const endItem = Math.min(startItem + limit - 1, totalTours); %>
-
-
-  </div>
-  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4">
+    <% const endItem = Math.min(startItem + limit - 1, totalTours); %>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4">
     <div class="mb-2 mb-md-0 text-muted">
       Mostrando <%= startItem %>–<%= endItem %> de <%= totalTours %> tours
     </div>
@@ -123,8 +83,10 @@
             <span class="page-link"><i class="fas fa-angle-right"></i></span>
           </li>
         <% } %>
-
       </ul>
     </nav>
   </div>
+  </div>
+  
 </section>
+<!-- ***** Listing Destinations Area End ***** -->

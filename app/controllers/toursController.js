@@ -15,6 +15,7 @@ exports.index = async (req, res) => {
     const [tours] = await TourModel.getPaginated(filters, page, limit, idioma);
 
     res.render('tours', {
+      layout: 'layouts/dorne_home',
       tours,
       locale: req.getLocale(),
       //locale: idioma,
@@ -52,7 +53,7 @@ exports.detalle = async (req, res) => {
     //const [preciosCalculados] = await TourExtrasModel.getPreciosPrivadosCalculados(tourId); // nuevo
 
     res.render('tour-detalle', {
-      layout: 'layouts/layouts_tours_datalles',
+      layout: 'layouts/dorne_detalle',
       tour: {
         ...tour,
         precio: Number(tour.precio) || 0  // Asegura que sea número para evitar .toFixed error

@@ -1,22 +1,56 @@
-<section class="contact-section">
-    <h2><%= __('contact.title') %></h2>
-    <p><%= __('contact.subtitle') %></p>
-    <% if (success && success.length) { %>
-        <div class="alert alert-success"><%= success[0] %></div>
-    <% } %>
-    <% if (error && error.length) { %>
-        <div class="alert alert-error"><%= error[0] %></div>
-    <% } %>
-    <form action="/contact" method="POST" class="contact-form">
-      <label for="name"><%= __('contact.name') %></label>
-      <input type="text" id="name" name="name" required>
-  
-      <label for="email"><%= __('contact.email') %></label>
-      <input type="email" id="email" name="email" required>
-  
-      <label for="message"><%= __('contact.message') %></label>
-      <textarea id="message" name="message" rows="5" required></textarea>
-  
-      <button type="submit"><%= __('contact.send') %></button>
+<!-- ***** Contact Area Start ***** -->
+<div class="dorne-contact-area d-md-flex" id="contact">
+        
+  <!-- Contact Form Area -->
+  <div class="contact-form-area equal-height">
+    <div class="contact-text">
+      <h4><%= __('contact.title') %></h4>
+      <p><%= __('contact.subtitle') %></p>
+      <div class="contact-info d-lg-flex">
+        <div class="single-contact-info">
+        <h6><i class="fa fa-map-signs" aria-hidden="true"></i> Main Avenue Soho, NY</h6>
+        <h6><i class="fa fa-map-signs" aria-hidden="true"></i> No. 25-33</h6>
+      </div>
+      <div class="single-contact-info">
+        <h6><i class="fa fa-envelope-o" aria-hidden="true"></i> contact@yourbusiness.com</h6>
+        <h6><i class="fa fa-phone" aria-hidden="true"></i> +34 567 22478 49567</h6>
+      </div>
+    </div>
+  </div>
+  <% if (success && success.length) { %>
+      <div class="alert alert-success"><%= success[0] %></div>
+  <% } %>
+  <% if (error && error.length) { %>
+      <div class="alert alert-error"><%= error[0] %></div>
+  <% } %>
+  <div class="contact-form">
+    <!--<div class="contact-form-title">
+      <h6><%= __('contact.title') %></h6>
+    </div>-->
+    <form action="/contact">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <input type="text" name="name" class="form-control" placeholder="<%= __('contact.name') %>">
+        </div>
+        <div class="col-12 col-md-6">
+          <input type="email" name="email" class="form-control" placeholder="<%= __('contact.email') %>">
+        </div>
+        <div class="col-12">
+          <input type="text" name="subject" class="form-control" placeholder="Subject">
+        </div>
+        <div class="col-12">
+          <textarea name="message" class="form-control" id="Message" cols="30" rows="10" placeholder="<%= __('contact.message') %>"></textarea>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn dorne-btn"><%= __('contact.send') %></button>
+        </div>
+      </div>
     </form>
-  </section>
+  </div>
+  </div>
+  <!-- Map Area -->
+  <div class="dorne-map-area equal-height">
+    <div id="googleMap"></div>
+  </div>
+</div>
+<!-- ***** Contact Area End ***** -->

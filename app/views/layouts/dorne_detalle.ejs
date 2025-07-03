@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title><%= __('app.title') %></title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/dorne-master/img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link href="/dorne-master/style.css" rel="stylesheet">
+
+    <!-- Responsive CSS -->
+    <link href="/dorne-master/css/responsive/responsive.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="dorne-load"></div>
+    </div>
+
+    <!-- ***** Search Form Area ***** -->
+    <!--<div class="dorne-search-form d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="search-close-btn" id="closeBtn">
+                        <i class="pe-7s-close-circle" aria-hidden="true"></i>
+                    </div>
+                    <form action="#" method="get">
+                        <input type="search" name="caviarSearch" id="search" placeholder="Search Your Desire Destinations or Events">
+                        <input type="submit" class="d-none" value="submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+    <!-- ***** Header Area Start ***** -->
+    <%- include('../partials/dorne_header') %>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Breadcumb Area Start ***** -->
+    <div class="breadcumb-area height-700 bg-img bg-overlay" style="background-image: url('<%= tour.imagen_destacada %>')">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <div class="map-ratings-review-area d-flex">
+                            <a href="#" class="d-flex align-items-center justify-content-center"><img src="img/core-img/map.png" alt=""></a>
+                            <a href="#">8.7</a>
+                            <a href="#">Write a review</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Breadcumb Area End ***** -->
+
+    <%- body %>
+
+    <!-- ****** Footer Area Start ****** -->
+    <%- include('../partials/dorne_footer') %>
+    <!-- ****** Footer Area End ****** -->
+
+    <!-- jQuery-2.2.4 js -->
+    <script src="/dorne-master/js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="/dorne-master/js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap-4 js -->
+    <script src="/dorne-master/js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="/dorne-master/js/others/plugins.js"></script>
+    <!-- Google Maps js -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk9KNSL1jTv4MY9Pza6w8DJkpI_nHyCnk"></script>
+    <script src="js/google-map/location-map-active.js"></script>
+    <!-- Active JS -->
+    <script src="/dorne-master/js/active.js"></script>
+</body>
+
+</html>

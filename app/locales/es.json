@@ -5,12 +5,15 @@
 		"explore": "Encuentra las mejores experiencias de aventura, cultura y naturaleza.",
 		"title2": "Descubre la Riviera Maya con Nosotros",
         "line1": "Vive experiencias inolvidables en destinos paradisíacos.",
-        "line2": "Explora nuestras opciones de tours arqueológicos, aventuras gastronómicas y momentos de relajación frente al mar."
+        "line2": "Explora nuestras opciones de tours arqueológicos, aventuras gastronómicas y momentos de relajación frente al mar.",
+		"title-td": "Traslados Destacados",
+		"title-ft": "Tours Destacados",
+		"title-tc": "Testimonials"
 	},
 	"menu": {
 		"home": "Inicio",
 		"tours": "Tours",
-		"transportation": "Transportación",
+		"transportation": "Traslados",
 		"contact": "Contacto",
 		"spanish": "Español",
 		"english": "Ingles",
@@ -109,7 +112,7 @@
 		"desc": "Viaja a tu ritmo con un tour personalizado solo para ti y tus acompañantes."
 	},
 	"transportation": {
-		"title": "Transportación",
+		"title": "Traslados",
 		"desc": "Traslados cómodos y seguros desde el aeropuerto a tu hotel y viceversa."
 	},
 	"payment": {

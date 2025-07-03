@@ -1,0 +1,45 @@
+<header class="header_area" id="header">
+        <div class="container-fluid h-100">
+            <div class="row h-100">
+                <div class="col-12 h-100">
+                    <nav class="h-100 navbar navbar-expand-lg">
+                        <a class="navbar-brand" href="/"><img src="/dorne-master/img/core-img/logo.png" alt=""></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dorneNav" aria-controls="dorneNav" aria-expanded="false" aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
+                        <!-- Nav -->
+                        <div class="collapse navbar-collapse" id="dorneNav">
+                            <ul class="navbar-nav mr-auto" id="dorneMenu">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/"><%= __('menu.home') %> <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="/tours"><%= __('menu.tours') %> <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="/transportacion"><%= __('menu.transportation') %> <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/contact">Contact</a>
+                                </li>
+                            </ul>
+                            
+                            <!-- Signin btn -->
+                            <div class="dorne-signin-btn">
+                                <a href="#">Sign in  or Register</a>
+                            </div>
+                            <!-- Menú de idioma en lugar de Add Listings -->
+                            <div class="dorne-language-dropdown dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                🌐 <%= locale.toUpperCase() %> <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown2">
+                                <% const cleanUrl = originalUrl.replace(/([?&])lang=[^&]*/, '').replace(/[?&]$/, ''); %>
+                                <a class="dropdown-item" href="<%= cleanUrl + (cleanUrl.includes('?') ? '&' : '?') + 'lang=es' %>">Español</a>
+                                <a class="dropdown-item" href="<%= cleanUrl + (cleanUrl.includes('?') ? '&' : '?') + 'lang=en' %>">English</a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
