@@ -1,34 +1,56 @@
 <style>
-    .whatsapp-btn {
-      display: inline-block;
-      background-color: #25D366;
-      color: white;
-      padding: 12px 20px;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-    }
-  </style>
-<section class="reserva-container">
-  <h2>Hola <%= nombre %>, el link de pago ha expirado</h2>
-    <p>Tu reservación ha pasado la fecha límite de pago.</p>
-    <p>Si aún estás interesado, por favor contáctanos para ayudarte a reactivarla o generar una nueva:</p>
-    
-    <ul>
-      <li>Email: <a href="mailto:<%= emailContacto %>"><%= emailContacto %></a></li>
-      <li>Teléfono: <a href="tel:<%= telefonoContacto %>"><%= telefonoContacto %></a></li>
-    </ul>
+  .whatsapp-btn {
+    display: inline-block;
+    background-color: #25D366;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
 
-    <p>También puedes escribirnos directamente por WhatsApp:</p>
-    
-    <a
-      class="whatsapp-btn"
-      target="_blank"
-      href="https://wa.me/<%= telefonoContacto %>?text=Hola%20Riviera%20Tours,%20mi%20link%20de%20pago%20ha%20expirado.%20Me%20gustaría%20saber%20cómo%20puedo%20reactivar%20mi%20reservación.">
-      📱 Contactar por WhatsApp
-    </a>
+  .whatsapp-btn:hover {
+    background-color: #1ebe5d;
+    text-decoration: none;
+    color: white;
+  }
+</style>
 
-    <p style="margin-top: 20px;">
-      <a href="/tours">Ver otros tours disponibles</a>
-    </p>
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h2 class="fw-bold text-center mb-4">Hola <%= nombre %>, el link de pago ha expirado</h2>
+
+            <p class="lead text-center">Tu reservación ha pasado la fecha límite de pago.</p>
+
+            <p class="text-center">Si aún estás interesado, por favor contáctanos para ayudarte a reactivarla o generar una nueva:</p>
+
+            <ul class="list-group list-group-flush mb-4">
+              <li class="list-group-item"><strong>Email:</strong> <a href="mailto:<%= emailContacto %>"><%= emailContacto %></a></li>
+              <li class="list-group-item"><strong>Teléfono:</strong> <a href="tel:<%= telefonoContacto %>"><%= telefonoContacto %></a></li>
+            </ul>
+
+            <p class="text-center mt-4">También puedes escribirnos directamente por WhatsApp:</p>
+
+            <div class="text-center">
+              <a
+                class="whatsapp-btn"
+                target="_blank"
+                href="https://wa.me/<%= telefonoContacto %>?text=Hola%20Riviera%20Tours,%20mi%20link%20de%20pago%20ha%20expirado.%20Me%20gustaría%20saber%20cómo%20puedo%20reactivar%20mi%20reservación.">
+                📱 Contactar por WhatsApp
+              </a>
+            </div>
+
+            <div class="text-center mt-4">
+              <a href="/tours" class="btn btn-outline-primary">Ver otros tours disponibles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

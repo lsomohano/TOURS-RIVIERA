@@ -1,19 +1,39 @@
-<section class="reserva-container">
-  <h1 class="text-danger"><%= __('reservation.cancelado.titulo') %></h1>
+<!-- ***** Reservation Cancelled Section Start ***** -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="text-center mb-4">
+          <h2 class="text-danger fw-bold"><%= __('reservation.cancelado.titulo') %></h2>
+        </div>
 
-  <% if (reserva) { %>
-    <p><%- __('reservation.cancelado.mensaje', { nombre: reserva.nombre_cliente, tour: reserva.tour_nombre }) %></p>
-    
-    <ul>
-      <li><strong><%= __('reservation.codigo') %>:</strong> <%= reserva.reserva_codigo %></li>
-      <li><strong><%= __('reservation.fecha') %>:</strong> <%= reserva.fecha_reserva.toISOString().split('T')[0] %></li>
-      <li><strong><%= __('reservation.personas') %>:</strong> <%= reserva.cantidad_personas %></li>
-    </ul>
-
-    <p><%= __('reservation.reintentar') %></p>
-    <a href="/reservar/<%= reserva.tour_id %>" class="btn-volver"><%= __('reservation.btn_reintentar') %></a>
-  <% } else { %>
-    <p class="error"><%= __('reservation.error') %></p>
-    <a href="/" class="btn-volver"><%= __('reservation.btn_inicio') %></a>
-  <% } %>
+        <% if (reserva) { %>
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <p class="lead">
+                <%- __('reservation.cancelado.mensaje', { nombre: reserva.nombre_cliente, tour: reserva.tour_nombre }) %>
+              </p>
+              <ul class="list-group list-group-flush text-start mt-4">
+                <li class="list-group-item"><strong><%= __('reservation.codigo') %>:</strong> <%= reserva.reserva_codigo %></li>
+                <li class="list-group-item"><strong><%= __('reservation.fecha') %>:</strong> <%= reserva.fecha_reserva.toISOString().split('T')[0] %></li>
+                <li class="list-group-item"><strong><%= __('reservation.personas') %>:</strong> <%= reserva.cantidad_personas %></li>
+              </ul>
+              <p class="mt-4"><%= __('reservation.reintentar') %></p>
+              <div class="text-center">
+                <a href="/reservar/<%= reserva.tour_id %>" class="btn btn-danger"><%= __('reservation.btn_reintentar') %></a>
+              </div>
+            </div>
+          </div>
+        <% } else { %>
+          <div class="alert alert-danger text-center" role="alert">
+            <%= __('reservation.error') %>
+          </div>
+          <div class="text-center mt-3">
+            <a href="/" class="btn btn-secondary"><%= __('reservation.btn_inicio') %></a>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
 </section>
+<!-- ***** Reservation Cancelled Section End ***** -->

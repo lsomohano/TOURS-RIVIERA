@@ -1,24 +1,42 @@
-<section class="reserva-container">
-  <h1><%= __('reservation.exito.titulo') %></h1>
+<!-- ***** Reservation Success Section Start ***** -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="text-center mb-4">
+          <h2 class="fw-bold"><%= __('reservation.exito.titulo') %></h2>
+        </div>
 
-  <% if (reserva) { %>
-    <p>
-      <%- __('reservation.exito.mensaje', { nombre: reserva.nombre_cliente, tour: reserva.tour_nombre }) %>
-    </p>
+        <% if (reserva) { %>
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <p class="lead">
+                <%- __('reservation.exito.mensaje', { nombre: reserva.nombre_cliente, tour: reserva.tour_nombre }) %>
+              </p>
+              <ul class="list-group list-group-flush text-start mt-4">
+                <li class="list-group-item"><strong><%= __('reservation.codigo') %>:</strong> <%= reserva.reserva_codigo %></li>
+                <li class="list-group-item"><strong><%= __('reservation.fecha') %>:</strong> <%= reserva.fecha_reserva.toISOString().split('T')[0] %></li>
+                <li class="list-group-item"><strong><%= __('reservation.personas') %>:</strong> <%= reserva.cantidad_personas %></li>
+                <li class="list-group-item"><strong><%= __('reservation.costo_unitario') %>:</strong> $<%= Number(reserva.costo_unitario).toFixed(2) %> MXN</li>
+                <li class="list-group-item"><strong><%= __('reservation.total_pagado') %>:</strong> $<%= Number(reserva.total_pagado).toFixed(2) %> MXN</li>
+                <li class="list-group-item"><strong><%= __('reservation.metodo_pago') %>:</strong> <%= reserva.metodo_pago %></li>
+                <li class="list-group-item"><strong><%= __('reservation.email_conf') %>:</strong> <%= reserva.email %></li>
+              </ul>
+            </div>
+          </div>
 
-    <ul>
-      <li><strong><%= __('reservation.codigo') %>:</strong> <%= reserva.reserva_codigo %></li>
-      <li><strong><%= __('reservation.fecha') %>:</strong> <%= reserva.fecha_reserva.toISOString().split('T')[0] %></li>
-      <li><strong><%= __('reservation.personas') %>:</strong> <%= reserva.cantidad_personas %></li>
-      <li><strong><%= __('reservation.costo_unitario') %>:</strong> $<%= Number(reserva.costo_unitario).toFixed(2) %> MXN</li>
-      <li><strong><%= __('reservation.total_pagado') %>:</strong> $<%= Number(reserva.total_pagado).toFixed(2) %> MXN</li>
-      <li><strong><%= __('reservation.metodo_pago') %>:</strong> <%= reserva.metodo_pago %></li>
-      <li><strong><%= __('reservation.email_conf') %>:</strong> <%= reserva.email %></li>
-    </ul>
-  <% } else { %>
-    <p class="error"><%= __('reservation.error') %></p>
-  <% } %>
+          <div class="text-center mt-4">
+            <a href="/" class="btn btn-primary me-2"><%= __('reservation.volver_inicio') %></a>
+            <a href="#" onclick="window.print()" class="btn btn-outline-secondary"><%= __('reservation.imprimir') %></a>
+          </div>
 
-  <a href="/" class="btn-volver"><%= __('reservation.volver_inicio') %></a>
-  <a href="#" onclick="window.print()" class="btn-imprimir"><%= __('reservation.imprimir') %></a>
+        <% } else { %>
+          <div class="alert alert-danger text-center" role="alert">
+            <%= __('reservation.error') %>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
 </section>
+<!-- ***** Reservation Success Section End ***** -->

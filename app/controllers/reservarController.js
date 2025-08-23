@@ -18,6 +18,7 @@ exports.getReserva = async (req, res) => {
     }
 
     res.render('reservar', {
+      layout: 'layouts/dorne_paginas',
       tour: results[0],
       locale: req.getLocale(),
       currentUrl: req.originalUrl,
@@ -192,6 +193,7 @@ exports.reservaSuccess = async (req, res) => {
     await enviarCorreoConfirmacionPago(transporter, reserva, reserva.tour_nombre); // suponiendo que 'reserva.tour' viene unido
 
     res.render('reservar_success', {
+      layout: 'layouts/dorne_paginas',
       reserva,
       locale: req.getLocale(),
       currentUrl: req.originalUrl
@@ -221,6 +223,7 @@ exports.reservaCancel = async (req, res) => {
     }
 
     res.render('reservar_cancel', {
+      layout: 'layouts/dorne_paginas',
       reserva: reservas[0],
       locale: req.getLocale(),
       currentUrl: req.originalUrl

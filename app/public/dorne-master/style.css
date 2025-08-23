@@ -600,6 +600,19 @@ li {
     margin-right: 10px;
 }
 
+form .custom-select {
+  width: 100%; /* 🔥 Esto lo hace ocupar todo el ancho del contenedor */
+  height: 52px;
+  border-radius: 0;
+  padding: 0 80px 0 40px;
+  color: #72728c;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  margin-right: 10px;
+}
+
+
 .hero-social-btn {
     position: absolute;
     width: auto;

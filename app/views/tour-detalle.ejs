@@ -227,7 +227,7 @@
                                   <textarea id="peticiones_especiales" name="peticiones_especiales" rows="3" placeholder="Escribe aquí si necesitas algo especial..." class="form-control"></textarea>
                               <% } %>
                               <input type="hidden" name="modalidad" value="<%= tour.modalidad %>">
-                              
+                              <input type="hidden" name="tour_id" value="<%= tour.id %>">
                               <button type="submit" class="btn dorne-btn bg-white text-dark"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> <%= __('reservation.reserveButton') %></button>
                             </form>
                         </div>
